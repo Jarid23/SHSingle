@@ -153,15 +153,15 @@ namespace Warmups.BLL
         
         public bool InRange(int n, bool outsideMode)
         {
-            if ((n < 10) && (outsideMode = false))
+            if ((n < 10) && (outsideMode == false))
             {
                 return true;
             }
-            if ((n > 10) && (outsideMode = true))
+            if ((n > 10) && (outsideMode == true))
             {
                 return true;
             }
-            if ((n > 10) && (outsideMode = false))
+            if ((n > 10) && (outsideMode == false))
             {
                 return false;
             }
@@ -286,23 +286,19 @@ namespace Warmups.BLL
         
         public bool LastDigit(int a, int b, int c)
         {
-            if((a%10) == (b%10))
-            {
+            int modA = a % 10;
+            int modB = b % 10;
+            int modC = c % 10;
+
+            if (modA == modB || modA == modC || modB == modC)
                 return true;
-            }
-            if ((b & 10) == (c % 10))
-            {
-                return true;
-            }
             else
-            {
                 return false;
-            }
         }
-        
+
         public int RollDice(int die1, int die2, bool noDoubles)
         {
-            if(noDoubles == false)
+            if(!noDoubles)
             {
                 return (die1 + die2);
             }
