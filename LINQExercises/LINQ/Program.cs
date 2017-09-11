@@ -32,7 +32,7 @@ namespace LINQ
             // Exercise19();
 
 
-            Exercise26();
+            // Exercise26();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -263,7 +263,7 @@ namespace LINQ
         /// </summary>
         static void Exercise10()
         {
-            // join customer and order tables ?
+            // join customer and order tables but on what ?
             // (where Order.Total < 500)
             // print customers
         }
@@ -362,32 +362,37 @@ namespace LINQ
         /// <summary>
         /// Print the products alphabetically by name
         /// </summary>
-        //static void Exercise16()
-        //{
-        //    var productAlphabeticalOrder = DataLoader.LoadProducts()
-        //                    .Where() 
-        //                    .OrderBy(p => p.ProductName).ToList();
-        //    Console.WriteLine(productAlphabeticalOrder);
+        static void Exercise16()
+        {
+            var allProducts = DataLoader.LoadProducts();
 
-        //}
+            var alphabetOrder = allProducts.OrderBy(p => p.ProductName);
+
+            PrintProductInformation(alphabetOrder);
+
+        }
+
+
 
         /// <summary>
         /// Print the products in descending order by units in stock
         /// </summary>
-        //static void Exercise17()
-        //{
-        //    var productDescendingOrder = DataLoader.LoadProducts()
-        //                     .Where()
-        //                    .OrderByDescending(p => p.UnitsInStock);
-        //    Console.WriteLine(productDescendingOrder);
-        //}
+        static void Exercise17()
+        {
+            var allProducts = DataLoader.LoadProducts();
+            var descOrderByStock = allProducts.OrderByDescending(p => p.UnitsInStock);
+            PrintProductInformation(descOrderByStock);
+        }
 
         /// <summary>
         /// Print the list of products ordered first by category, then by unit price, from highest to lowest.
         /// </summary>
         static void Exercise18()
         {
-
+            var allProducts = DataLoader.LoadProducts();
+            var productThenPrice = allProducts.OrderBy(p => p.Category).ThenBy(p => p.UnitPrice);
+            PrintProductInformation(productThenPrice);
+            
         }
 
         /// <summary>
@@ -420,9 +425,10 @@ namespace LINQ
         /// </summary>
         //static void Exercise20()
         //{
-        //    var groupProductsByCategory = DataLoader.LoadProducts();
-        //    var groupProductsByCategory = from category in Product
-        //                                  group category by category.Product
+        //    var allProducts = DataLoader.LoadProducts();
+        //    var groupProductsByCategory = allProducts.GroupBy(p => p.ProductName);
+
+            
 
         //}
 
@@ -445,17 +451,21 @@ namespace LINQ
         /// <summary>
         /// Print the unique list of product categories
         /// </summary>
-        static void Exercise22()
-        {
-
-        }
+        //static void Exercise22()
+        //{
+        //    var allProducts = DataLoader.LoadProducts();
+        //    var uniqueOnly = allProducts.Distinct(p=>p.Category);
+        //    PrintProductInformation(uniqueOnly);
+        //}
 
         /// <summary>
         /// Write code to check to see if Product 789 exists
         /// </summary>
         static void Exercise23()
         {
+            var allProducts = DataLoader.LoadProducts();
 
+            foreach()
         }
 
         /// <summary>
