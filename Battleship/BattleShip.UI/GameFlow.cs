@@ -13,8 +13,7 @@ namespace BattleShip.UI
 {
     class GameFlow
     {
-        public bool GameOver { get; set; }
-        public bool IsXTurn { get; private set; } = true;
+      
 
   
         }

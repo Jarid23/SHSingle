@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BattleShip.BLL;
-
+using BattleShip.UI;
+using BattleShip.BLL.Requests;
 
 namespace BattleShip.UI
 {
@@ -12,16 +13,25 @@ namespace BattleShip.UI
     {
         static void Main(string[] args)
         {
-            Player playerOne;
-            Player playerTwo;
+            
 
             ConsoleOutput.StartMenu();
 
-            ConsoleInput.GetUserName();
+            ConsoleInput.CreateBothPLayers();
 
-            playerOne = new Player(ConsoleInput.PlayerOne, ConsoleOutput.Board());
-            playerTwo = new Player(ConsoleInput.PlayerTwo, ConsoleOutput.Board());
+            ConsoleInput.CreatePlayerBoards();
+
+            PlaceShipRequest.playerOne();
+
+            ConsoleInput.GetCoordinate(ConsoleInput.PlayerOne.PlayerName);
+
+            //setupPlayerBoard.BoardCreated(ConsoleInput.PlayerOne);
+            
+
             Console.ReadLine();
+
+            
+            
             
         }
 
