@@ -160,7 +160,7 @@ namespace Warmups.BLL
             {
                 if (str.Substring(0, 3) == ("bad"))
                     return true;
-                return str.Substring(1, 4) == ("bad");
+                return str.Substring(1, 3) == ("bad");
             }
             else
                 return false;
@@ -187,6 +187,10 @@ namespace Warmups.BLL
 
         public string LastChars(string a, string b)
         {
+            if ((a == "") && (b == ""))
+            {
+                return "@@";
+            }
             if ((a.Length >= 2) && (b.Length >= 2))
             {
                 string firsta = a.Substring(0, 1);
@@ -208,10 +212,7 @@ namespace Warmups.BLL
                 string newword = firsta + lastb;
                 return newword;
             }
-            if ((a == "") && (b == ""))
-            {
-                return "@@";
-            }
+           
 
             else
             {
@@ -327,12 +328,18 @@ namespace Warmups.BLL
             {
                 return "";
             }
-
-            if ((str[0] == 'x') && (str.Length > 1))
+            if ((str[0] == 'x') && (str.Length == 4))
             {
-                str = str.Substring(1, str.Length-1);
+                str = str.Substring(1, str.Length - 2);
                 return str;
             }
+            if ((str[0] == 'x') && (str.Length > 1))
+            {
+                str = str.Substring(1, str.Length - 1);
+                return str;
+            }
+
+          
             if ((str[(str.Length - 1)] == 'x') && (str.Length > 1))
             {
                 str = str.Substring(0, str.Length - 1);

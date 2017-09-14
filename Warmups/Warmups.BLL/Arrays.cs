@@ -79,8 +79,8 @@ namespace Warmups.BLL
 
         public int[] Reverse(int[] numbers)
         {
-            int[] reversed = { numbers[2], numbers[1], numbers[0] };
-            return reversed;
+            Array.Reverse(numbers);
+            return numbers;
         }
 
         public int[] HigherWins(int[] numbers)
@@ -126,26 +126,33 @@ namespace Warmups.BLL
 
         public bool Double23(int[] numbers)
         {
+            int twoCounter = 0;
+            int threeCounter = 0;
+
+            for (int i = 0; i <= numbers.Length-1 ; i++)
             {
-                if (numbers.Length == 2)
+                if (numbers[i] == 2)
                 {
-                    if (numbers[0] == 2 && numbers[1] == 2)
-                        return true;
-                    return (numbers[0] == 3 && numbers[1] == 3);
+                    twoCounter++;
                 }
-                if (numbers.Length > 2)
+                if (numbers[i] == 3)
                 {
-                    if (numbers[1] == 2 && numbers[2] == 2)
-                        return true;
-                    return (numbers[1] == 3 && numbers[2] == 3);
-                }
-                else
-                {
-                    return false;
+                    threeCounter++;
                 }
             }
+            if (twoCounter == 2)
+            {
+                return true;
+            }
+            if (threeCounter == 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-            
         
 
 

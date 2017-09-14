@@ -6,26 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using BattleShip.BLL.Ships;
 using BattleShip.BLL;
+using BattleShip.BLL.GameLogic;
+using BattleShip.BLL.Responses;
 
 namespace BattleShip.UI
 {
-    class ConsoleInput
+    public static class ConsoleInput
     {
 
-        public static Player PlayerOne { get; set; }
-        public static Player PlayerTwo { get; set; }
-        internal static void CreateBothPLayers()
+        public static Player CreateSinglePLayers()
         {
             Console.WriteLine("Enter your name first player : ");
-            PlayerOne = new Player(Console.ReadLine(), ConsoleOutput.Board());
+            return new Player(Console.ReadLine(), ConsoleOutput.Board());
 
-            Console.WriteLine("Enter your name second player : ");
-            PlayerTwo = new Player(Console.ReadLine(), ConsoleOutput.Board());
         }
-        internal static void CreatePlayerBoards()
+        internal static Board CreatePlayerBoards(string playerOne)
         {
-            var playerOneBoardSetup = new setupPlayerBoard(PlayerOne);
-            var playerTwoBoardSetup = new setupPlayerBoard(PlayerTwo);
+              return BoardCreated(playerOne);           
         }
 
         internal static Coordinate GetCoordinate(string PlayerName)
@@ -46,7 +43,29 @@ namespace BattleShip.UI
 
         internal static ShipDirection GetDirection(string playerName, ShipType s)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            Console.Write($"{playerName}, please enter a ship direction : ");
+            string requestedDirection = Console.ReadLine();
+             switch (requestedDirection)
+            {
+                case "D" || "d":
+                    return PlaceShipDown(PlaceShipRequest.Coordinate, s);
+                case "U" || "u":
+                    return PlaceShipUp(PlaceShipRequest.)
+            }
+
+
+             switch (request.Direction)
+            {
+                case ShipDirection.Down:
+                    return PlaceShipDown(request.Coordinate, newShip);
+                case ShipDirection.Up:
+                    return PlaceShipUp(request.Coordinate, newShip);
+                case ShipDirection.Left:
+                    return PlaceShipLeft(request.Coordinate, newShip);
+                default:
+                    return PlaceShipRight(request.Coordinate, newShip);
+            }
         }
 
         public static bool CoordinateTryParse(string userInput, out Coordinate validCoordinate)
@@ -77,5 +96,44 @@ namespace BattleShip.UI
 
 
         }
+        public static Board BoardCreated(string PlayerName)
+        {
+
+            Board toReturn = new Board();
+
+            for (ShipType s = ShipType.Carrier; s >= ShipType.Destroyer; s--)
+            {
+
+                bool IsShipSpotValid = false;
+                do
+                {
+                    PlaceShipRequest request = new PlaceShipRequest();
+                    request.Coordinate = ConsoleInput.GetCoordinate(PlayerName);
+                    request.Direction = ConsoleInput.GetDirection(PlayerName, s);
+                    request.ShipType = s;
+
+                    var result = toReturn.PlaceShip(request);
+
+                    if (result == ShipPlacement.NotEnoughSpace)
+                    {
+                        ConsoleOutput.TooFar();
+                    }
+                    if (result == ShipPlacement.Overlap)
+                    {
+                        ConsoleOutput.Overlap();
+                    }
+                    if (result == ShipPlacement.Ok)
+                    {
+                        ConsoleOutput.PlaceSuccess();
+                        IsShipSpotValid = true;
+                    }
+                }
+                while (!IsShipSpotValid);
+            }
+            return toReturn;
+
+        }
     }
 }
+
+

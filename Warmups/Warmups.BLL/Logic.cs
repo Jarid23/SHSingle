@@ -111,7 +111,7 @@ namespace Warmups.BLL
        
         public string AlarmClock(int day, bool vacation)
         {
-            if ((day == 0) && (vacation = false))
+            if ((day == 0))
             {
                 return "10:00";
             }

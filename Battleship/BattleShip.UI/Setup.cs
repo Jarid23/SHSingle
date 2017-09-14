@@ -10,8 +10,6 @@ using BattleShip.BLL.Requests;
 using BattleShip.BLL.Responses;
 using BattleShip.BLL.Ships;
 
-
-
 namespace BattleShip.UI
 {
     class Setup
@@ -32,23 +30,24 @@ namespace BattleShip.UI
                 do
                 {
                     PlaceShipRequest request = new PlaceShipRequest();
-                    //request.Coordinate = BshipInput.GetCoordinate(PlayerName, s);
-                   // request.Direction = BshipInput.GetDirection(PlayerName, s);
+                    
+                    request.Coordinate = ConsoleInput.GetCoordinate(PlayerName);
+                    request.Direction = ConsoleInput.GetDirection(PlayerName,s);
                     request.ShipType = s;
 
                     var result = toReturn.PlaceShip(request);
 
                     if (result == ShipPlacement.NotEnoughSpace)
                     {
-                       // BshipOutput.TooFar();
+                        ConsoleOutput.TooFar();
                     }
                     if (result == ShipPlacement.Overlap)
                     {
-                    //    BshipOutput.GGOverlap();
+                        ConsoleOutput.Overlap();
                     }
                     if (result == ShipPlacement.Ok)
                     {
-                     //   BshipOutput.PlaceSuccess();
+                        ConsoleOutput.PlaceSuccess();
                         IsShipSpotValid = true;
                     }
                 }

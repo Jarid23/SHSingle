@@ -13,28 +13,12 @@ namespace BattleShip.UI
     {
         static void Main(string[] args)
         {
-            
+            GameFlow newGame = new GameFlow();
 
-            ConsoleOutput.StartMenu();
-
-            ConsoleInput.CreateBothPLayers();
-
-            ConsoleInput.CreatePlayerBoards();
-
-            PlaceShipRequest.playerOne();
-
-            ConsoleInput.GetCoordinate(ConsoleInput.PlayerOne.PlayerName);
-
-            //setupPlayerBoard.BoardCreated(ConsoleInput.PlayerOne);
-            
+            newGame.RunGame();
 
             Console.ReadLine();
-
-            
-            
-            
-        }
-
-      
+                                
+        }     
     }
 }

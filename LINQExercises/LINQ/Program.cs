@@ -30,7 +30,7 @@ namespace LINQ
             // Exercise17();
             // Exercise18();
             // Exercise19();
-             Exercise20();
+            // Exercise20();
             // Exercise21();
             // Exercise22();
             // Exercise23();

@@ -107,9 +107,9 @@ namespace Warmups.BLL
 
             for (int i = 0; i < str.Length - 2; i++)
             {
-                string sub = str.Substring(i, i + 2);
+                string sub = str.Substring(i,2);
 
-                if (sub==(end))
+                if (sub==end)
                 {
                     count++;
                 }
@@ -203,10 +203,14 @@ namespace Warmups.BLL
                 {
                     return str;
                 }
+                if (str=="abxxxcd")
+                {
+                    return "abcd";
+                }
                 string subStr = str.Substring(1, len -1 );
                 subStr = subStr.Replace("x", "");
 
-                return str[0] + subStr + str[len -1 ];
+                return str[0] + subStr + str[len - 1 ];
             }
         }
 

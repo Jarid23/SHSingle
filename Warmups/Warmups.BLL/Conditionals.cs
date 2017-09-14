@@ -312,13 +312,13 @@ namespace Warmups.BLL
             {
                 return false;
             }
-            if ((str.Length > 3) && str.Substring(2, 4) == ("ix"))
+            if ((str.Length > 3) && str.Substring(1, 2) == ("ix"))
             {
                 return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
@@ -384,7 +384,7 @@ namespace Warmups.BLL
         public bool GotE(string str)
         {
             int count = 0;
-            for (int i = 0; i < str.Length - 1; i++)
+            for (int i = 0; i < str.Length ; i++)
             {
                 if (str[i] == 'e')
                 {
@@ -392,6 +392,7 @@ namespace Warmups.BLL
                 }
 
             }
+          
             if ((count > 0) && (count < 4))
             {
                 return true;
