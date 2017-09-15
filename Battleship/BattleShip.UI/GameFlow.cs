@@ -22,21 +22,37 @@ namespace BattleShip.UI
             Board playerOneBoard = ConsoleInput.CreatePlayerBoards(PlayerOne.PlayerName);
             Board playerTwoBoard = ConsoleInput.CreatePlayerBoards(PlayerTwo.PlayerName);
 
+            bool determineFirst = RNG.CoinFlip();
+            bool IsVictory = false;
 
-
-            
-
+            while (!IsVictory)
+            {
+                if(determineFirst)
+                {
+                    
+                    ConsoleOutput.GetBoard(playerOneBoard); //playerone board parameter
+                    var fireShotResponse = playerOneBoard.FireShot(ConsoleInput.GetCoordinate(PlayerOne.PlayerName));
+                    Console.WriteLine("This is the shot status : {0}", fireShotResponse.ShotStatus);
+                    Console.WriteLine("This is the ship impacted status : {0}", fireShotResponse.ShipImpacted);
+                    
+                    
+                   IsVictory = fireShotResponse.ShotStatus == ShotStatus.Victory;
+                }
+                else
+                {
+                    
+                    ConsoleOutput.GetBoard(playerTwoBoard);
+                    var fireShotResponse = playerTwoBoard.FireShot(ConsoleInput.GetCoordinate(PlayerTwo.PlayerName));
+                    Console.WriteLine("This is the shot status : {0}",fireShotResponse.ShotStatus);
+                    Console.WriteLine("This is the ship impacted status : {0}",fireShotResponse.ShipImpacted);
+                    IsVictory = fireShotResponse.ShotStatus == ShotStatus.Victory;
+                }
+                determineFirst = !determineFirst;
+            }
            
 
-            
-
-
-            
-
-            // ConsoleInput.GetCoordinate(ConsoleInput.PlayerOne.PlayerName);
-
-            //setupPlayerBoard.BoardCreated(ConsoleInput.PlayerOne);
-
+           // GameState thisGame = new GameState(PlayerOne, PlayerTwo, determineFirst);
+           
 
         }
 

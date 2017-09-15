@@ -17,7 +17,7 @@ namespace BattleShip.UI
         public static Player CreateSinglePLayers()
         {
             Console.WriteLine("Enter your name first player : ");
-            return new Player(Console.ReadLine(), ConsoleOutput.Board());
+            return new Player(Console.ReadLine(), new Board ());
 
         }
         internal static Board CreatePlayerBoards(string playerOne)
@@ -32,7 +32,7 @@ namespace BattleShip.UI
             Coordinate validCoordinate = null;
             while (!IsValidCoordinate)
             {
-                Console.Write($"{PlayerName}, please enter a coordinate : ");
+                Console.Write($"{PlayerName}, please enter a coordinate (a-j, then 1-10) : ");
 
 
                 String userInput = Console.ReadLine();
@@ -44,29 +44,26 @@ namespace BattleShip.UI
         internal static ShipDirection GetDirection(string playerName, ShipType s)
         {
             // throw new NotImplementedException();
-            Console.Write($"{playerName}, please enter a ship direction : ");
+            Console.Write($"{playerName}, please enter a ship direction (D for down, U for UP, L for left, R for right) : ");
             string requestedDirection = Console.ReadLine();
-             switch (requestedDirection)
+            switch (requestedDirection)
             {
-                case "D" || "d":
-                    return PlaceShipDown(PlaceShipRequest.Coordinate, s);
-                case "U" || "u":
-                    return PlaceShipUp(PlaceShipRequest.)
-            }
 
-
-             switch (request.Direction)
-            {
-                case ShipDirection.Down:
-                    return PlaceShipDown(request.Coordinate, newShip);
-                case ShipDirection.Up:
-                    return PlaceShipUp(request.Coordinate, newShip);
-                case ShipDirection.Left:
-                    return PlaceShipLeft(request.Coordinate, newShip);
+                case "D":
+                    return ShipDirection.Down;
+                case "U":
+                    return ShipDirection.Up;
+                case "L":
+                    return ShipDirection.Left;
+                case "R":
+                    return ShipDirection.Right;
                 default:
-                    return PlaceShipRight(request.Coordinate, newShip);
-            }
-        }
+                    return GetDirection(playerName, s);
+                
+            } }
+
+
+         
 
         public static bool CoordinateTryParse(string userInput, out Coordinate validCoordinate)
         {

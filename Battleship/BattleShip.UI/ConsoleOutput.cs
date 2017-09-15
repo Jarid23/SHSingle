@@ -4,32 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BattleShip.BLL.GameLogic;
-
-
+using BattleShip.BLL.Responses;
+using BattleShip.BLL.Requests;
 
 namespace BattleShip.UI
 {
     public static class ConsoleOutput
     {
-      
-        internal static Board Board()
+        internal static Board GetBoard(Board board)
         {
-            Board board = new Board();
             for (int y = 1; y < 11; y++)
             {
+                Console.Write($"| ");
                 for (int x = 1; x <= 11; x++)
                 {
+                    ShotHistory currentState = board.CheckCoordinate(new Coordinate(x, y));
+                    switch (currentState)
+                    {
+                        case ShotHistory.Unknown:
+                            Console.Write("?");
+                            break;
+                        case ShotHistory.Miss:
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write("M");
+                            Console.ResetColor();
+                            break;
+                        case ShotHistory.Hit:
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("H");
+                            Console.ResetColor();
+                            break;
+                    }
+
                     Console.Write($"| ");
-                    
                 }
-                Console.WriteLine("");
-                Console.WriteLine("----------------------------");
-                
+                Console.WriteLine();
+                Console.WriteLine("-----------------------------------");
             }
             return board;
-        }
 
-      
+        }
 
         public static string BshipInput()
         {
@@ -65,6 +81,6 @@ namespace BattleShip.UI
             Console.WriteLine("");
             return null;
         }
-
     }
 }
+

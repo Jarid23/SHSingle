@@ -9,7 +9,7 @@ namespace BattleShip.BLL.GameLogic
 {
     public class Board
     {
-        private Dictionary<Coordinate, ShotHistory> ShotHistory;
+        public Dictionary<Coordinate, ShotHistory> ShotHistory;
         private int _currentShipIndex;
 
         public Ship[] Ships { get; private set; }
@@ -79,7 +79,7 @@ namespace BattleShip.BLL.GameLogic
             }
         }
 
-        private void CheckForVictory(FireShotResponse response)
+        public void CheckForVictory(FireShotResponse response)
         {
             if (response.ShotStatus == ShotStatus.HitAndSunk)
             {
@@ -89,7 +89,7 @@ namespace BattleShip.BLL.GameLogic
             }
         }
 
-        private void CheckShipsForHit(Coordinate coordinate, FireShotResponse response)
+        public void CheckShipsForHit(Coordinate coordinate, FireShotResponse response)
         {
             response.ShotStatus = ShotStatus.Miss;
 
