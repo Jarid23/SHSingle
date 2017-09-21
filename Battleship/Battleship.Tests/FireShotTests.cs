@@ -9,6 +9,7 @@ namespace Battleship.Tests
     [TestFixture]
     public class FireShotTests
     {
+      
         #region "Board Setup"
         /// <summary>
         /// Let's set up a board as follows:
@@ -271,5 +272,7 @@ namespace Battleship.Tests
             coordinate = new Coordinate(8, 2);
             return board.FireShot(coordinate);
         }
+
     }
+
 }

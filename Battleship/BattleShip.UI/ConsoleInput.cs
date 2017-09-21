@@ -65,9 +65,9 @@ namespace BattleShip.UI
 
          
 
-        public static bool CoordinateTryParse(string userInput, out Coordinate validCoordinate)
+        public static bool CoordinateTryParse(string userInput, out Coordinate outputCoord)
         {
-            validCoordinate = null;
+            outputCoord = null;
             if (userInput.Length > 1)
             {
                 char yPart = userInput[0];
@@ -83,7 +83,7 @@ namespace BattleShip.UI
                         if (x >= 1 && x <= 10)
                         {
                             ycol = (yPart - 'a' + 1);
-                            validCoordinate = new Coordinate(ycol, x);
+                            outputCoord = new Coordinate(ycol, x);
                             return true;
                         }
                     }
