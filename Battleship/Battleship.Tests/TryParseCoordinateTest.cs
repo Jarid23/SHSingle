@@ -14,7 +14,7 @@ namespace Battleship.Tests
     {
         [TestCase("a7",true,1,7)]
         [TestCase("b9", true, 2, 9)]
-        [TestCase("7a", false, null, null)]
+        [TestCase("7a", false, -1, -1)]
         [TestCase("z69", false, null, null)]
 
         public void ParseStringToCoordinate(string userInput, bool expected, int xCoordinate, int yCoordinate)

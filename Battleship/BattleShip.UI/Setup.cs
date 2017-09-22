@@ -12,12 +12,29 @@ using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI
 {
-    class Setup
+    public class Setup
     {
+        public Player Player1 { get; }
+        public Player Player2 { get; }
+        public bool Player1Turn { get; set; }
+
+        public Setup()
+        {
+         
+            Player1 = ConsoleInput.CreateSinglePLayers();
+           
+            Player2 = ConsoleInput.CreateSinglePLayers();
+            Player1.PlayerBoard = ConsoleInput.CreatePlayerBoards(Player1.PlayerName);
+            Player2.PlayerBoard = ConsoleInput.CreatePlayerBoards(Player2.PlayerName);
+            Player1Turn = WhoGoesFirst();
+
+        } 
+
         private bool WhoGoesFirst()
         {
             return RNG.CoinFlip();
         }
+
         private Board BoardCreated(string PlayerName)
         {
 
@@ -55,7 +72,5 @@ namespace BattleShip.UI
             }
             return null;
         }
-
-
     }
 }

@@ -16,13 +16,13 @@ namespace BattleShip.UI
 
         public static Player CreateSinglePLayers()
         {
-            Console.WriteLine("Enter your name first player : ");
+            Console.WriteLine("Enter your name player : ");
             return new Player(Console.ReadLine(), new Board ());
 
         }
-        internal static Board CreatePlayerBoards(string playerOne)
+        internal static Board CreatePlayerBoards(string playerName)
         {
-              return BoardCreated(playerOne);           
+              return BoardCreated(playerName);           
         }
 
         internal static Coordinate GetCoordinate(string PlayerName)

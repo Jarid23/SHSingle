@@ -21,7 +21,7 @@ namespace SGBank.Data
         public Account LoadAccount(string AccountNumber)
         {
             List<Account> Accounts = new List<Account>();
-            Account c = new Account();
+            Account c = null;
             using (StreamReader reader = new StreamReader(_filepath))
             {
                 string line;
@@ -30,6 +30,7 @@ namespace SGBank.Data
                     string[] columns = line.Split(',');
                     if(AccountNumber == columns[0])
                     {
+                        c = new Account();
                         c.AccountNumber = columns[0];
                         c.Name = columns[1];
                         c.Balance = decimal.Parse(columns[2]);
@@ -63,14 +64,26 @@ namespace SGBank.Data
 
         public void SaveAccount(Account account)
         {
-            List<Account> Accounts = new List<Account>();
-            Account c = new Account();
-            string line = $"{account.AccountNumber},{account.Name},{account.Balance},{account.Type}";
+
+            string line = $"{account.AccountNumber},{account.Name},{account.Balance},{account.Type.ToString()[0]}";
+            string[] everyLine = File.ReadAllLines(_filepath);
+
             using (StreamWriter writer = new StreamWriter(_filepath))
             {
-                writer.Write(line);
+                foreach (var fileline in everyLine)
+                {
+                    string[] columns = fileline.Split(',');
+
+                    if (account.AccountNumber == columns[0])
+                    {
+                        writer.WriteLine(line);
+                    }
+                    else
+                    {
+                        writer.WriteLine(fileline);
+                    }
+                }
             }
-           
         }
         //private Account ReadAllAccounts()
         //{

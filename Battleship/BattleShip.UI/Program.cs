@@ -13,12 +13,20 @@ namespace BattleShip.UI
     {
         static void Main(string[] args)
         {
-            GameFlow newGame = new GameFlow();
+            while (true)
+            {
+                GameFlow newGame = new GameFlow();
 
-            newGame.RunGame();
+                newGame.RunGame();
 
-            Console.ReadLine();
-                                
-        }     
+                Console.WriteLine("Would you like to play again ?");
+                var keepGoing = Console.ReadLine().ToLower();
+                if (keepGoing[0] != 'y')
+                {
+                    break;
+                }
+
+            }
+        }
     }
 }

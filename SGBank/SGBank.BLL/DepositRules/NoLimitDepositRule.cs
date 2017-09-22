@@ -22,8 +22,6 @@ namespace SGBank.BLL.DepositRules
                 return response;
             }
 
-
-
             if (amount <= 0)
             {
                 response.Success = false;

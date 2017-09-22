@@ -16,13 +16,16 @@ namespace BattleShip.UI
     {
         public void RunGame()
         {
-              Player PlayerOne = ConsoleInput.CreateSinglePLayers();
-              Player PlayerTwo = ConsoleInput.CreateSinglePLayers();
 
-            Board playerOneBoard = ConsoleInput.CreatePlayerBoards(PlayerOne.PlayerName);
-            Board playerTwoBoard = ConsoleInput.CreatePlayerBoards(PlayerTwo.PlayerName);
+            Setup gameSetup = new Setup();
 
-            bool determineFirst = RNG.CoinFlip();
+            Player PlayerOne = gameSetup.Player1;
+            Player PlayerTwo = gameSetup.Player2;
+
+            Board playerOneBoard = PlayerOne.PlayerBoard;
+            Board playerTwoBoard = PlayerTwo.PlayerBoard;
+
+            bool determineFirst = gameSetup.Player1Turn;
             bool IsVictory = false;
 
             while (!IsVictory)
@@ -30,8 +33,8 @@ namespace BattleShip.UI
                 if(determineFirst)
                 {
                     
-                    ConsoleOutput.GetBoard(playerOneBoard); //playerone board parameter
-                    var fireShotResponse = playerOneBoard.FireShot(ConsoleInput.GetCoordinate(PlayerOne.PlayerName));
+                    ConsoleOutput.GetBoard(playerTwoBoard); //playerone board parameter
+                    var fireShotResponse = playerTwoBoard.FireShot(ConsoleInput.GetCoordinate(PlayerOne.PlayerName));
                     Console.WriteLine("This is the shot status : {0}", fireShotResponse.ShotStatus);
                     Console.WriteLine("This is the ship impacted status : {0}", fireShotResponse.ShipImpacted);
                     
@@ -41,8 +44,8 @@ namespace BattleShip.UI
                 else
                 {
                     
-                    ConsoleOutput.GetBoard(playerTwoBoard);
-                    var fireShotResponse = playerTwoBoard.FireShot(ConsoleInput.GetCoordinate(PlayerTwo.PlayerName));
+                    ConsoleOutput.GetBoard(playerOneBoard);
+                    var fireShotResponse = playerOneBoard.FireShot(ConsoleInput.GetCoordinate(PlayerTwo.PlayerName));
                     Console.WriteLine("This is the shot status : {0}",fireShotResponse.ShotStatus);
                     Console.WriteLine("This is the ship impacted status : {0}",fireShotResponse.ShipImpacted);
                     IsVictory = fireShotResponse.ShotStatus == ShotStatus.Victory;
