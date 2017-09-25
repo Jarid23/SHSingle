@@ -9,6 +9,7 @@ namespace FlooringMastery.BLL.Interfaces
 {
    public interface IOrderRepository
     {
-        Order LookupOrder(string OrderDate);
+        List<Order> LookupOrder(string OrderDate);
+
     }
 }

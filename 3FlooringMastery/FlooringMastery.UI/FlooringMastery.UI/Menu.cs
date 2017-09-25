@@ -30,7 +30,7 @@ namespace FlooringMastery.UI
                 {
                     case "1":
                         DisplayOrderWorkflow displayWorkflow = new DisplayOrderWorkflow();
-                        displayWorkflow.Execute();
+                        displayWorkflow.GetDate();
                         break;
                     //case "2":
                     //    AddOrdertWorkflow addOrderWorkflow = new AddOrdertWorkflow();

@@ -11,6 +11,8 @@ namespace FlooringMastery.BLL
     public class OrderManager
     {
         private IOrderRepository _orderRepository;
+      //  private ITaxRepo _taxrepo;
+      //  private IProductRepository _productrepo;
 
         public OrderManager(IOrderRepository orderRepository)
         {
@@ -36,5 +38,6 @@ namespace FlooringMastery.BLL
             return response;
         }
     }
+
 }
 

@@ -526,15 +526,9 @@ namespace LINQ
         /// </summary>
         static void Exercise26()
         {
-            var countOdds = DataLoader.NumbersA.Where(p => (p%2 == 1));
-            int oddCount = 0;
+            var countOdds = DataLoader.NumbersA.Where(p => (p%2 == 1)).Count();
 
-            foreach (var number in countOdds)
-            {
-                oddCount++;
-            }
-        
-        Console.WriteLine("There was {0} odd numbers.", oddCount);
+            Console.WriteLine(countOdds);
             // 0, 2, 4, 5, 6, 8, 9 
         }
 
