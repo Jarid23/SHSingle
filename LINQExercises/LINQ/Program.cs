@@ -36,7 +36,7 @@ namespace LINQ
             // Exercise23();
             // Exercise24();
             // Exercise25();
-            // Exercise26();
+            Exercise26();
             // Exercise27();
             // Exercise28();
             // Exercise30();
@@ -287,14 +287,11 @@ namespace LINQ
         /// </summary>
         static void Exercise11()
         {
+            var first3Odd = DataLoader.NumbersC.Where(number => number % 2 == 1).Take(3);
+
+            foreach (var number in first3Odd)
             {
-                var first3Odd = DataLoader.NumbersC.Where(number => number % 2 == 1).Take(3);
-
-                foreach (var number in first3Odd)
-                {
-                    Console.WriteLine(number);
-                }
-
+                Console.WriteLine(number);
             }
         }
 
@@ -303,14 +300,11 @@ namespace LINQ
         /// </summary>
         static void Exercise12()
         {
+            var skipFirst3 = DataLoader.NumbersB;
+
+            foreach (var number in skipFirst3.Skip(3))
             {
-                var skipFirst3 = DataLoader.NumbersB;
-
-                foreach (var number in skipFirst3.Skip(3))
-                {
-                    Console.WriteLine(number);
-                }
-
+                Console.WriteLine(number);
             }
         }
 
@@ -340,21 +334,14 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
-            var upUntil6 = DataLoader.NumbersC;
+            var upUntil6 = DataLoader.NumbersC.TakeWhile(p => p < 6);
 
             foreach (var number in upUntil6)
             {
-                if (number < 6)
-                {
-                    Console.WriteLine(number);
-                }
-                if (number >= 6)
-                {
-                    break;
-                }
+                Console.WriteLine(number);
             }
-
         }
+
 
         /// <summary>
         /// Print all the numbers in NumbersC that come after the first number divisible by 3
@@ -441,31 +428,31 @@ namespace LINQ
             var allProducts = DataLoader.LoadProducts();
             var groupProductsByCategory = allProducts.GroupBy(p => p.Category);
 
-        foreach(var category in groupProductsByCategory)
+            foreach (var category in groupProductsByCategory)
             {
                 Console.WriteLine(category.Key);
                 Console.WriteLine("");
-                foreach(var product in category)
+                foreach (var product in category)
                 {
                     Console.WriteLine(product.ProductName);
-                    
+
                 }
                 Console.WriteLine("");
             }
-    }
+        }
 
-    /// <summary>
-    /// Print all Customers with their orders by Year then Month
-    /// ex:
-    /// 
-    /// Joe's Diner
-    /// 2015
-    ///     1 -  $500.00
-    ///     3 -  $750.00
-    /// 2016
-    ///     2 - $1000.00
-    /// </summary>
-    static void Exercise21() //DO NOT DO
+        /// <summary>
+        /// Print all Customers with their orders by Year then Month
+        /// ex:
+        /// 
+        /// Joe's Diner
+        /// 2015
+        ///     1 -  $500.00
+        ///     3 -  $750.00
+        /// 2016
+        ///     2 - $1000.00
+        /// </summary>
+        static void Exercise21() //DO NOT DO
         {
 
         }
@@ -480,10 +467,10 @@ namespace LINQ
                                  select new { product.Category };
             var distinctCategories = justCategories.Distinct();
 
-            foreach(var product in distinctCategories)
+            foreach (var product in distinctCategories)
             {
                 Console.WriteLine(product);
-            }           
+            }
         }
 
         /// <summary>
@@ -493,7 +480,7 @@ namespace LINQ
         {
             var allProducts = DataLoader.LoadProducts();
             bool product789 = allProducts.Any(p => p.ProductID == 789);
-            Console.WriteLine(product789);           
+            Console.WriteLine(product789);
         }
 
         /// <summary>
@@ -514,7 +501,7 @@ namespace LINQ
             }
         }
 
-         
+
 
         /// <summary>
         /// Print a list of categories that have no products out of stock
@@ -526,11 +513,11 @@ namespace LINQ
             var inStock = allProducts.Where(p => p.UnitsInStock > 0);
 
             var stockedUP = from product in inStock
-                                select new { product.ProductName,product.Category, product.UnitsInStock };
+                            select new { product.ProductName, product.Category, product.UnitsInStock };
 
             foreach (var product in stockedUP)
             {
-                Console.WriteLine("{0},{1},{2}",product.Category,product.ProductName, product.UnitsInStock);
+                Console.WriteLine("{0},{1},{2}", product.Category, product.ProductName, product.UnitsInStock);
             }
         }
 
@@ -539,22 +526,16 @@ namespace LINQ
         /// </summary>
         static void Exercise26()
         {
-            var countOdds = DataLoader.NumbersA;
+            var countOdds = DataLoader.NumbersA.SkipWhile(p => (p%2 != 1));
             int oddCount = 0;
-            int evenCount = 0;
 
-            foreach(var number in countOdds)
+            foreach (var number in countOdds)
             {
-                if(number % 2 == 1)
-                {
-                    oddCount++;
-                }
-                else
-                {
-                    evenCount++;
-                }     
+                oddCount++;
             }
-            Console.WriteLine("There was {0} odd numbers and {1} even numbers.",oddCount,evenCount);
+        
+        Console.WriteLine("There was {0} odd numbers.", oddCount);
+            
         }
 
         /// <summary>
