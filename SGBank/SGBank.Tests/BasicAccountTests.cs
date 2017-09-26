@@ -15,10 +15,10 @@ namespace SGBank.Tests
     [TestFixture]
     public class BasicAccountTests
     {
-        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, true)]
-        public void BasicAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, bool expectedResult)
+        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, 350, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, 0, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, 350, true)]
+        public void BasicAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount,decimal expectedBalance, bool expectedResult)
         {
             IDeposit depositResponse = new NoLimitDepositRule();
 
@@ -32,13 +32,17 @@ namespace SGBank.Tests
             };
             AccountDepositResponse accountDepositResponse = depositResponse.Deposit(accountVariable, amount);
             Assert.AreEqual(expectedResult, accountDepositResponse.Success);
+            if (expectedResult)
+            {
+                Assert.AreEqual(expectedBalance, accountDepositResponse.Account.Balance);
+            }
         }
         [TestCase("33333", "Basic Account", 1500, AccountType.Basic, -1000,1500, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Free, -100, 100, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, 100, 100, false)]
         [TestCase("33333", "Basic Account", 150, AccountType.Basic, -50, 100, true)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, -150, -60, true)]
-        public void BasicAccountWithdrawRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount,decimal newBalance, bool expectedResult)
+        public void BasicAccountWithdrawRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount,decimal expectedBalance, bool expectedResult)
         {
             IWithdraw withdrawResponse = new BasicAccountWithdrawRule();
 
@@ -53,6 +57,10 @@ namespace SGBank.Tests
             };
             AccountWithdrawResponse accountWithdrawResponse = withdrawResponse.Withdraw(accountVariable, amount);
             Assert.AreEqual(expectedResult, accountWithdrawResponse.Success);
+            if (expectedResult)
+            {
+                Assert.AreEqual(expectedBalance, accountWithdrawResponse.Account.Balance);
+            }
         }
 
     }

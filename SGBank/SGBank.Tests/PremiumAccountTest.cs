@@ -14,9 +14,9 @@ namespace SGBank.Tests
     public class PremiumAccountTest
     {
         [TestCase("55555", "Premium Account", 100, AccountType.Premium, 100, 100, false)]
-        [TestCase("55555", "Premium Account", 100, AccountType.Premium, -599, -499, true)]
+        [TestCase("55555", "Premium Account", 100, AccountType.Premium, -599, -509, true)]
         [TestCase("55555", "Premium Account", 100, AccountType.Premium, -601, -501, false)]
-        public void PremiumAccountWithdrawRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
+        public void PremiumAccountWithdrawRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, decimal expectedBalance, bool expectedResult)
         {
             IWithdraw withdrawResponse = new PremiumAccountWithdrawRule();
 
@@ -29,6 +29,10 @@ namespace SGBank.Tests
             };
             AccountWithdrawResponse accountWithdrawResponse = withdrawResponse.Withdraw(accountVariable, amount);
             Assert.AreEqual(expectedResult, accountWithdrawResponse.Success);
+            if (expectedResult)
+            {
+                Assert.AreEqual(expectedBalance, accountWithdrawResponse.Account.Balance);
+            }
         }
 
     }
