@@ -54,6 +54,15 @@ namespace FlooringMastery.Data
                 }
                 return Orders;
             }
+        public void AddOrder(Order NewOrder)
+        {
+            string _filename = "Orders_06012013.txt";
+            string line = $"{NewOrder.OrderNumber},{NewOrder.CustomerName},{NewOrder.State},{NewOrder.TaxRate},{NewOrder.ProductType},{NewOrder.Area},{NewOrder.CostPerSquareFoot},{NewOrder.LaborCostPerSquareFoot},{NewOrder.MaterialCost},{NewOrder.LaborCost},{NewOrder.Tax},{ NewOrder.Total}";
+            using (var sw = File.AppendText(_filepath + _filename))
+            {
+                sw.WriteLine(line);
+            }
+        }
         }
     }
 

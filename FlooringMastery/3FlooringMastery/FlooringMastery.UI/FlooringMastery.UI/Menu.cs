@@ -32,10 +32,10 @@ namespace FlooringMastery.UI
                         DisplayOrderWorkflow displayWorkflow = new DisplayOrderWorkflow();
                         displayWorkflow.Execute();
                         break;
-                    //case "2":
-                    //    AddOrdertWorkflow addOrderWorkflow = new AddOrdertWorkflow();
-                    //    addOrderWorkflow.Execute();
-                    //    break;
+                    case "2":
+                        AddOrderWorkflow addOrderWorkflow = new AddOrderWorkflow();
+                        addOrderWorkflow.Execute();
+                        break;
                         //case "3":
                         //    EditOrdertWorkflow editOrderWorkflow = new EditOrdertWorkflow();
                         //    editOrderWorkflow.Execute();

@@ -17,7 +17,7 @@ namespace FlooringMastery.BLL
             switch (mode)
             {
                 case "LiveData":
-                    return new OrderManager(new LiveDataRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\3FlooringMastery\FlooringMastery.UI\Data\"));
+                    return new OrderManager(new LiveDataRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\FlooringMastery\3FlooringMastery\FlooringMastery.UI\Data\"));
                 default:
                     throw new Exception("Mode value in app config is not valid");
             }

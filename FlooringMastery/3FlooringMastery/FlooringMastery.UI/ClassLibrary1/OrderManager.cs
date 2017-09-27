@@ -1,4 +1,6 @@
 ﻿using FlooringMastery.BLL.Interfaces;
+using FlooringMastery.BLL.Responses;
+using FlooringMastery.Models;
 using FlooringMastery.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,27 @@ namespace FlooringMastery.BLL
                 response.Success = true;
             }
 
+            return response;
+        }
+        public AddOrderResponse AddOrder(Order NewOrder)
+        {
+            AddOrderResponse response = new AddOrderResponse();
+            response.NewOrder = new Order();
+
+            response.NewOrder.OrderNumber = NewOrder.OrderNumber;
+            response.NewOrder.CustomerName = NewOrder.CustomerName;
+            response.NewOrder.State = NewOrder.State;
+            response.NewOrder.TaxRate = NewOrder.TaxRate;
+            response.NewOrder.ProductType = NewOrder.ProductType;
+            response.NewOrder.Area = NewOrder.Area;
+            response.NewOrder.CostPerSquareFoot = NewOrder.CostPerSquareFoot;
+            response.NewOrder.LaborCostPerSquareFoot = NewOrder.LaborCostPerSquareFoot;
+            response.NewOrder.MaterialCost = NewOrder.MaterialCost;
+            response.NewOrder.LaborCost = NewOrder.LaborCost;
+            response.NewOrder.Tax = NewOrder.Tax;
+            response.NewOrder.Total = NewOrder.Total;
+
+            _orderRepository.AddOrder(response.NewOrder);
             return response;
         }
     }
