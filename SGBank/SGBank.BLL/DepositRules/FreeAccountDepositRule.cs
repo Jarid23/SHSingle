@@ -14,8 +14,9 @@ namespace SGBank.BLL.DepositRules
         public AccountDepositResponse Deposit(Account account, decimal amount)
         {
             AccountDepositResponse response = new AccountDepositResponse();
-
-            if(account.Type != AccountType.Free)
+            response.OldBalance = account.Balance;
+            response.Account = account;
+            if (account.Type != AccountType.Free)
             {
                 response.Success = false;
                 response.Message = "Error: a non free account hit the Free Deposit Rule.  Contact IT";
@@ -36,9 +37,9 @@ namespace SGBank.BLL.DepositRules
                 return response;
             }
 
-            response.OldBalance = account.Balance;
+           
             account.Balance += amount;
-            response.Account = account;
+            
             response.Amount = amount;
             response.Success = true;
 

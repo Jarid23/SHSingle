@@ -37,12 +37,12 @@ namespace FlooringMastery.UI
                         addOrderWorkflow.Execute();
                         break;
                         //case "3":
-                        //    EditOrdertWorkflow editOrderWorkflow = new EditOrdertWorkflow();
+                        //    EditOrderWorkflow editOrderWorkflow = new EditOrderWorkflow();
                         //    editOrderWorkflow.Execute();
                         //    break;
-                        //case "4":
-                        //    RemoveOrdertWorkflow removeOrderWorkflow = new RemoveOrdertWorkflow();
-                        //    removeOrderWorkflow.Execute();
+                        case "4":
+                            RemoveOrderWorkflow removeOrderWorkflow = new RemoveOrderWorkflow();
+                            removeOrderWorkflow.Execute();
                         break;
                     case "Q":
                         return;

@@ -15,8 +15,8 @@ namespace SGBank.Tests
     [TestFixture]
     public class BasicAccountTests
     {
-        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, 350, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, 0, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, 100, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, 100, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, 350, true)]
         public void BasicAccountDepositRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount,decimal expectedBalance, bool expectedResult)
         {
@@ -31,11 +31,9 @@ namespace SGBank.Tests
                 Type = accountType
             };
             AccountDepositResponse accountDepositResponse = depositResponse.Deposit(accountVariable, amount);
-            Assert.AreEqual(expectedResult, accountDepositResponse.Success);
-            if (expectedResult)
-            {
-                Assert.AreEqual(expectedBalance, accountDepositResponse.Account.Balance);
-            }
+            Assert.AreEqual(expectedResult, accountDepositResponse.Success);                      
+            Assert.AreEqual(expectedBalance, accountDepositResponse.Account.Balance);
+            
         }
         [TestCase("33333", "Basic Account", 1500, AccountType.Basic, -1000,1500, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Free, -100, 100, false)]
@@ -57,10 +55,8 @@ namespace SGBank.Tests
             };
             AccountWithdrawResponse accountWithdrawResponse = withdrawResponse.Withdraw(accountVariable, amount);
             Assert.AreEqual(expectedResult, accountWithdrawResponse.Success);
-            if (expectedResult)
-            {
-                Assert.AreEqual(expectedBalance, accountWithdrawResponse.Account.Balance);
-            }
+            Assert.AreEqual(expectedBalance, accountWithdrawResponse.Account.Balance);
+            
         }
 
     }

@@ -41,11 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\IStateRepository.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\AddOrderResponse.cs" />
     <Compile Include="Responses\DisplayOrderResponse.cs" />
+    <Compile Include="Responses\GetProductsResponse.cs" />
+    <Compile Include="Responses\RemoveOrderResponse.cs" />
     <Compile Include="Responses\Response.cs" />
+    <Compile Include="Tax.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

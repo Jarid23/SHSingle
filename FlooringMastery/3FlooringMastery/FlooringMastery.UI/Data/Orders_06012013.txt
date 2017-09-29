@@ -1,2 +1,4 @@
 ﻿OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
-1,Wise,OH,6.25,Wood,100.00,5.15,4.75,515.00,475.00,61.88,1051.881,Jarid,MN,0.05,Apples,112,23,35,2576,3920,324.80,6820.80
+1,Wise,OH,6.25,Wood,100.00,5.15,4.75,515.00,475.00,61.88,1051.881
+2,Jarid,MN,0.05,Marble,112,3,5,336,560,44.80,940.80
+3,J,MN,0.05,wood,101,1,2,101,202,15.15,318.15

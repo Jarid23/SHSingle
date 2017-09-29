@@ -8,7 +8,7 @@ namespace FlooringMastery.Models
 {
     public class Order
     {
-        public string OrderNumber { get; set; }
+        public int OrderNumber { get; set; }
         public string OrderDate { get; set; }
         public string CustomerName { get; set; }
         public string State { get; set; }
@@ -17,9 +17,10 @@ namespace FlooringMastery.Models
         public decimal Area { get; set; }
         public decimal CostPerSquareFoot { get; set; }
         public decimal LaborCostPerSquareFoot { get; set; }
-        public decimal MaterialCost { get; set; }
-        public decimal LaborCost { get; set; }
-        public decimal Tax { get; set; }
-        public decimal Total { get; set; }
+
+        public decimal MaterialCost => (CostPerSquareFoot * Area);
+        public decimal LaborCost => LaborCostPerSquareFoot * Area;
+        public decimal Tax => TaxRate * (LaborCost + MaterialCost);
+        public decimal Total => Tax + LaborCost + MaterialCost;
     }
 }

@@ -18,6 +18,18 @@ namespace FlooringMastery.BLL
         {
             _orderRepository = orderRepository;
         }
+        public GetProductsResponse GetProducts()
+        {
+            GetProductsResponse response = new GetProductsResponse();
+
+            response.Product = 
+        }
+
+        public List<Tax> GetAllStates()
+        {
+            throw new NotImplementedException();
+        }
+
         public DisplayOrderResponse LookupOrder(string orderDate)
         {
             DisplayOrderResponse response = new DisplayOrderResponse();
@@ -37,6 +49,17 @@ namespace FlooringMastery.BLL
 
             return response;
         }
+
+        public int GetNextOrderNumber(DateTime userEnteredDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            throw new NotImplementedException();
+        }
+
         public AddOrderResponse AddOrder(Order NewOrder)
         {
             AddOrderResponse response = new AddOrderResponse();
@@ -58,6 +81,16 @@ namespace FlooringMastery.BLL
             _orderRepository.AddOrder(response.NewOrder);
             return response;
         }
+        
+
+        //public Order GetSingleOrder(string OrderDate,string OrderNumber)
+        //{
+        //     looping logic
+        //}
+        //public RemoveOrderResponse RemoveOrder(Order OrderBeingRemoved)
+        //{
+
+        //}
     }
 }
 

@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LiveDataRepository.cs" />
-    <Compile Include="ProductOrderRepository.cs" />
+    <Compile Include="OrderRepository.cs" />
+    <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

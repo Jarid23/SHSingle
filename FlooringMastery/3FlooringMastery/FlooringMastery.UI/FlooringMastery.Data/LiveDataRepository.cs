@@ -30,18 +30,15 @@ namespace FlooringMastery.Data
                         var columns = reader[i].Split(',');
                         var order = new Order();
 
-                        order.OrderNumber = columns[0];
+                        order.OrderNumber = int.Parse(columns[0]);
                         order.CustomerName = columns[1];
                         order.State = columns[2];
-                        order.Tax = decimal.Parse(columns[3]);
+                        order.TaxRate = decimal.Parse(columns[3]);
                         order.ProductType = columns[4];
                         order.Area = decimal.Parse(columns[5]);
                         order.CostPerSquareFoot = decimal.Parse(columns[6]);
                         order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
-                        order.MaterialCost = decimal.Parse(columns[8]);
-                        order.LaborCost = decimal.Parse(columns[9]);
-                        order.Tax = decimal.Parse(columns[10]);
-                        order.Total = decimal.Parse(columns[11]);
+
 
                         Orders.Add(order);
                         
@@ -61,7 +58,12 @@ namespace FlooringMastery.Data
             using (var sw = File.AppendText(_filepath + _filename))
             {
                 sw.WriteLine(line);
+
             }
+        }
+        public void RemoveOrder(Order OrderBeingRemoved)
+        {
+
         }
         }
     }

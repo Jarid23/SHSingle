@@ -14,7 +14,8 @@ namespace SGBank.BLL.DepositRules
         public AccountDepositResponse Deposit(Account account, decimal amount)
         {
             AccountDepositResponse response = new AccountDepositResponse();
-
+            response.OldBalance = account.Balance;
+            response.Account = account;
             if ((account.Type != AccountType.Basic) && (account.Type != AccountType.Premium))
             {
                 response.Success = false;
@@ -30,9 +31,9 @@ namespace SGBank.BLL.DepositRules
             }
             else
             {
-                response.OldBalance = account.Balance;
+                
                 account.Balance += amount;
-                response.Account = account;
+                
                 response.Amount = amount;
                 response.Success = true;
 

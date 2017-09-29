@@ -14,7 +14,8 @@ namespace SGBank.BLL.WithdrawRules
         public AccountWithdrawResponse Withdraw(Account account, decimal amount)
         {
             AccountWithdrawResponse response = new AccountWithdrawResponse();
-
+            response.OldBalance = account.Balance;
+            response.Account = account;
             if (account.Type != AccountType.Premium)
             {
                 response.Success = false;
@@ -36,7 +37,7 @@ namespace SGBank.BLL.WithdrawRules
             }
             else
             {
-                response.OldBalance = account.Balance;
+                
                 account.Balance += amount;
                 if (account.Balance < 0)
                 {
@@ -44,7 +45,7 @@ namespace SGBank.BLL.WithdrawRules
                     Console.WriteLine(account.Balance);
                     Console.WriteLine("Negative balance so here is a 10 dollar overdraft fee");
                 }
-                response.Account = account;
+               
                 response.Amount = amount;
                 response.Success = true;
                 return response;
