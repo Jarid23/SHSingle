@@ -27,7 +27,7 @@ namespace FlooringMastery.UI.Workflows
             Console.WriteLine("Are you sure you want to edit this Order : ");
             string edit = Console.ReadLine();
 
-            if((edit == "y") || (edit == "yes"))
+            if(((edit == "y") || (edit == "yes")) || (edit=="Y"))
             {               
               var EditedName = ConsoleIO.EditGetName(orderBeingEdited);
               var EditedState = ConsoleIO.EditGetState(orderBeingEdited, orderManager.GetAllStates() );

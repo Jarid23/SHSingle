@@ -16,7 +16,7 @@ namespace FlooringMastery.Data
         {
             _filepath = filepath;
         }
-       
+
         public List<Order> LoadOrders(DateTime orderDate)
         {
             List<Order> Orders = new List<Order>();
@@ -24,50 +24,97 @@ namespace FlooringMastery.Data
             string filename = "Orders_" + orderDate.Month.ToString().PadLeft(2, '0')
                     + orderDate.Day.ToString().PadLeft(2, '0') + orderDate.Year + ".txt";
 
-                var fileToRead = _filepath + filename;
+            var fileToRead = _filepath + filename;
+            if (File.Exists(fileToRead))
+            {
+                var reader = File.ReadAllLines(fileToRead);
+                for (int i = 1; i < reader.Length; i++)
+                {
+                    var columns = reader[i].Split(',');
+                    var order = new Order();
+
+                    order.OrderNumber = int.Parse(columns[0]);
+                    order.CustomerName = columns[1];
+                    order.State = columns[2];
+                    order.TaxRate = decimal.Parse(columns[3]);
+                    order.ProductType = columns[4];
+                    order.Area = decimal.Parse(columns[5]);
+                    order.CostPerSquareFoot = decimal.Parse(columns[6]);
+                    order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
+                    order.OrderDate = orderDate;
+                    Orders.Add(order);
+                }
+            }
+            else
+            {
+                Console.ReadKey();
+            }
+            return Orders;
+        }
+
+
+        public bool AddOrder(Order newOrder)
+        {
+            try
+            {
+                string _filename = "Orders_" + newOrder.OrderDate.Month.ToString().PadLeft(2, '0')
+                        + newOrder.OrderDate.Day.ToString().PadLeft(2, '0') + newOrder.OrderDate.Year + ".txt";
+
+
+                var fileToRead = _filepath + _filename;
+                if (!File.Exists(fileToRead))
+                {
+                    using (var sw = File.CreateText(fileToRead))
+                    {
+                        string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost";
+                        sw.WriteLine(header);
+                    }
+
+                }
+
+                string line = $"{newOrder.OrderNumber},{newOrder.CustomerName},{newOrder.State},{newOrder.TaxRate},{newOrder.ProductType},{newOrder.Area},{newOrder.CostPerSquareFoot},{newOrder.LaborCostPerSquareFoot},{newOrder.MaterialCost},{newOrder.LaborCost},{newOrder.Tax},{ newOrder.Total}";
+                using (var sw = File.AppendText(_filepath + _filename))
+                {
+                    sw.WriteLine(line);
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveOrder(Order orderBeingRemoved)
+        {
+            try
+            {
+                string _filename = "Orders_" + orderBeingRemoved.OrderDate.Month.ToString().PadLeft(2, '0')
+                        + orderBeingRemoved.OrderDate.Day.ToString().PadLeft(2, '0') + orderBeingRemoved.OrderDate.Year + ".txt";
+
+                var fileToRead = _filepath + _filename;
                 if (File.Exists(fileToRead))
                 {
                     var reader = File.ReadAllLines(fileToRead);
-                    for (int i = 1; i < reader.Length; i++)
+                    var allOrders = LoadOrders(orderBeingRemoved.OrderDate);
+                   
+                    allOrders.RemoveAll(o=>o.OrderNumber == orderBeingRemoved.OrderNumber);
+                    File.Delete(fileToRead);
+                    for(int i = 0; i < allOrders.Count; i++)
                     {
-                        var columns = reader[i].Split(',');
-                        var order = new Order();
-
-                        order.OrderNumber = int.Parse(columns[0]);
-                        order.CustomerName = columns[1];
-                        order.State = columns[2];
-                        order.TaxRate = decimal.Parse(columns[3]);
-                        order.ProductType = columns[4];
-                        order.Area = decimal.Parse(columns[5]);
-                        order.CostPerSquareFoot = decimal.Parse(columns[6]);
-                        order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
-
-
-                        Orders.Add(order);
-                        
-                    }
+                        AddOrder(allOrders[i]);
+                    }                                    
                 }
-                else
-                {
+                return true;
 
-                    Console.ReadKey();
-                }
-                return Orders;
             }
-        public void AddOrder(Order NewOrder)
-        {
-            string _filename = "Orders_06012013.txt";
-            string line = $"{NewOrder.OrderNumber},{NewOrder.CustomerName},{NewOrder.State},{NewOrder.TaxRate},{NewOrder.ProductType},{NewOrder.Area},{NewOrder.CostPerSquareFoot},{NewOrder.LaborCostPerSquareFoot},{NewOrder.MaterialCost},{NewOrder.LaborCost},{NewOrder.Tax},{ NewOrder.Total}";
-            using (var sw = File.AppendText(_filepath + _filename))
+            catch (Exception e)
             {
-                sw.WriteLine(line);
-
+                return false;
             }
-        }
-        public void RemoveOrder(Order OrderBeingRemoved)
-        {
-
-        }
         }
     }
+} 
+     
 

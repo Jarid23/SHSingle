@@ -19,7 +19,7 @@ namespace FlooringMastery.BLL
                 case "InMemory":
                     return new OrderManager(new InMemoryOrderRepository(), new InMemoryProductRepository(), new InMemoryStateRepository());
                 case "LiveData":
-                    return new OrderManager(new LiveDataRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\FlooringMastery\3FlooringMastery\FlooringMastery.UI\Data\"));
+                    return new OrderManager(new LiveDataRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\FlooringMastery\3FlooringMastery\FlooringMastery.UI\Data\"), new ProductRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\FlooringMastery\3FlooringMastery\FlooringMastery.UI\Data\Products.txt"), new StateRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\FlooringMastery\3FlooringMastery\FlooringMastery.UI\Data\Taxes.txt"));
                 default:
                     throw new Exception("Mode value in app config is not valid");
             }

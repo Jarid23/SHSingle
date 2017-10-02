@@ -15,8 +15,7 @@ namespace FlooringMastery.UI
             foreach (var order in orders)
             {
                 Console.WriteLine($"Order Number: {order.OrderNumber}");
-                Console.WriteLine($"Name: {order.CustomerName}");
-                Console.WriteLine($"Order: {order.OrderDate}");
+                Console.WriteLine($"Name: {order.CustomerName}");                
                 Console.WriteLine($"State: {order.State}");
                 Console.WriteLine($"Product: {order.ProductType}");
                 Console.WriteLine($"Materials: {order.MaterialCost}");
@@ -29,8 +28,7 @@ namespace FlooringMastery.UI
         public static void DisplaySingleOrderDetails(Order orderBeingRemoved)
         {
             Console.WriteLine($"Order Number: {orderBeingRemoved.OrderNumber}");
-            Console.WriteLine($"Name: {orderBeingRemoved.CustomerName}");
-            Console.WriteLine($"Order: {orderBeingRemoved.OrderDate}");
+            Console.WriteLine($"Name: {orderBeingRemoved.CustomerName}");            
             Console.WriteLine($"State: {orderBeingRemoved.State}");
             Console.WriteLine($"Product: {orderBeingRemoved.ProductType}");
             Console.WriteLine($"Materials: {orderBeingRemoved.MaterialCost}");

@@ -31,6 +31,7 @@ namespace FlooringMastery.UI.Workflows
 
             int newOrderNumber = orderManager.GetNextOrderNumber(userEnteredDate);
 
+            Console.WriteLine("Press any key to continue");
             Console.ReadKey();
 
             var response = orderManager.AddOrder(new Order()

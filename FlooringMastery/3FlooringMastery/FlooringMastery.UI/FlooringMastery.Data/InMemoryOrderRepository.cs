@@ -25,13 +25,15 @@ namespace FlooringMastery.Data
                  CostPerSquareFoot = 3,
                  LaborCostPerSquareFoot = 4 } };
 
-        public void AddOrder(Order orderToAdd)
+        public bool AddOrder(Order orderToAdd)
         {
             _allOrderData.Add(orderToAdd);
+            return true;
         }
-        public void RemoveOrder(Order orderBeingRemoved)
+        public bool RemoveOrder(Order orderBeingRemoved)
         {
             _allOrderData.Remove(orderBeingRemoved);
+            return true;
         }
         
 

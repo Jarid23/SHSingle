@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlooringMastery.Data;
 
 namespace FlooringMastery.BLL
 {
@@ -15,13 +16,16 @@ namespace FlooringMastery.BLL
         private IOrderRepository _orderRepository;
         private IStateRepository _stateRepository;
         private IProductRepository _productRepository;
+       // private LiveDataRepository _liveDataRepository;
 
         public OrderManager(IOrderRepository orderRepository, IProductRepository productRepository, IStateRepository stateRepository)
         {
             _stateRepository = stateRepository;
             _productRepository = productRepository;
             _orderRepository = orderRepository;
+            
         }
+
         public GetProductsResponse GetProducts()
         {
             GetProductsResponse response = new GetProductsResponse();
@@ -78,7 +82,8 @@ namespace FlooringMastery.BLL
             AddOrderResponse response = new AddOrderResponse();
             response.NewOrder = newOrder;
         
-            _orderRepository.AddOrder(response.NewOrder);
+            response.Success = _orderRepository.AddOrder(response.NewOrder);
+            
             return response;
         }
         
@@ -93,8 +98,10 @@ namespace FlooringMastery.BLL
             RemoveOrderResponse response = new RemoveOrderResponse();
             response.OrderBeingRemoved = orderBeingRemoved;
 
-            _orderRepository.RemoveOrder(response.OrderBeingRemoved);
+            response.Success = _orderRepository.RemoveOrder(response.OrderBeingRemoved);
+
             return response;
+            // response.Success = _orderRepository.AddOrder(response.NewOrder);
         }
     }
 }
