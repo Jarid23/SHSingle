@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlooringMastery.BLL.Interfaces
 {
-   public interface IStateRepository
+    public interface IStateRepository
     {
+        List<Tax> GetEveryState();
     }
 }

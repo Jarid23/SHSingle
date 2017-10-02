@@ -17,10 +17,13 @@ namespace FlooringMastery.Data
             _filepath = filepath;
         }
        
-        List<Order> IOrderRepository.LoadOrders(string OrderDate)
+        public List<Order> LoadOrders(DateTime orderDate)
         {
-                List<Order> Orders = new List<Order>();
-                string filename = "Orders_" + OrderDate + ".txt";
+            List<Order> Orders = new List<Order>();
+
+            string filename = "Orders_" + orderDate.Month.ToString().PadLeft(2, '0')
+                    + orderDate.Day.ToString().PadLeft(2, '0') + orderDate.Year + ".txt";
+
                 var fileToRead = _filepath + filename;
                 if (File.Exists(fileToRead))
                 {

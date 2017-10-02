@@ -17,7 +17,8 @@ namespace FlooringMastery.UI.Workflows
             Console.Clear();
             OrderManager orderManager = OrderManagerFactory.Create();
 
-            var userEnteredDate = ConsoleIO.GetDate();
+            var userEnteredDate = ConsoleIO.GetFutureDate();
+
             var userEnteredName = ConsoleIO.GetName();
 
             List<Tax> allStates = orderManager.GetAllStates();
@@ -34,6 +35,7 @@ namespace FlooringMastery.UI.Workflows
 
             var response = orderManager.AddOrder(new Order()
             {
+                OrderDate = userEnteredDate,
                 OrderNumber = newOrderNumber,
                 CustomerName = userEnteredName,
                 State = userEnteredState.StateAbbreviation,

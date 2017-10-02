@@ -17,8 +17,8 @@ namespace FlooringMastery.UI.Workflows
             Console.Clear();
             Console.WriteLine("Lookup orders for a day");
             Console.WriteLine("--------------------------");
-            Console.Write("Enter a day's date to look up it's orders (MMDDYYYY): ");
-            string orderDate = Console.ReadLine();
+            
+            DateTime orderDate = ConsoleIO.GetDate();
 
             DisplayOrderResponse response = manager.LookupOrder(orderDate);
 

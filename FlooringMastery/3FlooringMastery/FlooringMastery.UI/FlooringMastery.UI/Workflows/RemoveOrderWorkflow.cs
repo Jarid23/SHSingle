@@ -1,5 +1,8 @@
 ﻿using FlooringMastery.BLL;
+using FlooringMastery.BLL.Interfaces;
+using FlooringMastery.Data;
 using FlooringMastery.Models;
+using FlooringMastery.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +16,37 @@ namespace FlooringMastery.UI.Workflows
         public void Execute()
         {
             Console.Clear();
+            var userEnteredDate = ConsoleIO.GetDate();
+
+            var userEnteredOrderNumber = ConsoleIO.GetOrderNumber();
+
             OrderManager orderManager = OrderManagerFactory.Create();
+            
+            var response = orderManager.LookupOrder(userEnteredDate);
 
-            Console.Write("Enter an Order Date for the Order you want to delete (MMDDYYYY): ");
-            string OrderDate = Console.ReadLine();
+            var orderBeingRemoved = response.Order.SingleOrDefault(o => o.OrderNumber == userEnteredOrderNumber);
 
-            Console.Write("Enter an Order number for the Order you want to delete: ");
-            string OrderNumber = Console.ReadLine();
-
-            Console.ReadKey();
-
-         //   var result = orderManager.GetSingleOrder(OrderDate, OrderNumber);
-          
-            //  orderManager.RemoveOrder(Order OrderBeingRemoved);
-
+            ConsoleIO.DisplaySingleOrderDetails(orderBeingRemoved);
+            Console.WriteLine("Are you sure you want to delete this Order : ");
+            string delete = Console.ReadLine();
+            
+            if ((orderBeingRemoved == null) || (delete == "n") || (delete =="N"))
+            {
+                Console.WriteLine("We could not find that order or you selected not to delete");
+                Console.ReadKey();
+            }
+            if(((delete == "y") || (delete == "Y")) && (orderBeingRemoved != null))
+            {
+                orderManager.RemoveOrder(orderBeingRemoved);
+                Console.WriteLine("We deleted the order");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("We could not find that order or you selected not to delete");
+                Console.ReadKey();
+            }
+                                                             
         }
     }
 }

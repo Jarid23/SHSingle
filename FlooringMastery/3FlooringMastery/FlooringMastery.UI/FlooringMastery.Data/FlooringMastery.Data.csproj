@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InMemoryStateRepository.cs" />
     <Compile Include="LiveDataRepository.cs" />
+    <Compile Include="InMemoryOrderRepository.cs" />
+    <Compile Include="InMemoryProductRepository.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringMastery.BLL\FlooringMastery.Models.csproj">

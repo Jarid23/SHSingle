@@ -9,7 +9,8 @@ namespace FlooringMastery.BLL.Interfaces
 {
    public interface IOrderRepository
     {
-        List<Order> LoadOrders(string OrderDate);
-       void AddOrder(Order Order);
+        List<Order> LoadOrders(DateTime orderDate);
+        void AddOrder(Order orderToAdd);
+        void RemoveOrder(Order orderBeingRemoved);
     }
 }

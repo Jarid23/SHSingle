@@ -9,7 +9,7 @@ namespace FlooringMastery.Models
     public class Order
     {
         public int OrderNumber { get; set; }
-        public string OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public string CustomerName { get; set; }
         public string State { get; set; }
         public decimal TaxRate { get; set; }

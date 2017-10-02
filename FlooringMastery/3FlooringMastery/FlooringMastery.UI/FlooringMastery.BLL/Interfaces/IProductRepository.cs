@@ -8,5 +8,6 @@ namespace FlooringMastery.BLL.Interfaces
 {
     public interface IProductRepository
     {
+        List<Product> GetEveryProduct();
     }
 }

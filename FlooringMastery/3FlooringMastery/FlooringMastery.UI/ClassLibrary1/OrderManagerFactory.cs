@@ -16,6 +16,8 @@ namespace FlooringMastery.BLL
 
             switch (mode)
             {
+                case "InMemory":
+                    return new OrderManager(new InMemoryOrderRepository(), new InMemoryProductRepository(), new InMemoryStateRepository());
                 case "LiveData":
                     return new OrderManager(new LiveDataRepository(@"C:\Users\jwagner\Desktop\REPOS\dotnet---jarid---wagner\FlooringMastery\3FlooringMastery\FlooringMastery.UI\Data\"));
                 default:

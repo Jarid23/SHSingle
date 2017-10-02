@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workflows\AddOrderWorkflow.cs" />
     <Compile Include="Workflows\DisplayOrderWorkflow.cs" />
+    <Compile Include="Workflows\EditOrderWorkflow.cs" />
     <Compile Include="Workflows\RemoveOrderWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\FlooringMastery.BLL\FlooringMastery.Models.csproj">
       <Project>{0372EECB-8A32-48BE-A222-149BA22FC17C}</Project>
       <Name>FlooringMastery.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlooringMastery.Data\FlooringMastery.Data.csproj">
+      <Project>{21A21D88-998C-4459-8947-AF9F2D3F8BB5}</Project>
+      <Name>FlooringMastery.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

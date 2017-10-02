@@ -8,9 +8,9 @@ using FlooringMastery.BLL;
 
 namespace FlooringMastery.Data
 {
-    public class ProductRepository : IProductRepository
+    public class StateRepository : IStateRepository
     {
-        public List<Product> GetEveryProduct()
+        public List<Tax> GetEveryState()
         {
             throw new NotImplementedException();
         }

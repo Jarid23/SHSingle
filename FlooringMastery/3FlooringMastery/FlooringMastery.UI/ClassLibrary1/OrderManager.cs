@@ -13,24 +13,29 @@ namespace FlooringMastery.BLL
     public class OrderManager
     {
         private IOrderRepository _orderRepository;
+        private IStateRepository _stateRepository;
+        private IProductRepository _productRepository;
 
-        public OrderManager(IOrderRepository orderRepository)
+        public OrderManager(IOrderRepository orderRepository, IProductRepository productRepository, IStateRepository stateRepository)
         {
+            _stateRepository = stateRepository;
+            _productRepository = productRepository;
             _orderRepository = orderRepository;
         }
         public GetProductsResponse GetProducts()
         {
             GetProductsResponse response = new GetProductsResponse();
 
-            response.Product = 
+            //response.Product = 
+            throw new NotImplementedException();
         }
 
         public List<Tax> GetAllStates()
         {
-            throw new NotImplementedException();
+            return _stateRepository.GetEveryState();
         }
 
-        public DisplayOrderResponse LookupOrder(string orderDate)
+        public DisplayOrderResponse LookupOrder(DateTime orderDate)
         {
             DisplayOrderResponse response = new DisplayOrderResponse();
 
@@ -52,32 +57,27 @@ namespace FlooringMastery.BLL
 
         public int GetNextOrderNumber(DateTime userEnteredDate)
         {
-            throw new NotImplementedException();
+            var result = 1;
+            
+            var orders = _orderRepository.LoadOrders(userEnteredDate);
+            if(orders.Count > 0)
+            {
+                result = orders.Max(o => o.OrderNumber) + 1;                   
+            }
+            
+            return result;
         }
 
         public List<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _productRepository.GetEveryProduct();
         }
 
-        public AddOrderResponse AddOrder(Order NewOrder)
+        public AddOrderResponse AddOrder(Order newOrder)
         {
             AddOrderResponse response = new AddOrderResponse();
-            response.NewOrder = new Order();
-
-            response.NewOrder.OrderNumber = NewOrder.OrderNumber;
-            response.NewOrder.CustomerName = NewOrder.CustomerName;
-            response.NewOrder.State = NewOrder.State;
-            response.NewOrder.TaxRate = NewOrder.TaxRate;
-            response.NewOrder.ProductType = NewOrder.ProductType;
-            response.NewOrder.Area = NewOrder.Area;
-            response.NewOrder.CostPerSquareFoot = NewOrder.CostPerSquareFoot;
-            response.NewOrder.LaborCostPerSquareFoot = NewOrder.LaborCostPerSquareFoot;
-            response.NewOrder.MaterialCost = NewOrder.MaterialCost;
-            response.NewOrder.LaborCost = NewOrder.LaborCost;
-            response.NewOrder.Tax = NewOrder.Tax;
-            response.NewOrder.Total = NewOrder.Total;
-
+            response.NewOrder = newOrder;
+        
             _orderRepository.AddOrder(response.NewOrder);
             return response;
         }
@@ -87,10 +87,15 @@ namespace FlooringMastery.BLL
         //{
         //     looping logic
         //}
-        //public RemoveOrderResponse RemoveOrder(Order OrderBeingRemoved)
-        //{
 
-        //}
+        public RemoveOrderResponse RemoveOrder(Order orderBeingRemoved)
+        {
+            RemoveOrderResponse response = new RemoveOrderResponse();
+            response.OrderBeingRemoved = orderBeingRemoved;
+
+            _orderRepository.RemoveOrder(response.OrderBeingRemoved);
+            return response;
+        }
     }
 }
 
