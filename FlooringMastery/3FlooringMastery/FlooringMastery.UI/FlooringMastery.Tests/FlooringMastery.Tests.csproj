@@ -66,6 +66,13 @@
       <Project>{21A21D88-998C-4459-8947-AF9F2D3F8BB5}</Project>
       <Name>FlooringMastery.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlooringMastery.UI\FlooringMastery.UI.csproj">
+      <Project>{76B6D6C7-C16F-493E-A281-856A77D8DADF}</Project>
+      <Name>FlooringMastery.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

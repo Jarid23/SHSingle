@@ -103,6 +103,10 @@ namespace FlooringMastery.BLL
             return response;
             // response.Success = _orderRepository.AddOrder(response.NewOrder);
         }
+        public List<Order> GetAllOrders (DateTime orderDate)
+        {
+            return _orderRepository.LoadOrders(orderDate);
+        }
     }
 }
 

@@ -1,4 +1,2 @@
 OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost
-3,Jarid Wagner,IN,6.00,Tile,420,3.50,4.15,1470.00,1743.00,19278.0000,22491.0000
-4,yes,PA,6.75,Laminate,999,1.75,2.10,1748.25,2097.90,25961.5125,29807.6625
-2,Jarid,IN,6.00,Wood,9999,5.15,4.75,51494.85,47495.25,593940.6000,692930.7000
+2,Larry,MI,5.75,Wood,105,5.15,4.75,540.75,498.75,5977.1250,7016.6250
