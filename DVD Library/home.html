@@ -14,29 +14,25 @@
                         <button type="button">Create DVD</button>
                     </th>
                     <th>
-                        <button type="button">Search</button>
+                        <button type="button" id="searchBtn">Search</button>
                     </th>
+                   
                     <th>
-                        
-                    </th>
-                    <th>
-                        <input type="text" name="search" placeholder="Search..">
+                        <span id="searchDropdown">
+                            <select required>
+                                <option selected disabled hidden>Search Category</option>
+                                <option value="1">Title</option>
+                                <option value="2">Release Date</option>
+                                <option value="3">Director</option>
+                                <option value="4">Rating</option>
+                            </select>
+                        </span>
+                        <input type="text" name="search" placeholder="Search.." required>
                     </th>
             </tr>
             </table>
         </div>
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown link
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Title</a>
-                <a class="dropdown-item" href="#">Release Year</a>
-                <a class="dropdown-item" href="#">Director Name</a>
-                <a class="dropdown-item" href="#">Rating</a>
-            </div>
-        </div>
+  
         <table class="table">
             <tr>
                 <th>Title</th>

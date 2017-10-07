@@ -30,7 +30,14 @@
                                 <td>@student.LastName</td>
                                 <td>@student.Major.MajorName</td>
                                 <td>@student.GPA</td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Student", new { studentId = student.StudentId }, null) |
+                                    @Html.ActionLink("Delete", "Delete", "Student", new { studentId = student.StudentId }, null)                                    
+                                </td>
                             </tr>
+                            <!--The Student List view is completed with the exception of
+                       adding links to each row of data in the table to allow for editing and deleting students.-->
                         }
                     </tbody>
                 </table>

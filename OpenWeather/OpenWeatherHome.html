@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Weather Page
+    </title>
+    
+</head>
+<body>
+    <h1 style="text-align:center">Weather Page</h1>
+    <div style="text-align: center;">
+        <input type="text" id="weatherZip" />
+        <button id="btnSearch">Give me the weather</button>
+        </div>
+        <hr />
+        <div id="results" style="text-align:center">
+            Temperature
+            <input type="text" id="temp" />
+            <br />
+            Humidity
+            <input type="text" id="humidity" />
+            <br />
+            Name
+            <input type="text" id="name" />
+            <br />
+            Clouds
+            <input type="text" id="clouds" />
+            <br />
+            Image
+            <img id="imageTmp" src="" />
+            <hr />
+
+
+        </div>
+</body>
+
+</html>
+
+<script src="jquery-3.0.0.min.js"></script>
+<script src="OpenWeather.js"></script>

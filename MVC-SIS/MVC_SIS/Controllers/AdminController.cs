@@ -10,6 +10,19 @@ namespace Exercises.Controllers
 {
     public class AdminController : Controller
     {
+        [HttpGet]
+        public ActionResult Courses()
+        {
+            var model = CourseRepository.GetAll();
+            return View(model.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult State()
+        {
+            var model = StateRepository.GetAll();
+            return View(model.ToList());
+        }
 
         [HttpGet]
         public ActionResult Majors()
@@ -31,6 +44,48 @@ namespace Exercises.Controllers
             return RedirectToAction("Majors");
         }
 
+        [HttpPost]
+        public ActionResult AddState(State state)
+        {
+            StateRepository.Add(state);
+            return RedirectToAction("State");
+        }
+        
+
+        [HttpGet]
+        public ActionResult AddState()
+        {            
+            return View(new State());
+        }
+
+        [HttpGet]
+        public ActionResult AddCourse()
+        {
+            return View(new Course());
+        }
+
+        [HttpPost]
+        public ActionResult AddCourse(Course course)
+        {
+            CourseRepository.Add(course.CourseName);
+            return RedirectToAction("Courses");
+        }
+
+
+        [HttpGet]
+        public ActionResult EditState(string StateAbbreviation)
+        {
+            var state = StateRepository.Get(StateAbbreviation);
+            return View(state);
+        }
+
+        [HttpPost]
+        public ActionResult EditState(State state)
+        {
+            StateRepository.Edit(state);
+            return RedirectToAction("State");
+        }
+
         [HttpGet]
         public ActionResult EditMajor(int id)
         {
@@ -46,6 +101,20 @@ namespace Exercises.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditCourse(int CourseId)
+        {
+            var course = CourseRepository.Get(CourseId);
+            return View(course);
+        }
+
+        [HttpPost]
+        public ActionResult EditCourse(Course course)
+        {
+            CourseRepository.Edit(course);
+            return RedirectToAction("Courses");
+        }
+
+        [HttpGet]
         public ActionResult DeleteMajor(int id)
         {
             var major = MajorRepository.Get(id);
@@ -58,6 +127,38 @@ namespace Exercises.Controllers
             MajorRepository.Delete(major.MajorId);
             return RedirectToAction("Majors");
         }
+
+        [HttpGet]
+        public ActionResult DeleteState(string StateAbbreviation)
+        {
+            var state = StateRepository.Get(StateAbbreviation);
+            return View(state);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteState(State state)
+        {
+            StateRepository.Delete(state.StateAbbreviation);
+            return RedirectToAction("State");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCourse(int CourseId)
+        {
+            var course = CourseRepository.Get(CourseId);
+            return View(course);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCourse(Course course)
+        {
+            CourseRepository.Delete(course.CourseId);
+            return RedirectToAction("Courses");
+        }
+
+
+
+
 
     }
 }
