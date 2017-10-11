@@ -17,9 +17,10 @@
         {
             <div class="form-group">
                 <label>State</label>
-                @Html.TextBoxFor(m => m.StateName, new { @class = "form-control", placeholder = "State" })
+                @Html.TextBoxFor(m => m.StateName, new { @class = "form-control", placeholder = "State" })                
                 <label>State Abbreviation</label>
                 @Html.TextBoxFor(m => m.StateAbbreviation, new { @class = "form-control", placeholder = "State" })
+                @Html.ValidationMessageFor(m => m.StateAbbreviation)
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>
         }

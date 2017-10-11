@@ -18,6 +18,7 @@
             <div class="form-group">
                 <label>Major</label>
                 @Html.TextBoxFor(m => m.MajorName, new {@class = "form-control", placeholder = "Major"})
+                @Html.ValidationMessageFor(m => m.MajorName)
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>
         }

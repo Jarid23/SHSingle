@@ -37,21 +37,31 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult Add(StudentVM studentVM)
         {
-            studentVM.Student.Courses = new List<Course>();
+            if (ModelState.IsValid)
+            {
+                studentVM.Student.Courses = new List<Course>();
 
-            foreach (var id in studentVM.SelectedCourseIds)
-                studentVM.Student.Courses.Add(CourseRepository.Get(id));
+                foreach (var id in studentVM.SelectedCourseIds)
+                    studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
-            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+                studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
 
-            StudentRepository.Add(studentVM.Student);
+                StudentRepository.Add(studentVM.Student);
 
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+            }
+            else
+            {
+                var viewModel = new StudentVM();
+                viewModel.SetCourseItems(CourseRepository.GetAll());
+                viewModel.SetMajorItems(MajorRepository.GetAll());
+                return View(viewModel);
+            }
         }
 
         [HttpGet]
         public ActionResult Edit(int StudentId)
-        {            
+        {
             var student = StudentRepository.Get(StudentId);
             var studentVM = new StudentVM();
             studentVM.Student = student;
@@ -63,10 +73,22 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult Edit(Student student)
         {
-            var major = MajorRepository.Get(student.Major.MajorId);
-            student.Major = major;
-            StudentRepository.Edit(student);
             
+            if (ModelState.IsValid)
+            {
+                
+                var major = MajorRepository.Get(student.Major.MajorId);
+                student.Major = major;
+                StudentRepository.Edit(student);
+            }
+            else
+            {
+                var studentVM = new StudentVM();
+                studentVM.Student = student;
+                studentVM.SetCourseItems(CourseRepository.GetAll());
+                studentVM.SetMajorItems(MajorRepository.GetAll());
+                return View(studentVM);
+            }
             return RedirectToAction("List");
         }
 
@@ -79,7 +101,7 @@ namespace Exercises.Controllers
 
         [HttpPost]
         public ActionResult Delete(Student student)
-        {                        
+        {
             StudentRepository.Delete(student.StudentId);
             return RedirectToAction("List");
         }
