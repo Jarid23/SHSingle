@@ -66,6 +66,10 @@ namespace Exercises.Controllers
             var studentVM = new StudentVM();
             studentVM.Student = student;
             studentVM.SetCourseItems(CourseRepository.GetAll());
+            if (studentVM.Student.Courses != null)
+            {
+                studentVM.SelectedCourseIds = studentVM.Student.Courses.Select(c => c.CourseId).ToList();
+            }
             studentVM.SetMajorItems(MajorRepository.GetAll());
             return View(studentVM);
         }

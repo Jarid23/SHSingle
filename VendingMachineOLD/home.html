@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Browser Events Lab</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/sticky-footer.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <!-- Banner + Nav -->
+            <div class="row" id="pageBannerAndNav">
+                <div class="col-md-12">
+                    <h1 class="text-center">Vending Machine</h1>
+                    <hr>
+                    <div id="main-wrap">
+                        <div id="content-wrap"> 
+                            <div id="allItems" class="xs">     
+                                <!--Load all items here-->                           
+                                <div class="container-fluid">
+                                 
+                                    </div>
+                                </div>                 
+                            </div>
+                        </div>
+                    </div>
+
+                       
+                       
+
+                        <div id="sidebar">
+                            <form action="/action_page.php">
+                                Total $ In: <input type="text" name="moneyDesposited" id="total"><br>                                
+                                
+                                <button type="button" id="addDollar">Add Dollar</button>
+                                <button type="button" id="addQuarter">Add Quarter</button>
+                                <button type="button" id="addDime">Add Dime</button>
+                                <button type="button" id="addNickel">Add Nickel</button>
+                            </form>
+                            <hr />
+                            <form action="/action_page.php">
+                                Messages : <input type="text" name="messages" id="message"><br>
+                                Item : <input type="text" name="item" id="item"><br>
+                                <button type="button" id="purchase">Make Purchase</button>
+                               
+                            </form>
+                            <hr />
+                            <form action="/action_page.php">
+                                Change : <input type="text" name="change"><br>                                
+                                <button type="button">Change Return</button>
+
+                            </form>
+                    
+                    </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            
+            
+            
+        
+        <footer class="footer" id="footer">
+            <p class="text-center" id="footerPlaceholder">&copy 2017 The Software Guild</p>
+        </footer>
+        
+        <script src="js/jquery-3.0.0.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/home.js"></script>
+    </body>
+    
+</html>

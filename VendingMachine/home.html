@@ -1,101 +1,57 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-    <head>
-        <title>jQuery Browser Events Lab</title>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/sticky-footer.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <!-- Banner + Nav -->
-            <div class="row" id="pageBannerAndNav">
-                <div class="col-md-12">
-                    <h1 class="text-center">Vending Machine</h1>
-                    <hr>
-                    <div id="main-wrap">
-                        <div id="content-wrap"> 
-                            <div id="allItems">                                
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col" id="1">
-                                            1 of 3
-                                        </div>
-                                        <div class="col" id="2">
-                                            2 of 3
-                                        </div>
-                                        <div class="col" id="3">
-                                            3 of 3
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                    </div>
-                                </div>                 
-                            </div>
-                        </div>
-                    </div>
+<head>
+    <title>jQuery Browser Events Lab</title>
 
-                       
-                       
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <!-- Banner + Nav -->
+        <h1 class="text-center">Vending Machine</h1>
+        <hr>
+            <div class="row" style="background-color:grey">
+                <div id="allItems" class="col-xs-9" style="background-color:palevioletred">
+                    <!--Load all items here-->
+                </div>
+                
+                <div id="sidebar" class="col-xs-3" style="background-color:blue">
+                    <form action="/action_page.php">
+                        Total $ In: <input type="text" name="moneyDesposited" id="total"><br>
 
-                        <div id="sidebar">
-                            <form action="/action_page.php">
-                                Total $ In: <input type="text" name="moneyDesposited" id="total"><br>                                
-                                
-                                <button type="button" id="addDollar">Add Dollar</button>
-                                <button type="button" id="addQuarter">Add Quarter</button>
-                                <button type="button" id="addDime">Add Dime</button>
-                                <button type="button" id="addNickel">Add Nickel</button>
-                            </form>
-                            <hr />
-                            <form action="/action_page.php">
-                                Messages : <input type="text" name="messages" id="message"><br>
-                                Item : <input type="text" name="item" id="item"><br>
-                                <button type="button" id="purchase">Make Purchase</button>
-                               
-                            </form>
-                            <hr />
-                            <form action="/action_page.php">
-                                Change : <input type="text" name="change"><br>                                
-                                <button type="button">Change Return</button>
+                        <button type="button" id="addDollar">Add Dollar</button>
+                        <button type="button" id="addQuarter">Add Quarter</button>
+                        <button type="button" id="addDime">Add Dime</button>
+                        <button type="button" id="addNickel">Add Nickel</button>
+                    </form>
+                    <hr />
+                    <form action="/action_page.php">
+                        Messages : <input type="text" name="messages" id="message"><br>
+                        Item : <input type="text" name="item" id="item"><br>
+                        <button type="button" id="purchase">Make Purchase</button>
 
-                            </form>
-                    
-                    </div>
-                    </div>
-                    <hr>
+                    </form>
+                    <hr />
+                    <form action="/action_page.php">
+                        <p>
+                            Change : <input type="text" name="change"><br>
+                            <button type="button">Change Return</button>
+                        </p>
+                    </form>
+
                 </div>
             </div>
-            
-            
-            
-        
-        <footer class="footer" id="footer">
-            <p class="text-center" id="footerPlaceholder">&copy 2017 The Software Guild</p>
-        </footer>
-        
-        <script src="js/jquery-3.0.0.min.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/home.js"></script>
-    </body>
-    
+        </div>
+
+
+    <footer class="footer" id="footer">
+        <p class="text-center" id="footerPlaceholder">&copy 2017 The Software Guild</p>
+    </footer>
+
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/home.js"></script>
+</body>
+
 </html>
