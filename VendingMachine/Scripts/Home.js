@@ -71,30 +71,54 @@ function LoadMachine() {
     })
 }
 
+
 function Vend(id) {
     $('#item').val(id);
 }
 
-function VendItem(amount, id) {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/money/" + amount + "/item/" + id ,
-        success: function (item) {
-            //just returns change ?
-           
-            var quarters = (item.quarters)*.25
-            var dimes = (item.dimes)*.10
-            var nickels = (item.nickels)*.05
-            var pennies = (item.pennies)*.01
-            $('#change').val((quarters+dimes+nickels+pennies).toFixed(2));
-        });
-},
-error: function () {
-    alert("Insufficient funds");
-}
-error: function () {
-    alert("Out of Inventory");
-}
+$('#purchaseButton').click(function () {
+    makePurchase();
+});
+$('.itemClass').click(function () {
+    makePurchaseMessage();
+});
 
-})
-}
+function makePurchase() {
+
+    var newID = $('#itemsID').val();
+
+    var itemsPrice = $('.priceClass');
+    var moneyDeposited = $('#totalForItem').val();
+
+
+
+    if (isNaN(moneyDeposited) || isNaN(newID) || moneyDeposited == "" || moneyDeposited == 0 || newID == "") {
+        $('#purchaseMessage').val('Invalid choice ');
+    }
+    else {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/money/' + moneyDeposited + '/item/' + newID,
+            success: function (data) {
+
+                var quarters = (data.quarters) * .25;
+                var dimes = (data.dimes) * .10;
+                var nickels = (data.nickels) * .05;
+                var pennies = (data.pennies) * .01;
+                $('#itemBox').val((quarters + dimes + nickels + pennies).toFixed(2));
+                $('#purchaseMessage').val("Thank You!");
+                var changeBack = '<p>' + 'Quarters:' + data.quarters + '</p>';
+                changeBack += '<p>' + 'Dimes:' + data.dimes + '</p>';
+                changeBack += '<p>' + 'Nickels:' + data.nickels + '</p>';
+                $('#itemChange').html(changeBack);
+                loadTheItems();
+                $("#totalForItem").val(0);
+            },
+
+            error: function (request, status, error) {
+                var errors = JSON.parse(request.responseText);
+                $('#purchaseMessage').val(errors.message);
+            }
+        });
+    }
+};

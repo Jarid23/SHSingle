@@ -70,28 +70,41 @@ namespace Exercises.Controllers
             {
                 studentVM.SelectedCourseIds = studentVM.Student.Courses.Select(c => c.CourseId).ToList();
             }
+            studentVM.SetStateItems(StateRepository.GetAll());
+
             studentVM.SetMajorItems(MajorRepository.GetAll());
             return View(studentVM);
         }
 
         [HttpPost]
-        public ActionResult Edit(Student student)
-        {
-            
-            if (ModelState.IsValid)
+        public ActionResult Edit(StudentVM studentVM)
+        {           
+            if (!ModelState.IsValid)
             {
-                
-                var major = MajorRepository.Get(student.Major.MajorId);
-                student.Major = major;
-                StudentRepository.Edit(student);
-            }
-            else
-            {
-                var studentVM = new StudentVM();
-                studentVM.Student = student;
+                studentVM.Student = StudentRepository.Get(studentVM.Student.StudentId);
                 studentVM.SetCourseItems(CourseRepository.GetAll());
+                if (studentVM.Student.Courses != null)
+                {
+                    studentVM.SelectedCourseIds = studentVM.Student.Courses.Select(c => c.CourseId).ToList();
+                }
+                studentVM.SetStateItems(StateRepository.GetAll());
                 studentVM.SetMajorItems(MajorRepository.GetAll());
                 return View(studentVM);
+            }
+            else
+            {                                               
+                studentVM.Student.Courses = new List<Course>();
+                foreach (var id in studentVM.SelectedCourseIds)
+                    studentVM.Student.Courses.Add(CourseRepository.Get(id));
+
+                studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+                StudentRepository.Edit(studentVM.Student);
+                if (studentVM.Student.Address.State != null)
+                {
+                    studentVM.Student.Address.State = StateRepository.Get(studentVM.Student.Address.State.StateAbbreviation);
+                    studentVM.Student.Address.AddressId = studentVM.Student.StudentId;
+                    StudentRepository.SaveAddress(studentVM.Student.StudentId, studentVM.Student.Address);
+                }
             }
             return RedirectToAction("List");
         }
