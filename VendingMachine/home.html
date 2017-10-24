@@ -1,56 +1,188 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>jQuery Browser Events Lab</title>
-
-    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/sticky-footer.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Banner + Nav -->
-        <h1 class="text-center">Vending Machine</h1>
-        <hr>
-            <div class="row" style="background-color:grey">
-                <div id="allItems" class="col-xs-9" style="background-color:palevioletred">
-                    <!--Load all items here-->
-                </div>
-                
-                <div id="sidebar" class="col-xs-3" style="background-color:blue">
-                    <form action="/action_page.php">
-                        Total $ In: <input type="text" name="moneyDesposited" id="total"><br>
+    <div class="header">
+        <h2 align="center">Vending Machine</h2>
+    </div>
+    <ul class="list-group" id="errorMessages"></ul>
 
-                        <button type="button" id="addDollar">Add Dollar</button>
-                        <button type="button" id="addQuarter">Add Quarter</button>
-                        <button type="button" id="addDime">Add Dime</button>
-                        <button type="button" id="addNickel">Add Nickel</button>
-                    </form>
-                    <hr />
-                    <form action="/action_page.php">
-                        Messages : <input type="text" name="messages" id="message"><br>
-                        Item : <input type="text" name="item" id="item"><br>
-                        <button type="button" id="purchase">Make Purchase</button>
-
-                    </form>
-                    <hr />
-                    <form action="/action_page.php">
-                        <p>
-                            Change : <input type="text" name="change"><br>
-                            <button type="button">Change Return</button>
-                        </p>
-                    </form>
+    <div class="container" id="container">
+        <div class="col-xs-8">
+            <div class="table col-xs-12" id="mainButtons">
+                <br>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button style="width:200px;height:200px" button id="item1">
+                            <a class="itemClass btn btn-default" id="item1" role="button">
+                                <p class="idClass" id="id1"></p>
+                                <h class="nameClass" id="name1"></h>
+                                <p class="priceClass" id="price1"></p>
+                                <p class="quantityClass" id="quantity1"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item2">
+                            <a class="itemClass btn btn-default" id="item2" role="button">
+                                <p class="idClass" id="id2"></p>
+                                <h class="nameClass" id="name2"></h>
+                                <p class="priceClass" id="price2"></p>
+                                <p class="quantityClass" id="quantity2"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item3">
+                            <a class="itemClass btn btn-default" id="item3" role="button">
+                                <p class="idClass" id="id3"></p>
+                                <h class="nameClass" id="name3"></h>
+                                <p class="priceClass" id="price3"></p>
+                                <p class="quantityClass" id="quantity3"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item4">
+                            <a class="itemClass btn btn-default" id="item4" role="button">
+                                <p class="idClass" id="id4"></p>
+                                <h class="nameClass" id="name4"></h>
+                                <p class="priceClass" id="price4"></p>
+                                <p class="quantityClass" id="quantity4"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item5">
+                            <a class="itemClass btn btn-default" id="item5" role="button">
+                                <p class="idClass" id="id5"></p>
+                                <h class="nameClass" id="name5"></h>
+                                <p class="priceClass" id="price5"></p>
+                                <p class="quantityClass" id="quantity5"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item6">
+                            <a class="itemClass btn btn-default" id="item6" role="button">
+                                <p class="idClass" id="id6"></p>
+                                <h class="nameClass" id="name6"></h>
+                                <p class="priceClass" id="price6"></p>
+                                <p class="quantityClass" id="quantity6"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item7">
+                            <a class="itemClass btn btn-default" id="item7" role="button">
+                                <p class="idClass" id="id7"></p>
+                                <h class="nameClass" id="name7"></h>
+                                <p class="priceClass" id="price7"></p>
+                                <p class="quantityClass" id="quantity7"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item8">
+                            <a class="itemClass btn btn-default" id="item8" role="button">
+                                <p class="idClass" id="id8"></p>
+                                <h class="nameClass" id="name8"></h>
+                                <p class="priceClass" id="price8"></p>
+                                <p class="quantityClass" id="quantity8"></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button style="width:200px;height:200px" button id="item9">
+                            <a class="itemClass btn btn-default" id="item9" role="button">
+                                <p class="idClass" id="id9"></p>
+                                <h class="nameClass" id="name9"></h>
+                                <p class="priceClass" id="price9"></p>
+                                <p class="quantityClass" id="quantity9"></p>
+                            </a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="jumbotron col-xs-4" id="sideButtons">
+            <br>
+            <h3 align="center">Money Deposited</h3>
+            <div align="center">
+                <input readonly placeholder="Amount" value="0" id="itemTotal">
+            </div>
+            <div class="list-group">
+                <div class="list-group" id="addMoney">
+                    <button type="button" id="dollarButton" class="amountBox">
+                        Dollar
+                    </button>
+                    <button type="button" id="quarterButton" class="amountBox">
+                        Quarter
+                    </button>
+                    <button type="button" id="dimeButton" class="amountBox">
+                        Dime
+                    </button>
+                    <button type="button" id="nickelButton" class="amountBox">
+                        Nickel
+                    </button>
+                </div>
+                </hr>
+            </div>
+            <br>
+            <br>
+
+            <div class="list-group">
+                <h3 align="center">Messages</h3>
+                <div align="center">
+                    <input readonly placeholder="Messages" type="text" id="purchaseBox">
+                </div>
+
+                <h align="left">Item:</h>
+                <div align="center">
+                    <input readonly placeholder="Item Cost" type="text" id="itemsCost">
+                    <div align="center">
+                        <input readonly placeholder="Item ID" type="text" id="itemsID">
+                    </div>
+                    <div class="col-xs-12" align="center">
+                        <br>
+
+                        <button align="center" type="button" id="purchaseButton" class="text-center">
+                            Make Purchase
+                        </button>
+                    </div>
+                </div>
+                
+                <br />
+                <br />
+                <br>
+                <br>
+                <div class="list-group">
+                    <h3 align="center">Change</h3>
+                    <div align="center">
+                        <input type="text" id="itemBox" class="text-center" readonly>
+                        <div type="text" id="itemChange" class="text-center" readonly></div>
+                        <button id="makeChange" type="button" name="button">Make Change</button>
+                    </div>
+                </div>
+                </hr>
+            </div>
+        </div>
+    </div>
 
 
     <footer class="footer" id="footer">
         <p class="text-center" id="footerPlaceholder">&copy 2017 The Software Guild</p>
     </footer>
 
-    <script src="Scripts/jquery-1.9.1.js"></script>
-    <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/home.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/home.js"></script>
 </body>
 
 </html>
