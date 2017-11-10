@@ -14,6 +14,6 @@ namespace DVDLibrary.Data
         {
 
         }
-        public DbSet<DVD> Dvds { get; set; }
+        public DbSet<Dvd> Dvds { get; set; }
     }
 }
