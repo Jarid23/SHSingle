@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDWAMastery", "DDWAMastery\DDWAMastery.csproj", "{DE64C3D4-B3F2-4B51-A591-78BFD2A9EFCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDWAMastery.UI", "DDWAMastery.UI\DDWAMastery.UI.csproj", "{2E9FA9FE-F299-4F3E-9B30-EFE40EA06610}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.UI", "DDWAMastery.UI\CarDealership.UI.csproj", "{2E9FA9FE-F299-4F3E-9B30-EFE40EA06610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDWA.Models", "DDWA.Models\DDWA.Models.csproj", "{98BD76FB-86F4-4188-A8E4-B9F4BCA6EDF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Models", "DDWA.Models\CarDealership.Models.csproj", "{98BD76FB-86F4-4188-A8E4-B9F4BCA6EDF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDWA.Data", "DDWA.Data\DDWA.Data.csproj", "{9C5FD4FF-4361-4388-B326-AE0B97F5C7DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Data", "DDWA.Data\CarDealership.Data.csproj", "{9C5FD4FF-4361-4388-B326-AE0B97F5C7DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
