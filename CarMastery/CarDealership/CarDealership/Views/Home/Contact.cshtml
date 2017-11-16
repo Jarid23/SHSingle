@@ -1,0 +1,35 @@
+﻿@model CarDealership.Models.ContactVM
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<h2>Contact Us</h2>
+
+
+<div class="col-xs-10">
+@using (Html.BeginForm())
+{
+        <div>
+            <h3>Name</h3>
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-group" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div>
+            <h3>Email</h3>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-group" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div>
+            <h3>Phone</h3>
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-group" })
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+        <div>
+            <h3>Message</h3>
+            @Html.TextBoxFor(m => m.Message, new { @class = "form-group" })
+            @Html.ValidationMessageFor(m => m.Message)
+        </div>
+        <button type="submit" class="btn btn-sm btn-danger">Submit</button>
+}
+    </div>

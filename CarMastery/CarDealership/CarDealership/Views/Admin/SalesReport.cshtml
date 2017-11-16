@@ -1,0 +1,41 @@
+﻿@model CarDealership.Models.SalesReportVM
+
+@{
+    ViewBag.Title = "Sales Report";
+}
+
+<h2>Sales Report</h2>
+
+<div id="searcharea">
+    <h3>Filters</h3>
+    <div>
+        <div class="col-xs-3">
+            <h4>Sales Member</h4>
+            <select id="searchKey" class="form-control">
+                @for (int i = 0; i < Model.SalesTeam.Count; i++)
+                {
+                    <option value="@Model.SalesTeam[i].Value">@Model.SalesTeam[i].Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-xs-3">
+            <h4>Start Date</h4>
+            <input class="form-control" id="datemin" name="datemin" placeholder="MM/DD/YYYY" type="text" />
+        </div>
+        <div class="col-xs-3">
+            <h4>End Date</h4>
+            <input class="form-control" id="datemax" name="datemiax" placeholder="MM/DD/YYYY" type="text" />
+        </div>
+        <div class="col-xs-3">
+            <h4>Search</h4>
+            <button type="button" class="btn btn-default" onclick="search()">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <h2>Search Results</h2>
+    <div id="usertable">
+
+    </div>
+</div>

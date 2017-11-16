@@ -1,0 +1,70 @@
+﻿@model CarDealership.Models.InventoryReportVM
+
+@{
+    ViewBag.Title = "InventoryReport";
+}
+
+<h2>Inventory Report</h2>
+
+<table class="table">
+    <tr>
+        <th>Year</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Count</th>
+        <th>Stock Value</th>
+    </tr>
+
+@foreach (var item in Model.NewCars)
+{
+    <tr>
+        <td>
+            @item.TotalCar.CarYear
+        </td>
+        <td>
+            @item.TotalCar.Model.CarMake.MakeType
+        </td>
+        <td>
+            @item.TotalCar.Model.ModelType
+        </td>
+        <td>
+            @item.Total
+        </td>
+        <td>
+            $@item.TotalPrice
+        </td>
+    </tr>
+}
+</table>
+
+<h4>Used Cars</h4>
+<table class="table">
+    <tr>
+        <th>Year</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Count</th>
+        <th>Stock Value</th>
+    </tr>
+
+    @foreach (var item in Model.UsedCars)
+    {
+        <tr>
+            <td>
+                @item.TotalCar.CarYear
+            </td>
+            <td>
+                @item.TotalCar.Model.CarMake.MakeType
+            </td>
+            <td>
+                @item.TotalCar.Model.ModelType
+            </td>
+            <td>
+                @item.Total
+            </td>
+            <td>
+                $@item.TotalPrice
+            </td>
+        </tr>
+    }
+</table>

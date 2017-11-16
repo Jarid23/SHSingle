@@ -1,0 +1,82 @@
+﻿@model CarDealership.Models.VehicleVM
+
+@{
+    ViewBag.Title = "Edit Vehicle";
+}
+
+<h2>Edit Vehicle</h2>
+
+@using (Html.BeginForm("EditVehicle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                <h4>Make</h4>
+                @Html.DropDownListFor(m => m.Make.MakeId, Model.MakeList, "-Choose One-", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                <h4>Model</h4>
+                @Html.DropDownListFor(m => m.Model.ModelId, Model.ModelList, "-Choose One-", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <h4>New @Html.CheckBoxFor(m => m.IsNew, new { @class = "form-control" })</h4>
+            </div>
+            <div class="col-xs-3">
+                <h4>Body Style</h4>
+                @Html.DropDownListFor(m => m.Style.StyleId, Model.StyleList, "-Choose One-", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <h4>Year</h4>
+                @Html.TextBoxFor(m => m.Year, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                <h4>Automatic @Html.CheckBoxFor(m => m.IsAutomatic, new { @class = "form-control" })</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <h4>Color</h4>
+                @Html.TextBoxFor(m => m.Color, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                <h4>Interior</h4>
+                @Html.TextBoxFor(m => m.Interior, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <h4>Mileage</h4>
+                @Html.TextBoxFor(m => m.Mileage, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                <h4>VIN #</h4>
+                @Html.TextBoxFor(m => m.VIN, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <h4>MSRP</h4>
+                @Html.TextBoxFor(m => m.MSRP, new { @class = "form-control" })
+
+            </div>
+            <div class="col-xs-3">
+                <h4>Sale Price</h4>
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row col-xs-12">
+            <h4>Description</h4>
+            @Html.TextAreaFor(m => m.Description)
+        </div>
+        <div class="row col-xs-12">
+            <button type="submit" class="btn btn-default">Save</button>
+
+        </div>
+
+    </div>
+}
+
