@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using System.Data.Entity;
+using DVDLibrary.Data;
 
 namespace DVDLibrary2.API
 {
@@ -15,6 +17,7 @@ namespace DVDLibrary2.API
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
+            Database.SetInitializer<MovieDBEntity>(null);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);            

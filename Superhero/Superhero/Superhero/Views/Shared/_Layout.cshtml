@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body style="background-color:azure">
+    @*navigation bar*@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="http://localhost:53579/">
+                </a>
+               
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        (FIGURE OUT WHAT YOU NEED HERE)
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="staticpages"></ul>
+                </li>
+                @if (User.IsInRole("admin"))
+            {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Site Management
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="management">
+                            <li>
+                                @Html.ActionLink("Add Hero", "CreateHero", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Pending Sightings", "PendingSightings", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Organization", "CreateOrganization", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Sighting", "CreateSighting", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Edit Hero", "EditHero", "Manager")
+                            </li>                            
+                            <li>
+                                @Html.ActionLink("Edit Organization", "EditOrganization", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Edit Sighting", "EditSighting", "Admin")
+                            </li> 
+                            <li>
+                                @Html.ActionLink("Remove Hero", "DeleteHero", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Remove Organization", "DeleteOrganization", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Remove Sighting", "DeleteSighting", "Admin")
+                            </li>                          
+                            <li>
+                                @Html.ActionLink("Add Manager", "AddManager", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Remove Manager", "DeleteManager", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Logout", "Logout", "Home")
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else if (User.IsInRole("Manager"))
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Blog Management
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="management">
+                            <li>
+                                @Html.ActionLink("Add Blog", "AddBlog", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Saved Blogs", "SavedBlogs", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Logout", "Logout", "Home")
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        @Html.ActionLink("Login", "Login")
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

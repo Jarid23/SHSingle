@@ -1,0 +1,32 @@
+﻿@model Superhero.Models.HeroVM
+
+@{
+    ViewBag.Title = "DeleteHero";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete a Hero</title>
+</head>
+<body>
+    <div class="col-xs-12">
+        <h3>Delete Hero</h3>
+        @Html.ActionLink("Return to Admin Home", "Delete", "Admin")
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label>Hero</label>
+                    @Html.TextBoxFor(h => h.HeroID, new { @class = "form-control", placeholder = "Location" })
+                    @Html.ValidationMessageFor(h => h.HeroID)
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+            }
+        </div>
+    </div>
+</body>
+</html>

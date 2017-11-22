@@ -1,0 +1,36 @@
+﻿@model Superhero.Models.SightingVM
+
+@{
+    ViewBag.Title = "EditSighting";
+}
+
+<h2>Edit Sighting</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                Sighting Date @Html.TextBoxFor(s => s.Date, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Sighting Hereos @Html.TextBoxFor(s => s.SighintgHeroes, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Sighting Location @Html.TextAreaFor(s => s.SightingLocation, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Delete ?  @Html.CheckBoxFor(s => s.IsDeleted, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Publish ? @Html.TextBoxFor(s => s.Ispublished, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <button type="submit" class="btn btn-default">Save</button>
+    </div>
+}
+<div class="col-xs-12" id="heroarea">
+
+</div>

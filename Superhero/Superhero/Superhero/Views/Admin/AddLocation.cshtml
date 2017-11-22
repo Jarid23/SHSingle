@@ -1,0 +1,36 @@
+﻿@model Superhero.Models.LocationVM
+
+@{
+    ViewBag.Title = "AddLocation";
+}
+
+<h2>AddLocation</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                Location Name @Html.TextBoxFor(l => l.LocationName, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Location Description @Html.TextBoxFor(l => l.LocationDescription, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Location Address @Html.TextBoxFor(l => l.LocationAddress, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Latitude @Html.TextBoxFor(l => l.LatitudeCoordinate, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Longitude @Html.TextBoxFor(l => l.LongitudeCoordinate, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <button type="submit" class="btn btn-default">Save</button>
+    </div>
+}
+<div class="col-xs-12" id="locationarea">
+
+</div>

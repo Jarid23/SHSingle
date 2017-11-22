@@ -1,0 +1,35 @@
+﻿@model Superhero.Models.SightingVM
+
+@{
+    ViewBag.Title = "AddSighting";
+}
+
+<h2>AddSighting</h2>
+
+<div class="row">
+    @using (Html.BeginForm("AddSighting", "User", FormMethod.Post, new
+    { enctype = "multipart/form-data" }))
+    {<div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                Sighting Date @Html.TextBoxFor(s => s.SightingObject.Date, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Sighting Hereos @Html.DropDownListFor(s => s.SightingObject.SighintgHeroes, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), "-Choose One-", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Sighting Location @Html.DropDownListFor(s => s.SightingObject.SightingLocation.LocationID, new SelectList(Model.SightingLocation, "LocationID", "LocationName"), "-Choose One-", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Publish ? @Html.CheckBoxFor(s => s.Ispublished, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+        <button type="submit" class="btn btn-default">Save</button>
+    </div>
+    }
+    <div class="col-xs-12" id="heroarea">
+
+    </div>

@@ -1,0 +1,36 @@
+﻿@model Superhero.Models.OrgVM
+
+@{
+    ViewBag.Title = "EditOrganization";
+}
+
+<h2>Edit Organization</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                Organization Name @Html.TextBoxFor(o => o.OrganizationName, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Organization Location @Html.TextBoxFor(o => o.OrganizationLocation, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Organization Address @Html.TextBoxFor(o => o.OganizationAddress, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Phone @Html.TextBoxFor(o => o.Phone, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Organization Heroes @Html.TextBoxFor(o => o.OrganizationHeroes, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <button type="submit" class="btn btn-default">Save</button>
+    </div>
+}
+<div class="col-xs-12" id="organizationarea">
+
+</div>

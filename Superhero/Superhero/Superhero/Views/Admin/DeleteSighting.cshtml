@@ -1,0 +1,33 @@
+﻿@model Superhero.Models.SightingVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete a sighting</title>
+</head>
+<body>
+    <div class="col-xs-12">
+        <h3>Delete Sighting</h3>
+        @*This return doesn't work*@
+        @Html.ActionLink("Return to Admin Home", "Sighting", "Admin")
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label>Sighting</label>
+                    @Html.TextBoxFor(s => s.SightingID, new { @class = "form-control", placeholder = "Sighting" })
+                    @Html.ValidationMessageFor(s => s.SightingID)
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Superhero.Model.Models.Sighting>
+
+@{
+    ViewBag.Title = "PendingSightings";
+}
+
+<div class="col-xs-offset-1 col-xs-10">
+    <h2>Pending Sightings</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SightingLocation)
+            </th>
+            <th>
+                @*What's going wrong here - model can't access SightingHeroes
+                @Html.DisplayNameFor(model => model.SightingHeroes)*@
+            </th>            
+        </tr>
+
+        @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td width="20%">
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td class="pgBody" width="50%">
+                                @Html.DisplayFor(modelItem => item.SightingLocation)
+                            </td>
+                            <td width="10%">
+                                @Html.DisplayFor(modelItem => item.Date.Day) /
+                                @Html.DisplayFor(modelItem => item.Date.Month) /
+                                @Html.DisplayFor(modelItem => item.Date.Year)
+                            </td>                            
+                            @Html.HiddenFor(modelItem => item.Ispublished)
+                            @Html.HiddenFor(modelItem => item.IsDeleted)
+                            <td width="10%">
+                                @Html.ActionLink("Publish", "PublishSighting", "Admin", new { id = item.SightingID }, "") |
+                                @Html.ActionLink("Edit", "EditSighting", "User", new { id = item.SightingID }, "") |
+                                @Html.ActionLink("Delete", "DeleteSighting", "Admin", new { id = item.SightingID }, "")
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>

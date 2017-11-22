@@ -1,0 +1,33 @@
+﻿@model Superhero.Models.LocationVM
+
+@{
+    ViewBag.Title = "DeleteLocation";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete a location</title>
+</head>
+<body>
+    <div class="col-xs-12">
+        <h3>Delete Location</h3>
+        @Html.ActionLink("Return to Admin Home", "Location", "Admin")
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label>Location</label>
+                    @Html.TextBoxFor(l => l.LocationID, new { @class = "form-control", placeholder = "Location" })
+                    @Html.ValidationMessageFor(l => l.LocationID)
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+            }
+        </div>
+    </div>
+</body>
+</html>
+

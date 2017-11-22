@@ -1,0 +1,32 @@
+﻿@model Superhero.Models.OrgVM
+
+@{
+    ViewBag.Title = "DeleteOrganization";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete a organization</title>
+</head>
+<body>
+    <div class="col-xs-12">
+        <h3>Delete organization</h3>
+        @Html.ActionLink("Return to Admin Home", "Organization", "Admin")
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label>Organization</label>
+                    @Html.TextBoxFor(o => o.OrganizationID, new { @class = "form-control", placeholder = "Organization" })
+                    @Html.ValidationMessageFor(o => o.OrganizationID)
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+            }
+        </div>
+    </div>
+</body>
+</html>
