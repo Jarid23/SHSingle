@@ -14,15 +14,19 @@
             <div class="col-xs-3">
                 Sighting Date @Html.TextBoxFor(s => s.SightingObject.Date, new { @class = "form-control" })
             </div>
-            <div class="col-xs-3">
-                Sighting Hereos @Html.DropDownListFor(s => s.SightingObject.SighintgHeroes, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), "-Choose One-", new { @class = "form-control" })
-            </div>
+            <div>
+                Sighting Heroes @Html.ListBoxFor(m => m.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })
+            </div>           
             <div class="col-xs-3">
                 Sighting Location @Html.DropDownListFor(s => s.SightingObject.SightingLocation.LocationID, new SelectList(Model.SightingLocation, "LocationID", "LocationName"), "-Choose One-", new { @class = "form-control" })
             </div>
             <div class="col-xs-3">
-                Publish ? @Html.CheckBoxFor(s => s.Ispublished, new { @class = "form-control" })
+                Sighting Description @Html.TextBoxFor(s => s.SightingObject.SightingDescription, new { @class = "form-control" })
             </div>
+            @*<div class="col-xs-3">
+                Publish ? @Html.CheckBoxFor(s => s.Ispublished, new { @class = "form-control" })
+            </div>*@
+                
         </div>
     </div>
 

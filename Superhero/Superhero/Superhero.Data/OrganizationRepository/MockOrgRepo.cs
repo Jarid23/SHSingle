@@ -17,6 +17,26 @@ namespace Superhero.Data.OrganizationRepository
                 OganizationAddress = "East Africa",
                 OrganizationName = "The third org",
                 Phone = "1234567899",
+                OrganizationHeroes = new List<Hero>
+                {
+                    new Hero
+                    {
+                        HeroName = "OrgHero1"
+                    } }
+
+            },
+             new Organization
+            {
+                OrganizationID = 4,
+                OganizationAddress = "West Africa",
+                OrganizationName = "The fourth org",
+                Phone = "12345678998",
+                OrganizationHeroes = new List<Hero>
+                {
+                    new Hero
+                    {
+                        HeroName = "OrgHero2"
+                    } }
             }
         };
 
@@ -30,7 +50,7 @@ namespace Superhero.Data.OrganizationRepository
             _organizations.RemoveAll(o => o.OrganizationID == OrganizationID);
         }
 
-        public void EditOrganization(Organization organization)
+        public void EditOrg(Organization organization)
         {
             var o = new Organization();
             foreach (var org in _organizations)
@@ -41,11 +61,27 @@ namespace Superhero.Data.OrganizationRepository
                     org.OrganizationHeroes = organization.OrganizationHeroes;
                     org.OrganizationLocation = organization.OrganizationLocation;
                     org.OrganizationName = organization.OrganizationName;
-                    org.Phone = organization.Phone;
-
+                    org.Phone = organization.Phone;                    
                 }
             }
             o = organization;
+        }
+
+        public IEnumerable<Organization> GetAllOrganizations()
+        {
+            return _organizations;
+        }
+
+        public Organization GetOrganizationById(int OrganizationID)
+        {
+            foreach (var organization in _organizations)
+            {
+                if (organization.OrganizationID == OrganizationID)
+                {
+                    return organization;
+                }
+            }
+            return new Organization();
         }
     }
 }

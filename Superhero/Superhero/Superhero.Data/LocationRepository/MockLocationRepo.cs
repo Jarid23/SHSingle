@@ -17,12 +17,20 @@ namespace Superhero.Data.LocationRepository
                 LatitudeCoordinate = 2,
                 LongitudeCoordinate = 2,
                 LocationAddress = "The South Pole",
-                LocationDescription = "Very vold with penguins",
-                LocationName = "The South Pole... same as address I guess"
-            }
-            };
+                LocationDescription = "Very cold with penguins",
+                LocationName = "The South Pole"
+            },
+             new Location
+            {
+                LocationID = 3,
+                LatitudeCoordinate = 3,
+                LongitudeCoordinate = 3,
+                LocationAddress = "Minneapolis",
+                LocationDescription = "The 2nd largest city in the Midwest",
+                LocationName = "Minneapolis"
+            } };
 
-        public void AddLocation(Location location)
+    public void AddLocation(Location location)
         {
             _locations.Add(location);
         }

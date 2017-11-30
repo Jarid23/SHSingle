@@ -12,8 +12,11 @@ namespace Superhero.Data.HeroRepository
         SuperheroDBContext context = new SuperheroDBContext();
         public void AddHero(Hero hero)
         {
-            context.Heroes.Add(hero);
-            context.SaveChanges();
+            using (var db = new SuperheroDBContext())
+            {
+                db.Heroes.Add(hero);
+                db.SaveChanges();
+            }
         }
 
         public void DeleteHero(int HeroID)
@@ -64,14 +67,17 @@ namespace Superhero.Data.HeroRepository
             var hero = context.Sightings.Include("SighintgHeroes").Where(s => s.SightingID == SightingID).FirstOrDefault();
             if (hero != null)
             {
-                return hero.SighintgHeroes;
+                return hero.SightingHeroes;
             }
             return null;
         }
 
         public Hero GetHereosByID(int HeroID)
         {
-            return context.Heroes.Where(h => h.HeroID == HeroID).FirstOrDefault();
+            using (var context = new SuperheroDBContext())
+            {
+                return context.Heroes.Where(h => h.HeroID == HeroID).FirstOrDefault();
+            }
         }
     }
 }

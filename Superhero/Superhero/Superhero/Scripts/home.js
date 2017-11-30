@@ -3,7 +3,6 @@ var set = 0;
 var cap = 0;
 
 $(document).ready(function () {
-    
 });
 
 function getNumber(number, sets) {
@@ -13,9 +12,7 @@ function getNumber(number, sets) {
         success: function (sightings) {
             var output = "";
             var i = 0;
-
-            //<img src="ExploreMidwest.Web/images/' + blogs[i].ImageLocation + '"
-
+         
             for (i; i < sightings.length; i++) {
                 if (sightings[i].Ispublished) {                    
                     output += '<div class="col-xs-10 blogDiv"><div class="col-xs-3"><div class="titleDiv"><h4>'

@@ -28,12 +28,12 @@ namespace Superhero.Data.HeroRepository
                             Phone = "1234567890",
                             OrganizationLocation = new Location
                             {
-                                LocationID = 1,
+                                LocationID = 2,
                                 LocationAddress = "LocationAddress1",
-                                LocationName = "The Ice Palace",
+                                LocationName = "The South Pole",
                                 LatitudeCoordinate = 1,
                                 LongitudeCoordinate = 1,
-                                LocationDescription = "At the North Pole where Superman lives"
+                                LocationDescription = "The South Pole where Superman lives"
                             }
                         }
                     },
@@ -44,8 +44,17 @@ namespace Superhero.Data.HeroRepository
                          SightingID = 1,
                          Ispublished = true,
                          IsDeleted = false,
-                     } } }
-                };
+                     } }
+            },
+            new Hero
+            {
+                    HeroID = 23,
+                    HeroName = "Hero23",
+                    Description = "This hero is like a ninja turtle",
+                    Superpower = "Unbreakable shell",
+                } };
+
+
 
         public void AddHero(Hero hero)
         {
@@ -91,11 +100,11 @@ namespace Superhero.Data.HeroRepository
             }
             return new Hero();
         }
-    
+
 
         public IEnumerable<Hero> GetHereosByOrganization(int OrganizationID)
         {
-           
+
             var heroes = _heroes.Where(h => h.Organizations.Any(o => o.OrganizationID == OrganizationID));
             if (heroes != null)
             {

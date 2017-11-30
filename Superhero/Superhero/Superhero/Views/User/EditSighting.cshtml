@@ -11,20 +11,17 @@
     <div class="form-group">
         <div class="row">
             <div class="col-xs-3">
-                Sighting Date @Html.TextBoxFor(s => s.Date, new { @class = "form-control" })
-            </div>
+                Sighting Date @Html.TextBoxFor(s => s.SightingObject.Date, new { @class = "form-control" })
+            </div>            
             <div class="col-xs-3">
-                Sighting Hereos @Html.TextBoxFor(s => s.SighintgHeroes, new { @class = "form-control" })
+                Sighting Location @Html.DropDownListFor(s => s.SightingObject.SightingLocation.LocationID, new SelectList(Model.SightingLocation, "LocationID", "LocationName"), "-Choose One-", new { @class = "form-control" })
             </div>
-            <div class="col-xs-3">
-                Sighting Location @Html.TextAreaFor(s => s.SightingLocation, new { @class = "form-control" })
+            <div>
+               Sighting Heroes @Html.ListBoxFor(m => m.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })
             </div>
-            <div class="col-xs-3">
-                Delete ?  @Html.CheckBoxFor(s => s.IsDeleted, new { @class = "form-control" })
-            </div>
-            <div class="col-xs-3">
-                Publish ? @Html.TextBoxFor(s => s.Ispublished, new { @class = "form-control" })
-            </div>
+            @*<div class="col-xs-3">
+                Publish ? @Html.CheckBoxFor(s => s.Ispublished, new { @class = "form-control" })
+            </div>*@
         </div>
     </div>
     <div class="col-xs-3">

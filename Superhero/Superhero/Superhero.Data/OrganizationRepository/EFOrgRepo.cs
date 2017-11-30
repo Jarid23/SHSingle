@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Superhero.Model.Models;
 
 namespace Superhero.Data.OrganizationRepository
-{
+{   
     public class EFOrgRepo : IOrgRepo
     {
+        SuperheroDBContext context = new SuperheroDBContext();
         public void AddOrganization(Organization organization)
         {
             SuperheroDBContext context = new SuperheroDBContext();
@@ -31,7 +32,7 @@ namespace Superhero.Data.OrganizationRepository
             }
         }
 
-        public void EditOrganization(Organization OrganizationID)
+        public void EditOrg(Organization OrganizationID)
         {
             SuperheroDBContext context = new SuperheroDBContext();
             {
@@ -46,6 +47,21 @@ namespace Superhero.Data.OrganizationRepository
 
                     context.SaveChanges();
                 }
+            }
+        }
+
+        public IEnumerable<Organization> GetAllOrganizations()
+        {
+            var orgs = from o in context.Organizations
+                         select o;
+            return orgs.ToList();
+        }
+
+        public Organization GetOrganizationById(int OrganizationID)
+        {
+            SuperheroDBContext context = new SuperheroDBContext();
+            {
+                return context.Organizations.Where(o => o.OrganizationID == o.OrganizationID).FirstOrDefault();
             }
         }
     }

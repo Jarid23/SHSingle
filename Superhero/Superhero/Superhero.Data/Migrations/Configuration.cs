@@ -1,10 +1,15 @@
 namespace Superhero.Data.Migrations
 {
+    using HeroRepository;
+    using LocationRepository;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Model.Models;
+    using OrganizationRepository;
+    using SightingRepository;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -18,6 +23,10 @@ namespace Superhero.Data.Migrations
 
         protected override void Seed(Superhero.Data.SuperheroDBContext context)
         {
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            ILocationRepo locorepo = LocationRepoFactory.Create();
+            ISightingRepo sightingrepo = SightingRepoFactory.Create();
             var userMgr = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
@@ -63,85 +72,58 @@ namespace Superhero.Data.Migrations
             {
                 userMgr.AddToRole(finduser.Id, "admin");
             }
+            var firstlocation = new Location
+            {
+                LocationName = "Minneapolis",
+                LocationAddress = "The Twin Cities",
+                LocationDescription = "A lovely city",
+                LatitudeCoordinate = 100,
+                LongitudeCoordinate = 100,
+            };
+            context.Locations.Add(firstlocation);
 
-            context.Heroes.AddOrUpdate(h => h.HeroName,
-                new Hero
+            var firstorg = new Organization
+            {
+                OrganizationName = "Minneapolis Hero Squad",
+                OganizationAddress = "S 5th street Minneapolis",
+                OrganizationLocation = firstlocation,
+                Phone = "123-456-7899",
+            };
+            context.Organizations.Add(firstorg);
+
+            var firsthero = new Hero
+            {
+                HeroName = "The Flash",
+                Organizations = new Collection<Organization>()
                 {
-                    HeroID = 1,
-                    HeroName = "Hero1",
-                    Description = "Can Fly",
-                    //Need to figure how to differntiate between list and singles
-                    Organizations = new List<Organization>
-                    {
+                    firstorg
+                },
+                Description = "Wears a red/yellow suit",
+                Superpower = "Runs really fast",
+            };
+            context.Heroes.Add(firsthero);
 
-                    new Organization
-                    {
-                        OrganizationID = 1,
-                        OganizationAddress = "OrganizationAddress1",
-                        OrganizationName = "OrganizationName1",
-                        Phone = "123-456-7890",
-                        //OrganizationHeroes =
-                       
-                        //This seems to create an infite loop. The hero needs an orgnization then the Org needs a hero
-                    }
-                    },
-
-                    Sightings = new List<Sighting>
-                    {
-                    new Sighting
-                    {
-                        SightingID = 1,
-                        Date = DateTime.Now,
-                        //LocationName = "Minneapolis",
-                        Ispublished = true,
-                    }
-                    },
-            Superpower = "Can Fly"
-                }
-                );
-
-            context.Locations.AddOrUpdate(l => l.LocationAddress,
-              new Location
-              {
-                  LocationID = 1,
-                  LocationName = "LocationName1",
-                  LocationAddress = "LocationAddress1",
-                  LocationDescription = "LocationDescription1",
-                  LatitudeCoordinate = 1,
-                  LongitudeCoordinate = 1
-              }
-              );
-
-            context.Organizations.AddOrUpdate(o => o.OrganizationName,
-              new Organization
-              {
-                  OrganizationID = 1,
-                  OrganizationName = "OrganizationName1",
-                  OganizationAddress = "OrganizationAddress1",
-                  //How do I seed an IENumerbale or I need to differntiate to a single
-                  // OrganizationHeroes = Hero1,
-                  Phone = "123-456-7890",
-              }
-              );
-
-            context.Sightings.AddOrUpdate(s => s.SightingID,
-              new Sighting
-              {
-                  Date = DateTime.Today,
-                  //Need to figure out lstings
-                  //Hero = Hero1,
-                  Ispublished = true,
-                  IsDeleted = false,
-                  //LocationName = "LocationName1",
-                  SightingID = 1
-
-              }
-              );
-
-
+            var firstsighting = new Sighting
+            {
+                SightingLocation = firstlocation,
+                SightingHeroes = new Collection<Hero>()
+                {
+                    firsthero
+                },
+                Date = DateTime.Today,
+                SightingDescription = "We saw the Flash in Minneapolis",
+                IsDeleted = false,
+                Ispublished = true,
+            };
+            context.Sightings.Add(firstsighting);
         }
     }
 }
+                
+
+
+
+
 
 
 

@@ -8,32 +8,36 @@ namespace Superhero.Model.Models
 {
     public class Sighting
     {
+        
         public int SightingID { get; set; }
-        public virtual ICollection<Hero> SighintgHeroes { get; set; }
+        public virtual ICollection<Hero> SightingHeroes { get; set; }
         public Location SightingLocation { get; set; }
         public DateTime Date { get; set; }
         public bool Ispublished { get; set; }
         public bool IsDeleted { get; set; }
+        public string SightingDescription { get; set; }
         
 
         public Sighting()
         {
-            SighintgHeroes = new HashSet<Hero>();
+            SightingHeroes = new HashSet<Hero>();
         }
 
         public string HeroesAsHtml()
         {
             string result = "";
-            if (SighintgHeroes != null && SighintgHeroes.Count>0)
+            if (SightingHeroes != null && SightingHeroes.Count > 0)
             {
-                foreach (var hero in SighintgHeroes)
+                foreach (var hero in SightingHeroes)
                 {
-                    result += hero.HeroName;
+                    result += hero.HeroName + ',';
+                }
+                if (!string.IsNullOrEmpty(result))
+                {
+                    result = result.Substring(0, result.Length - 1);
                 }
             }
-
             return result;
         }
-
     }
 }

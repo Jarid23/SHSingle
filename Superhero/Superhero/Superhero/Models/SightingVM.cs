@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Superhero.Models
 {
@@ -18,14 +19,31 @@ namespace Superhero.Models
         public IEnumerable<Hero> SightingHeroes { get; set; }
         public IEnumerable<Location> SightingLocation { get; set; }
         public Sighting SightingObject { get; set; }
+        public IEnumerable<int> SelectedHeroesID { get; set; }
+        public IEnumerable<int> SelectedLocationsID { get; set; }
+        //public IEnumerable<SelectListItem> HeroProperties { get; set; }
         public DateTime Date { get; set; }
         public bool Ispublished { get; set; }
         public bool IsDeleted { get; set; }
+        public List<SelectListItem> HeroList { get; set; }
 
         public SightingVM()
         {
+            HeroList = new List<SelectListItem>();
             SightingHeroes = herorepo.GetAllHeroes();
             SightingLocation = locationrepo.GetAllLocations();
-        }        
+        }
+
+        public void SetHeroItems(IEnumerable<Hero> heroes)
+        {
+            foreach (var hero in heroes)
+            {
+                HeroList.Add(new SelectListItem()
+                {
+                    Value = hero.HeroName
+                   
+                });
+            }
+        }
     }
 }

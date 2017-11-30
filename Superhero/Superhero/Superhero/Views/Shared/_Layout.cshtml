@@ -8,54 +8,63 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
-<body style="background-color:azure">
+<body style="background-color:azure; position : relative !important">
     @*navigation bar*@
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div id="nav" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="http://localhost:53579/">
-                </a>
-               
+                </a>               
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        (FIGURE OUT WHAT YOU NEED HERE)
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" id="staticpages"></ul>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home Page<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="staticpages">
+                        <li>
+                        @Html.ActionLink("Home Page", "Index", "Home")
+                        </li>
+                    </ul>
                 </li>
                 @if (User.IsInRole("admin"))
-            {
+                {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Site Management
+                            Admin Management
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="management">
                             <li>
-                                @Html.ActionLink("Add Hero", "CreateHero", "Manager")
+                                @Html.ActionLink("Add Hero", "AddHero", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Hero List", "HeroList", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Org List", "OrganizationList", "Admin")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Location List", "LocationList", "Admin")
                             </li>
                             <li>
                                 @Html.ActionLink("Pending Sightings", "PendingSightings", "Admin")
                             </li>
                             <li>
-                                @Html.ActionLink("Add Organization", "CreateOrganization", "Admin")
+                                @Html.ActionLink("Add Organization", "AddOrganization", "Admin")
                             </li>
                             <li>
-                                @Html.ActionLink("Add Sighting", "CreateSighting", "Admin")
+                                @Html.ActionLink("Add Sighting", "AddSighting", "User")
                             </li>
                             <li>
-                                @Html.ActionLink("Edit Hero", "EditHero", "Manager")
+                                @Html.ActionLink("Edit Hero", "EditHero", "Admin")
                             </li>                            
                             <li>
                                 @Html.ActionLink("Edit Organization", "EditOrganization", "Admin")
                             </li>
                             <li>
-                                @Html.ActionLink("Edit Sighting", "EditSighting", "Admin")
+                                @Html.ActionLink("Edit Sighting", "EditSighting", "User")
                             </li> 
                             <li>
-                                @Html.ActionLink("Remove Hero", "DeleteHero", "Manager")
+                                @Html.ActionLink("Remove Hero", "DeleteHero", "Admin")
                             </li>
                             <li>
                                 @Html.ActionLink("Remove Organization", "DeleteOrganization", "Admin")
@@ -63,14 +72,14 @@
                             <li>
                                 @Html.ActionLink("Remove Sighting", "DeleteSighting", "Admin")
                             </li>                          
-                            <li>
+                            @*<li>
                                 @Html.ActionLink("Add Manager", "AddManager", "Admin")
                             </li>
                             <li>
                                 @Html.ActionLink("Remove Manager", "DeleteManager", "Admin")
-                            </li>
+                            </li>*@
                             <li>
-                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                                @Html.ActionLink("Change Password", "ChangePassword", "User")
                             </li>
                             <li>
                                 @Html.ActionLink("Logout", "Logout", "Home")
@@ -78,22 +87,19 @@
                         </ul>
                     </li>
                 }
-                else if (User.IsInRole("Manager"))
+                else if (User.IsInRole("User"))
                 {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Blog Management
+                            Sighting Management
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" id="management">
+                        <ul class="dropdown-menu" id="sitemanagement">
                             <li>
-                                @Html.ActionLink("Add Blog", "AddBlog", "Manager")
-                            </li>
+                                @Html.ActionLink("Add Sighting", "AddSighting", "User")
+                            </li>                          
                             <li>
-                                @Html.ActionLink("Saved Blogs", "SavedBlogs", "Manager")
-                            </li>
-                            <li>
-                                @Html.ActionLink("Change Password", "ChangePassword", "Manager")
+                                @Html.ActionLink("Change Password", "ChangePassword", "User")
                             </li>
                             <li>
                                 @Html.ActionLink("Logout", "Logout", "Home")
@@ -109,7 +115,7 @@
                 }
             </ul>
         </div>
-    </nav>
+    </div>
 
 
 
@@ -120,8 +126,9 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!--<script src="~/Scripts/jquery-3.2.1.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>   
     <script src="~/Scripts/bootstrap.min.js"></script>
+    
 </body>
 </html>

@@ -1,0 +1,44 @@
+﻿@model List<Superhero.Model.Models.Location>
+
+@{
+    ViewBag.Title = "Location List";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Locations</h3>
+        @Html.ActionLink("Add Location", "AddLocation", "Admin", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-striped" style="width: auto;">
+            <thead>
+                <tr>
+                    <th>Location Name</th>
+                    <th>Location Address</th>
+                    <th>Location Description</th>
+                    <th>Latitude Coordinate</th>
+                    <th>Longitude Coordinate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var location in Model)
+                {
+                    <tr>
+                        <td>@location.LocationName</td>
+                        <td>@location.LocationAddress</td>
+                        <td>@location.LocationDescription</td>
+                        <td>@location.LatitudeCoordinate</td>
+                        <td>@location.LongitudeCoordinate</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditLocation", "Admin", new { id = location.LocationID }, null) |
+                            @Html.ActionLink("Delete", "DeleteLocation", "Admin", new { LocationID = location.LocationID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -10,8 +10,9 @@ namespace Superhero.Data.OrganizationRepository
     public interface IOrgRepo
     {
         void AddOrganization(Organization organization);
-        void EditOrganization(Organization organization);
+        void EditOrg(Organization organization);
         void DeleteOrganization(int OrganizationID);
-        //Maybe List Orgnizations by Heroes ?
+        IEnumerable<Organization> GetAllOrganizations();
+        Organization GetOrganizationById(int OrganizationID);
     }
 }

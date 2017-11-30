@@ -28,7 +28,7 @@ namespace Superhero.Data.SightingRepository
                     LatitudeCoordinate = 1,
                     LongitudeCoordinate = 1
                 },
-                SighintgHeroes = new List<Hero>
+                SightingHeroes = new List<Hero>
                 {
                     new Hero
                     {
@@ -36,6 +36,33 @@ namespace Superhero.Data.SightingRepository
                         HeroName = "Jarid",
                         Description = "We'll say I burrow underground",
                         Superpower = "I'm like a hedgehog I guess",
+                    }
+                 }
+            },
+
+                new Sighting
+            {
+                SightingID = 2,
+                Date = DateTime.Now,
+                Ispublished = true,
+                IsDeleted = false,
+                SightingLocation = new Location
+                {
+                    LocationID = 3,
+                    LocationName ="Heat Palace",
+                    LocationAddress = "Africe",
+                    LocationDescription = "Very Warm",
+                    LatitudeCoordinate = 100,
+                    LongitudeCoordinate = 100
+                },
+                SightingHeroes = new List<Hero>
+                {
+                    new Hero
+                    {
+                        HeroID = 3,
+                        HeroName = "Jarid's evil twin",
+                        Description = "We'll say he flies",
+                        Superpower = "Similar to superman",
                     }
                  },
             }
@@ -88,11 +115,11 @@ namespace Superhero.Data.SightingRepository
             {
                 if (sightin.SightingID == sighting.SightingID)
                 {
-
+                    sightin.SightingHeroes = sighting.SightingHeroes;
+                    sightin.SightingLocation = sighting.SightingLocation;
                     sightin.Date = sighting.Date;
                     sightin.Ispublished = sighting.Ispublished;
                     sightin.IsDeleted = sighting.IsDeleted;
-
                 }
             }
             s = sighting;

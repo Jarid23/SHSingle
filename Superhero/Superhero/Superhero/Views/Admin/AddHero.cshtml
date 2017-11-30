@@ -12,12 +12,9 @@
         <div class="row">
             <div class="col-xs-3">
                 Hero Name @Html.TextBoxFor(h => h.HeroName, new { @class = "form-control" })
-            </div>
-            <div class="col-xs-3">
-                Hero Organizations @Html.TextBoxFor(h => h.Organizations, new { @class = "form-control" })
-            </div>
-            <div class="col-xs-3">
-                Hero Sightings @Html.TextBoxFor(h => h.Sightings, new { @class = "form-control" })
+            </div>            
+            <div>
+                This Heroes' Organizations @Html.DropDownListFor(h => h.SelectedOrganizationsID, Model.Org, new { @class = "form-control" })
             </div>
             <div class="col-xs-3">
                 Superpower @Html.TextBoxFor(h => h.Superpower, new { @class = "form-control" })

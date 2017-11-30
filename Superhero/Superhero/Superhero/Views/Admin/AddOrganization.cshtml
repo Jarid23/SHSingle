@@ -14,7 +14,7 @@
                 Organization Name @Html.TextBoxFor(o => o.OrganizationName, new { @class = "form-control" })
             </div>
             <div class="col-xs-3">
-                Organization Location @Html.TextBoxFor(o => o.OrganizationLocation, new { @class = "form-control" })
+                Organization Location @Html.DropDownListFor(o => o.OrganizationLocation.LocationID, Model.LocationList, new { @class = "form-control" })
             </div>
             <div class="col-xs-3">
                 Organization Address @Html.TextBoxFor(o => o.OganizationAddress, new { @class = "form-control" })
@@ -23,8 +23,8 @@
                 Phone @Html.TextBoxFor(o => o.Phone, new { @class = "form-control" })
             </div>
             <div class="col-xs-3">
-                Organization Heroes @Html.TextBoxFor(o => o.OrganizationHeroes, new { @class = "form-control" })
-            </div>            
+                Organization Heroes @Html.ListBoxFor(o => o.SelectedHeroesID, Model.HeroList, new { @class = "form-control" })
+            </div>           
         </div>
     </div>
     <div class="col-xs-3">

@@ -1,0 +1,40 @@
+﻿@model List<Superhero.Model.Models.Hero>
+
+@{
+    ViewBag.Title = "Hero List";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Heroes</h3>
+        @Html.ActionLink("Add Hero", "AddHero", "Admin", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-striped" style="width: auto;">
+            <thead>
+                <tr>
+                    <th>Hero Name</th>
+                    <th>Hero Description</th>
+                    <th>Hero SuperPower</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hero in Model)
+                {
+                    <tr>
+                        <td>@hero.HeroName</td>
+                        <td>@hero.Description</td>
+                        <td>@hero.Superpower</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditHero", "Admin", new { id = hero.HeroID }, null) |
+                            @Html.ActionLink("Delete", "DeleteHero", "Admin", new { HeroID = hero.HeroID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

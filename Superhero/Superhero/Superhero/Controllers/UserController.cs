@@ -38,21 +38,16 @@ namespace Superhero.Controllers
 
         [HttpPost]
         public ActionResult AddSighting(SightingVM s)
-        {
-            var context = new SuperheroDBContext();
+        {          
             if (ModelState.IsValid)
             {
-                //s.SightingHeroes = new List<Hero>();
+                s.SightingHeroes = new List<Hero>();
 
-                //foreach (var id in s.SightingObject.SighintgHeroes)
-                //s.SightingObject.SighintgHeroes.Add(herorepo.GetHereosByID(id.HeroID));
-
-                //s.SightingObject.SightingLocation = locationrepo.GetLocationById(s.SightingObject.SightingLocation.LocationID);
-
-                //s.SightingObject.SighintgHeroes.Add(s.SightingHeroes);
-
+                foreach (var HeroID in s.SelectedHeroesID)
+                {
+                    s.SightingObject.SightingHeroes.Add(herorepo.GetHereosByID(HeroID));
+                }
                 repo.AddSighting(s.SightingObject);
-               
             }
             else
             {
@@ -62,9 +57,63 @@ namespace Superhero.Controllers
         }
 
 
-        public ActionResult EditSighting()
+        [HttpGet]
+        [ValidateInput(false)]
+        public ActionResult EditSighting(int SightingID)
         {
-            return View();
+            Sighting s = repo.GetSightingsById(SightingID);
+            int locationid = s.SightingLocation.LocationID;
+
+            var model = new SightingVM()
+            {
+                SightingObject = repo.GetSightingsById(SightingID),              
+                Date = s.Date,
+                SightingHeroes = herorepo.GetAllHeroes(),
+                SightingID = s.SightingID
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditSighting(SightingVM s)
+        {
+            var context = new SuperheroDBContext();
+            if (ModelState.IsValid)
+            {                             
+                foreach (var hero in s.SightingHeroes)
+                {
+                    s.SightingObject.SightingHeroes.Remove(hero);
+                }
+
+                foreach (var HeroID in s.SelectedHeroesID)
+                {
+                    s.SightingObject.SightingHeroes.Add(herorepo.GetHereosByID(HeroID));
+                }
+
+                // s.SightingObject.SightingLocation = locationrepo.GetLocationById(s.SightingObject.SightingLocation.LocationID);
+                // s.SightingLocation = locationrepo.GetLocationById(LocationID));
+                // s.SightingObject.SightingLocation.LocationID
+
+                s.SightingObject.SightingLocation = locationrepo.GetLocationById(s.SightingObject.SightingLocation.LocationID);
+
+                Sighting sighting = new Sighting
+                {
+                    SightingHeroes = s.SightingObject.SightingHeroes,
+                    SightingID = s.SightingObject.SightingID,
+                    SightingLocation = s.SightingObject.SightingLocation,
+                    SightingDescription = s.SightingObject.SightingDescription,
+                    Date = s.SightingObject.Date
+                };
+                repo.EditSighting(sighting);
+            }
+            else
+            {
+                return View(s);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
+

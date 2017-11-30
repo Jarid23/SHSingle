@@ -10,12 +10,18 @@ namespace Superhero.Data.SightingRepository
 {
     public class EFSightingRepo : ISightingRepo
     {
-        SuperheroDBContext context = new SuperheroDBContext();
+        //SuperheroDBContext context = new SuperheroDBContext();
 
         public void AddSighting(Sighting sighting)
         {
+            sighting.Ispublished = true;
             using (var db = new SuperheroDBContext())
             {
+                sighting.SightingLocation = db.Locations.FirstOrDefault(l => l.LocationID == sighting.SightingLocation.LocationID);
+                foreach (Hero hero in sighting.SightingHeroes )
+                {
+                    db.Heroes.Attach(hero);
+                }
                 db.Sightings.Add(sighting);
                 db.SaveChanges();
             }
@@ -52,29 +58,38 @@ namespace Superhero.Data.SightingRepository
 
         public IEnumerable<Sighting> GetAllSightings()
         {
-            var sightings = from s in context.Sightings
-                        select s;
-            return sightings.ToList();
+            using (var db = new SuperheroDBContext())
+            {
+                var sightings = from s in db.Sightings
+                                select s;
+                return sightings.ToList();
+            }
         }
 
         public IEnumerable<Sighting> GetNumberOfSightings(int number, int set)
         {
             using (var db = new SuperheroDBContext())
             {
-                var toReturn = db.Sightings.OrderByDescending(s => s.Date).Where(s => s.Ispublished).Skip(number * set).Take(number).ToList();
+                var toReturn = db.Sightings.Include("SightingLocation").Include("SightingHeroes").OrderByDescending(s => s.Date).Where(s => s.Ispublished).Skip(number * set).Take(number).ToList();
                 return toReturn;
             }
         }
 
         public IEnumerable<Sighting> GetPendingSightings()
         {
-            return context.Sightings.Where(d => d.Ispublished == false).ToList();
+            using (var db = new SuperheroDBContext())
+            {
+                return db.Sightings.Where(d => d.Ispublished == false).ToList();
+            }
         }
 
         public IEnumerable<Sighting> GetSighintsByDate(string date)
         {
             DateTime day = DateTime.Parse(date);
-            return context.Sightings.Where(s => DbFunctions.TruncateTime(s.Date) == day.Date).ToList();
+            using (var db = new SuperheroDBContext())
+            {
+                return db.Sightings.Where(s => DbFunctions.TruncateTime(s.Date) == day.Date).ToList();
+            }
         }
 
         //This may need to be just id instead of SightingID

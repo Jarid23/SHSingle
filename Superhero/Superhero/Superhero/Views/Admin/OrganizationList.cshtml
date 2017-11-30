@@ -1,0 +1,41 @@
+﻿@model List<Superhero.Model.Models.Organization>
+@{
+    ViewBag.Title = "Organization";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Organization</h3>
+        @Html.ActionLink("Add Organization", "AddOrganization", "Admin", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-striped" style="width: auto;">
+            <thead>
+                <tr>
+                    <th>Organization Name</th>
+                    <th>Organization Address</th>
+                    <th>Phone Number</th>
+                    @*<th>Organization Heroes</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var org in Model)
+                {
+                    <tr>
+                        <td>@org.OrganizationName</td>
+                        <td>@org.OganizationAddress</td>
+                        <td>@org.Phone</td>
+                        @*<td>@org.OrganizationHeroes</td>*@
+                        <td>
+                            @Html.ActionLink("Edit", "EditOrganization", "Admin", new { id = org.OrganizationID }, null) |
+                            @Html.ActionLink("Delete", "DeleteOrganization", "Admin", new { OrganizationID = org.OrganizationID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

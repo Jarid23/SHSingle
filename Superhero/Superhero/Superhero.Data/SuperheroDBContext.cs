@@ -20,7 +20,7 @@ namespace Superhero.Data
         public SuperheroDBContext()
             : base("Superhero")
         {
-
+            this.Configuration.LazyLoadingEnabled = false;
         }
         //DbContext corresponds to your database (or a collection of tables and views in your database)
         //whereas a DbSet corresponds to a table or view in your database. 

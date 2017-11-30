@@ -62,7 +62,7 @@ namespace Superhero.Data.LocationRepository
 
         public Location GetLocationById(int LocationID)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (SuperheroDBContext context = new SuperheroDBContext())
             {
                 return context.Locations.Where(l => l.LocationID == l.LocationID).FirstOrDefault();
             }
