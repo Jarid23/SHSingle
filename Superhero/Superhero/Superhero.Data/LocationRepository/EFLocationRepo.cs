@@ -11,32 +11,31 @@ namespace Superhero.Data.LocationRepository
     {
         public void AddLocation(Location location)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                context.Locations.Add(location);
-                context.SaveChanges();
+                db.Locations.Add(location);
+                db.SaveChanges();
             }
         }
 
-
         public void DeleteLocation(int LocationID)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                Location toRemove = context.Locations.SingleOrDefault(l => l.LocationID == LocationID);
+                Location toRemove = db.Locations.SingleOrDefault(l => l.LocationID == LocationID);
                 if (toRemove != null)
                 {
-                    context.Locations.Remove(toRemove);
+                    db.Locations.Remove(toRemove);
                 }
-                context.SaveChanges();
+                db.SaveChanges();
             }
         }
 
         public void EditLocation(Location LocationID)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                Location toEdit = context.Locations.SingleOrDefault(l => l.LocationID == LocationID.LocationID);
+                Location toEdit = db.Locations.SingleOrDefault(l => l.LocationID == LocationID.LocationID);
                 if (toEdit != null)
                 {
                     toEdit.LatitudeCoordinate = LocationID.LatitudeCoordinate;
@@ -45,16 +44,16 @@ namespace Superhero.Data.LocationRepository
                     toEdit.LocationDescription = LocationID.LocationDescription;
                     toEdit.LocationName = LocationID.LocationName;
 
-                    context.SaveChanges();
+                    db.SaveChanges();
                 }
             }
         }
 
         public IEnumerable<Location> GetAllLocations()
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                var locations = from l in context.Locations
+                var locations = from l in db.Locations
                                 select l;
                 return locations.ToList();
             }
@@ -64,8 +63,9 @@ namespace Superhero.Data.LocationRepository
         {
             using (SuperheroDBContext context = new SuperheroDBContext())
             {
-                return context.Locations.Where(l => l.LocationID == l.LocationID).FirstOrDefault();
+                return context.Locations.Where(l => l.LocationID == LocationID).FirstOrDefault();
             }
         }
     }
 }
+

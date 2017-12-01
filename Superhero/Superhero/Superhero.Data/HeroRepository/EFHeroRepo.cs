@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Superhero.Model.Models;
+using System.Data.Entity.Migrations;
 
 namespace Superhero.Data.HeroRepository
 {
     public class EFHeroRepo : IHeroRepo
     {
-        SuperheroDBContext context = new SuperheroDBContext();
+        //SuperheroDBContext context = new SuperheroDBContext();
         public void AddHero(Hero hero)
         {
             using (var db = new SuperheroDBContext())
-            {
+            {                
+                //db.Set<Hero>().AddOrUpdate(hero);
                 db.Heroes.Add(hero);
                 db.SaveChanges();
             }
@@ -21,55 +23,85 @@ namespace Superhero.Data.HeroRepository
 
         public void DeleteHero(int HeroID)
         {
-            Hero toRemove = context.Heroes.SingleOrDefault(h => h.HeroID == HeroID);
-            if (toRemove != null)
+            using (var db = new SuperheroDBContext())
             {
-                context.Heroes.Remove(toRemove);
+                Hero toRemove = db.Heroes.SingleOrDefault(h => h.HeroID == HeroID);
+                if (toRemove != null)
+                {
+                    db.Heroes.Remove(toRemove);
+                }
+                db.SaveChanges();
             }
-            context.SaveChanges();
         }
 
         public IEnumerable<Hero> GetAllHeroes()
         {
-            var heroes = from h in context.Heroes
-                        select h;
-            return heroes.ToList();
+            using (var db = new SuperheroDBContext())
+            {
+                var heroes = from h in db.Heroes
+                             select h;
+                return heroes.ToList();
+            }
         }
 
 
         public void EditHero(Hero HeroID)
         {
-            Hero toEdit = context.Heroes.SingleOrDefault(h => h.HeroID == HeroID.HeroID);
-            if (toEdit != null)
+            using (var db = new SuperheroDBContext())
             {
-                toEdit.Description = HeroID.Description;
-                toEdit.HeroName = HeroID.HeroName;
-                toEdit.Organizations = HeroID.Organizations;
-                toEdit.Sightings = HeroID.Sightings;
-                toEdit.Superpower = HeroID.Superpower;
-                context.SaveChanges();
+                Hero toEdit = db.Heroes.Include("Organizations").SingleOrDefault(h => h.HeroID == HeroID.HeroID);
+                if (toEdit != null)
+                {
+                    toEdit.Description = HeroID.Description;
+                    toEdit.HeroName = HeroID.HeroName;
+                    toEdit.Sightings = HeroID.Sightings;
+                    toEdit.Superpower = HeroID.Superpower;
+                    var orgsToDelete = new List<Organization>();
+
+                    foreach (var org in toEdit.Organizations)
+                    {
+                        orgsToDelete.Add(org);
+                    }
+
+                    foreach (var org in orgsToDelete)
+                    {
+                        toEdit.Organizations.Remove(org);
+                    }
+
+                    foreach (var org in HeroID.Organizations)
+                    {
+                        db.Organizations.Attach(org);
+                        toEdit.Organizations.Add(org);
+                    }
+                    db.SaveChanges();
+                }
             }
         }
 
         public IEnumerable<Hero> GetHereosByOrganization(int OrganizationID)
         {
-            //return context.Blog.Include("Category").Where(t => t.Title == title).ToList();
-            var org = context.Organizations.Include("OrganizationHeroes").Where(o => o.OrganizationID == OrganizationID).FirstOrDefault();
-            if (org != null)
+            using (var db = new SuperheroDBContext())
             {
-                return org.OrganizationHeroes;
+                var org = db.Organizations.Include("OrganizationHeroes").Where(o => o.OrganizationID == OrganizationID).FirstOrDefault();
+                if (org != null)
+                {
+                    return org.OrganizationHeroes;
+                }
+                return null;
             }
-            return null;
         }
 
         public IEnumerable<Hero> GetHereosBySighting(int SightingID)
         {
-            var hero = context.Sightings.Include("SighintgHeroes").Where(s => s.SightingID == SightingID).FirstOrDefault();
-            if (hero != null)
+            using (var db = new SuperheroDBContext())
             {
-                return hero.SightingHeroes;
+                var hero = db.Sightings.Include("SighintgHeroes").Where(s => s.SightingID == SightingID).FirstOrDefault();
+                if (hero != null)
+                {
+                    return hero.SightingHeroes;
+                }
+                return null;
             }
-            return null;
         }
 
         public Hero GetHereosByID(int HeroID)

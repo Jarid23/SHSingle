@@ -14,8 +14,8 @@ namespace Superhero.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SightingController : ApiController
     {
-        // GET: Sighting
-        ISightingRepo repo = SightingRepoFactory.Create();
+        
+        //ISightingRepo repo = SightingRepoFactory.Create();
 
         //[System.Web.Http.Route("sighting/{id}")]
         //[System.Web.Http.AcceptVerbs("GET")]

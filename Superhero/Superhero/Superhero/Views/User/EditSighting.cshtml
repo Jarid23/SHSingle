@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm())
 {
+@Html.HiddenFor(s => s.SightingObject.SightingID)
     <div class="form-group">
         <div class="row">
             <div class="col-xs-3">
@@ -18,6 +19,9 @@
             </div>
             <div>
                Sighting Heroes @Html.ListBoxFor(m => m.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })
+            </div>
+            <div>
+                Sighting Description @Html.TextBoxFor(m => m.SightingObject.SightingDescription, new { @class = "form-control" })
             </div>
             @*<div class="col-xs-3">
                 Publish ? @Html.CheckBoxFor(s => s.Ispublished, new { @class = "form-control" })

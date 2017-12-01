@@ -9,34 +9,34 @@ namespace Superhero.Data.OrganizationRepository
 {   
     public class EFOrgRepo : IOrgRepo
     {
-        SuperheroDBContext context = new SuperheroDBContext();
+        //SuperheroDBContext context = new SuperheroDBContext();
         public void AddOrganization(Organization organization)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                context.Organizations.Add(organization);
-                context.SaveChanges();
-            }
+                db.Organizations.Add(organization);
+                db.SaveChanges();
+            }        
         }
 
         public void DeleteOrganization(int OrganizationID)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                Organization toRemove = context.Organizations.SingleOrDefault(o => o.OrganizationID == OrganizationID);
+                Organization toRemove = db.Organizations.SingleOrDefault(o => o.OrganizationID == OrganizationID);
                 if (toRemove != null)
                 {
-                    context.Organizations.Remove(toRemove);
+                    db.Organizations.Remove(toRemove);
                 }
-                context.SaveChanges();
+                db.SaveChanges();
             }
         }
 
         public void EditOrg(Organization OrganizationID)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                Organization toEdit = context.Organizations.SingleOrDefault(o => o.OrganizationID == OrganizationID.OrganizationID);
+                Organization toEdit = db.Organizations.SingleOrDefault(o => o.OrganizationID == OrganizationID.OrganizationID);
                 if (toEdit != null)
                 {
                     toEdit.OganizationAddress = OrganizationID.OganizationAddress;
@@ -45,23 +45,26 @@ namespace Superhero.Data.OrganizationRepository
                     toEdit.OrganizationName = OrganizationID.OrganizationName;
                     toEdit.Phone = OrganizationID.Phone;
 
-                    context.SaveChanges();
+                    db.SaveChanges();
                 }
             }
         }
 
         public IEnumerable<Organization> GetAllOrganizations()
         {
-            var orgs = from o in context.Organizations
-                         select o;
-            return orgs.ToList();
+            using (var db = new SuperheroDBContext())
+            {
+                var orgs = from o in db.Organizations
+                           select o;
+                return orgs.ToList();
+            }
         }
 
         public Organization GetOrganizationById(int OrganizationID)
         {
-            SuperheroDBContext context = new SuperheroDBContext();
+            using (var db = new SuperheroDBContext())
             {
-                return context.Organizations.Where(o => o.OrganizationID == o.OrganizationID).FirstOrDefault();
+                return db.Organizations.Where(o => o.OrganizationID == o.OrganizationID).FirstOrDefault();
             }
         }
     }

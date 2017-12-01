@@ -5,6 +5,14 @@ var cap = 0;
 $(document).ready(function () {
 });
 
+$('#clearSearch').click(function () {
+    $('#searchTerm').val("");
+    $('#searchCategory').val("");
+    //set = 0;
+    //loadData();
+    //updateArea();
+})
+
 function getNumber(number, sets) {
     $.ajax({
         url: 'http://localhost:53579/sightings/' + number + '/' + sets,

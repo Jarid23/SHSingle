@@ -10,8 +10,6 @@ namespace Superhero.Data.SightingRepository
 {
     public class EFSightingRepo : ISightingRepo
     {
-        //SuperheroDBContext context = new SuperheroDBContext();
-
         public void AddSighting(Sighting sighting)
         {
             sighting.Ispublished = true;
@@ -41,16 +39,41 @@ namespace Superhero.Data.SightingRepository
             }            
         }
 
-        public void EditSighting(Sighting sightingID)
+        //for (int i = toEdit.SightingHeroes.Count - 1; i >= 0; i--)
+        //{
+        //    toEdit.SightingHeroes.Remove(i);
+        //}
+        //toEdit.SightingHeroes = sighting.SightingHeroes;
+        //db.Heroes.Attach(hero);
+        public void EditSighting(Sighting sighting)
         {
+            sighting.Ispublished = true;
             using (var db = new SuperheroDBContext())
             {
-                Sighting toEdit = db.Sightings.SingleOrDefault(s => s.SightingID == sightingID.SightingID);
+                Sighting toEdit = db.Sightings.Include("SightingHeroes").SingleOrDefault(s => s.SightingID == sighting.SightingID);
                 if (toEdit != null)
                 {
-                    toEdit.Date = sightingID.Date;
-                    //toEdit.Hero = sightingID.Hero;
-                   // toEdit.LocationName = sightingID.LocationName;                   
+                    toEdit.SightingDescription = sighting.SightingDescription;
+                    toEdit.Date = sighting.Date;                    
+                    toEdit.SightingLocation = sighting.SightingLocation;
+
+                    var heroesToDelete = new List<Hero>();
+
+                    foreach (var hero in toEdit.SightingHeroes)
+                    {
+                        heroesToDelete.Add(hero);
+                    }
+
+                    foreach (var hero in heroesToDelete)
+                    {
+                        toEdit.SightingHeroes.Remove(hero);
+                    }
+
+                    foreach (Hero hero in sighting.SightingHeroes)
+                    {
+                        db.Heroes.Attach(hero);
+                        toEdit.SightingHeroes.Add(hero);                        
+                    }                    
                     db.SaveChanges();
                 }
             }
@@ -98,7 +121,7 @@ namespace Superhero.Data.SightingRepository
             Sighting toReturn = new Sighting();
             using (var db = new SuperheroDBContext())
             {
-                var query = from s in db.Sightings
+                var query = from s in db.Sightings.Include("SightingLocation").Include("SightingHeroes")
                             where s.SightingID == SightingID
                             select s;
 

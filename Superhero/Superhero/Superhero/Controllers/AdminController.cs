@@ -15,12 +15,7 @@ namespace Superhero.Controllers
 {
     //[Authorize(Roles = "admin")]
     public class AdminController : Controller
-    {
-        ILocationRepo locorepo = LocationRepoFactory.Create();
-        IHeroRepo herorepo = HeroRepoFactory.Create();
-        IOrgRepo orgrepo = OrgRepoFactory.Create();
-        ISightingRepo repo = SightingRepoFactory.Create();
-        // GET: Admin
+    {      
         public ActionResult Index()
         {
             return View();
@@ -48,6 +43,9 @@ namespace Superhero.Controllers
         [HttpPost]
         public ActionResult AddOrganization(OrgVM o)
         {
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
+
             if (ModelState.IsValid)
             {
                 o.OrganizationHeroes = new List<Hero>();
@@ -77,6 +75,7 @@ namespace Superhero.Controllers
         [ValidateInput(false)]
         public ActionResult AddLocation(LocationVM l)
         {
+            ILocationRepo locorepo = LocationRepoFactory.Create();
             if (ModelState.IsValid)
             {
                 var model = new Location
@@ -102,6 +101,7 @@ namespace Superhero.Controllers
         [ValidateInput(false)]
         public ActionResult AddHero(HeroVM h)
         {
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
             var repo = HeroRepoFactory.Create();
 
             if (ModelState.IsValid)
@@ -113,10 +113,8 @@ namespace Superhero.Controllers
                     HeroID = h.HeroID,
                     HeroName = h.HeroName,
                     Description = h.Description,
-
                     Sightings = h.Sightings,
                     Superpower = h.Superpower,
-
                 };
                 foreach (var OrganizationID in h.SelectedOrganizationsID)
                 {
@@ -124,7 +122,6 @@ namespace Superhero.Controllers
                 }
                 repo.AddHero(hero);
             }
-
             else
             {
                 return View(h);
@@ -134,18 +131,21 @@ namespace Superhero.Controllers
 
         public ActionResult HeroList()
         {
+            IHeroRepo herorepo = HeroRepoFactory.Create();
             var model = herorepo.GetAllHeroes();
             return View(model.ToList());
         }
 
         public ActionResult OrganizationList()
         {
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
             var model = orgrepo.GetAllOrganizations();
             return View(model.ToList());
         }
 
         public ActionResult LocationList()
         {
+            ILocationRepo locorepo = LocationRepoFactory.Create();
             var model = locorepo.GetAllLocations();
             return View(model.ToList());
         }
@@ -153,6 +153,7 @@ namespace Superhero.Controllers
         [HttpGet]
         public ActionResult EditOrganization(int id)
         {
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
             var org = orgrepo.GetOrganizationById(id);
             var model = new OrgVM
             {
@@ -173,6 +174,7 @@ namespace Superhero.Controllers
         [HttpGet]
         public ActionResult EditLocation(int id)
         {
+            ILocationRepo locorepo = LocationRepoFactory.Create();
             var location = locorepo.GetLocationById(id);
             var model = new LocationVM
             {
@@ -190,7 +192,7 @@ namespace Superhero.Controllers
         [HttpGet]
         public ActionResult EditHero(int id)
         {
-
+            IHeroRepo herorepo = HeroRepoFactory.Create();
             var hero = herorepo.GetHereosByID(id);
             var model = new HeroVM
             {
@@ -211,6 +213,9 @@ namespace Superhero.Controllers
         [HttpPost]
         public ActionResult EditOrganization(OrgVM o)
         {
+            ILocationRepo locorepo = LocationRepoFactory.Create();
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
             if (ModelState.IsValid)
             {
                 o.OrganizationHeroes = new List<Hero>();
@@ -235,6 +240,7 @@ namespace Superhero.Controllers
         [HttpPost]
         public ActionResult EditLocation(LocationVM l)
         {
+            ILocationRepo locorepo = LocationRepoFactory.Create();
             if (ModelState.IsValid)
             {
                 var location = new Location
@@ -254,6 +260,8 @@ namespace Superhero.Controllers
         [HttpPost]
         public ActionResult EditHero(HeroVM h)
         {
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
             if (ModelState.IsValid)
             {
                 h.Organizations = new List<Organization>();
@@ -263,10 +271,8 @@ namespace Superhero.Controllers
                     HeroID = h.HeroID,
                     HeroName = h.HeroName,
                     Description = h.Description,
-
                     Sightings = h.Sightings,
                     Superpower = h.Superpower,
-
                 };
                 foreach (var OrganizationID in h.SelectedOrganizationsID)
                 {
@@ -279,6 +285,7 @@ namespace Superhero.Controllers
 
         public ActionResult DeleteHero(int HeroID)
         {
+            IHeroRepo herorepo = HeroRepoFactory.Create();
             herorepo.DeleteHero(HeroID);
 
             return RedirectToAction("HeroList");
@@ -286,18 +293,21 @@ namespace Superhero.Controllers
              
         public ActionResult DeleteLocation(int LocationID)
         {
+            ILocationRepo locorepo = LocationRepoFactory.Create();
             locorepo.DeleteLocation(LocationID);
             return RedirectToAction("LocationList");
         }
 
         public ActionResult DeleteOrganization(int OrganizationID)
         {
+            IOrgRepo orgrepo = OrgRepoFactory.Create();
             orgrepo.DeleteOrganization(OrganizationID);
             return RedirectToAction("OrganizationList");
         }
 
         public ActionResult DeleteSighting(int SightingID)
         {
+            ISightingRepo repo = SightingRepoFactory.Create();
             repo.DeleteSighting(SightingID);
 
             return RedirectToAction("Index", "Home");

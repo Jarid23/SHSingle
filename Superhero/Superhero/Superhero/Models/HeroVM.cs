@@ -20,6 +20,7 @@ namespace Superhero.Models
         public virtual ICollection<Organization> Organizations { get; set; }
         public virtual ICollection<Sighting> Sightings { get; set; }
         public List<SelectListItem> Org { get; set; }
+        public Hero HeroObject { get; set; }
 
         public HeroVM()
         {

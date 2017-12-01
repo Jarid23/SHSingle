@@ -19,7 +19,7 @@ namespace Superhero.Models
         public IEnumerable<Hero> SightingHeroes { get; set; }
         public IEnumerable<Location> SightingLocation { get; set; }
         public Sighting SightingObject { get; set; }
-        public IEnumerable<int> SelectedHeroesID { get; set; }
+        public List<int> SelectedHeroesID { get; set; }
         public IEnumerable<int> SelectedLocationsID { get; set; }
         //public IEnumerable<SelectListItem> HeroProperties { get; set; }
         public DateTime Date { get; set; }
@@ -29,6 +29,7 @@ namespace Superhero.Models
 
         public SightingVM()
         {
+            SelectedHeroesID = new List<int>();
             HeroList = new List<SelectListItem>();
             SightingHeroes = herorepo.GetAllHeroes();
             SightingLocation = locationrepo.GetAllLocations();

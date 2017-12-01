@@ -1,4 +1,6 @@
-﻿using Superhero.Data;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Superhero.Data;
 using Superhero.Data.HeroRepository;
 using Superhero.Data.LocationRepository;
 using Superhero.Data.SightingRepository;
@@ -14,11 +16,7 @@ using System.Web.Routing;
 namespace Superhero.Controllers
 {
     public class UserController : Controller
-    {
-        ILocationRepo locationrepo = LocationRepoFactory.Create();
-        ISightingRepo repo = SightingRepoFactory.Create();
-        IHeroRepo herorepo = HeroRepoFactory.Create();
-        // GET: User
+    {       
         public ActionResult Index()
         {
             return View();
@@ -27,6 +25,27 @@ namespace Superhero.Controllers
         public ActionResult ChangePassword()
         {
             return View(new ChangePasswordVM());
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordVM password)
+        {
+            using (var db = new SuperheroDBContext())
+            {
+                if (password.newPassword == password.newPasswordConfirm)
+                {
+                    var userMgr = new UserManager<IdentityUser>(new UserStore<IdentityUser>(db));
+
+                    userMgr.ChangePassword(User.Identity.GetUserId(), password.oldPassword, password.newPassword);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("newPassword", "Passwords must be the same");
+                }
+                return View(password);
+            }
         }
 
         [HttpGet]
@@ -38,7 +57,9 @@ namespace Superhero.Controllers
 
         [HttpPost]
         public ActionResult AddSighting(SightingVM s)
-        {          
+        {
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            ISightingRepo repo = SightingRepoFactory.Create();
             if (ModelState.IsValid)
             {
                 s.SightingHeroes = new List<Hero>();
@@ -61,16 +82,21 @@ namespace Superhero.Controllers
         [ValidateInput(false)]
         public ActionResult EditSighting(int SightingID)
         {
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            ISightingRepo repo = SightingRepoFactory.Create();
             Sighting s = repo.GetSightingsById(SightingID);
-            int locationid = s.SightingLocation.LocationID;
-
+            //int locationid = s.SightingLocation.LocationID;
             var model = new SightingVM()
-            {
+            {                                
                 SightingObject = repo.GetSightingsById(SightingID),              
                 Date = s.Date,
                 SightingHeroes = herorepo.GetAllHeroes(),
                 SightingID = s.SightingID
             };
+            foreach (var hero in s.SightingHeroes)
+            {
+                model.SelectedHeroesID.Add(hero.HeroID);
+            }
 
             return View(model);
         }
@@ -79,7 +105,10 @@ namespace Superhero.Controllers
         [ValidateInput(false)]
         public ActionResult EditSighting(SightingVM s)
         {
-            var context = new SuperheroDBContext();
+            IHeroRepo herorepo = HeroRepoFactory.Create();
+            ISightingRepo repo = SightingRepoFactory.Create();
+            ILocationRepo locationrepo = LocationRepoFactory.Create();
+           
             if (ModelState.IsValid)
             {                             
                 foreach (var hero in s.SightingHeroes)
@@ -92,14 +121,11 @@ namespace Superhero.Controllers
                     s.SightingObject.SightingHeroes.Add(herorepo.GetHereosByID(HeroID));
                 }
 
-                // s.SightingObject.SightingLocation = locationrepo.GetLocationById(s.SightingObject.SightingLocation.LocationID);
-                // s.SightingLocation = locationrepo.GetLocationById(LocationID));
-                // s.SightingObject.SightingLocation.LocationID
-
                 s.SightingObject.SightingLocation = locationrepo.GetLocationById(s.SightingObject.SightingLocation.LocationID);
 
                 Sighting sighting = new Sighting
                 {
+                    Ispublished = true,
                     SightingHeroes = s.SightingObject.SightingHeroes,
                     SightingID = s.SightingObject.SightingID,
                     SightingLocation = s.SightingObject.SightingLocation,

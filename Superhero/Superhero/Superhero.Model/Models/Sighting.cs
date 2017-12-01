@@ -10,7 +10,7 @@ namespace Superhero.Model.Models
     {
         
         public int SightingID { get; set; }
-        public virtual ICollection<Hero> SightingHeroes { get; set; }
+        public ICollection<Hero> SightingHeroes { get; set; }
         public Location SightingLocation { get; set; }
         public DateTime Date { get; set; }
         public bool Ispublished { get; set; }

@@ -13,14 +13,12 @@ using Superhero.Data.SightingRepository;
 namespace Superhero.Controllers
 {
     public class HomeController : Controller
-    {
-        ISightingRepo repo = SightingRepoFactory.Create();
-        // GET: Home
+    {       
         [HttpGet]
         public ActionResult Index()
         {
+            ISightingRepo repo = SightingRepoFactory.Create();
             var model = repo.GetNumberOfSightings(10,0);
-
             return View(model);
         }
 

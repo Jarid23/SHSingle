@@ -4,8 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-
-
 </div>
 <div class="col-xs-7 divTop">
     <form class="navbar-form navbar-right" onsubmit="return false;">
@@ -68,8 +66,7 @@
                                     @Html.ActionLink("Edit", "EditSighting", "User" , new { SightingID = sighting.SightingID }, null) |
                                     @Html.ActionLink("Delete", "DeleteSighting", "Admin", new { SightingID = sighting.SightingID }, null)
                                 </td>
-                            </tr>
-                            
+                            </tr>                            
                         }
                     </tbody>
                 </table>
