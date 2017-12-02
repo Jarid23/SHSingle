@@ -1,4 +1,5 @@
-﻿using Superhero.Data.SightingRepository;
+﻿using Superhero.Data;
+using Superhero.Data.SightingRepository;
 using Superhero.Model.Models;
 using Superhero.Models;
 using System;
@@ -14,43 +15,36 @@ namespace Superhero.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SightingController : ApiController
     {
-        
-        //ISightingRepo repo = SightingRepoFactory.Create();
-
-        //[System.Web.Http.Route("sighting/{id}")]
-        //[System.Web.Http.AcceptVerbs("GET")]
-        //public IHttpActionResult Sighting(int SightingID)
-        //{
-        //    return Ok(repo.GetSightingsById(SightingID));
-        //}
-
-        //[System.Web.Http.Route("sighting/{id}")]
-        //[System.Web.Http.AcceptVerbs("POST")]
-        //public Sighting GetById(int SightingID)
-        //{
-        //    var toReturn = repo.GetSightingsById(SightingID);
-        //    return toReturn;
-        //}
+        //SuperheroDBContext context = new SuperheroDBContext();
+        ISightingRepo repo = SightingRepoFactory.Create();
 
         
-        
+        [System.Web.Http.Route("sightings/{property}/{parameter}")]
+        public IHttpActionResult GetByType(string property, string parameter)
+        {
+            ISightingRepo repo = SightingRepoFactory.Create();
+            var toReturn = new List<Sighting>();
 
-        //[System.Web.Http.Route("sighting/{property}/{parameter}")]
-        //public List<Sighting> GetByType(string property, string parameter)
-        //{
-        //    var toReturn = new List<Sighting>();
-
-        //    switch (property)
-        //    {               
-        //        case "date":
-        //            if (parameter[0] == '#')
-        //            {
-        //                parameter = parameter.Remove(0, 1);
-        //            }
-        //            toReturn = repo.GetSighintsByDate(parameter);
-        //            break;                                   
-        //    }
-        //    return toReturn;
+            switch (property)
+            {
+                case "Hero":
+                    toReturn = repo.GetSightingsByHero(parameter).ToList();
+                    break;
+                case "Location":
+                    toReturn = repo.GetSightingsByLocation(parameter).ToList();
+                    break;
+                case "date":
+                    if (parameter[0] == '#')
+                    {
+                        parameter = parameter.Remove(0, 1);
+                    }
+                    toReturn = repo.GetSighintsByDate(parameter).ToList();
+                    break;
+                //case "Organization":
+                //    toReturn = repo.GetSightingsByOrganization(parameter);
+                //    break;
+            }
+             return Ok(toReturn);
+        }
     }
-    }
-
+}

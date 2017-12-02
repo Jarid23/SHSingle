@@ -16,7 +16,7 @@ namespace Superhero.Data.SightingRepository
             using (var db = new SuperheroDBContext())
             {
                 sighting.SightingLocation = db.Locations.FirstOrDefault(l => l.LocationID == sighting.SightingLocation.LocationID);
-                foreach (Hero hero in sighting.SightingHeroes )
+                foreach (Hero hero in sighting.SightingHeroes)
                 {
                     db.Heroes.Attach(hero);
                 }
@@ -36,7 +36,7 @@ namespace Superhero.Data.SightingRepository
                     db.Sightings.Remove(toRemove);
                 }
                 db.SaveChanges();
-            }            
+            }
         }
 
         //for (int i = toEdit.SightingHeroes.Count - 1; i >= 0; i--)
@@ -54,7 +54,7 @@ namespace Superhero.Data.SightingRepository
                 if (toEdit != null)
                 {
                     toEdit.SightingDescription = sighting.SightingDescription;
-                    toEdit.Date = sighting.Date;                    
+                    toEdit.Date = sighting.Date;
                     toEdit.SightingLocation = sighting.SightingLocation;
 
                     var heroesToDelete = new List<Hero>();
@@ -72,8 +72,8 @@ namespace Superhero.Data.SightingRepository
                     foreach (Hero hero in sighting.SightingHeroes)
                     {
                         db.Heroes.Attach(hero);
-                        toEdit.SightingHeroes.Add(hero);                        
-                    }                    
+                        toEdit.SightingHeroes.Add(hero);
+                    }
                     db.SaveChanges();
                 }
             }
@@ -115,6 +115,30 @@ namespace Superhero.Data.SightingRepository
             }
         }
 
+        public IEnumerable<Sighting> GetSightingsByHero(string parameter)
+        {
+            using (var db = new SuperheroDBContext())
+            {
+                return db.Sightings.Include("SightingLocation").Include("SightingHeroes").Where(s => s.SightingHeroes.Any(h => h.HeroName == parameter)).ToList();
+            }
+        }
+
+        //public List<Sighting> GetSightingsByLocation(Location sightinglocation)
+        //{
+        //    using (var db = new SuperheroDBContext())
+        //    {
+        //        return db.Sightings.Include("SightingLocation").Include("SightingHeroes").Where(s => s.SightingLocation == sightinglocation).ToList();
+        //    }
+        //}
+
+        //public List<Sighting> GetSightingsByOrganization(Organization sightingorganization)
+        //{
+        //    using (var db = new SuperheroDBContext())
+        //    {
+        //        return db.Sightings.Include("SightingLocation").Include("SightingHeroes").Where(s => s.)
+        //    }
+        //}
+
         //This may need to be just id instead of SightingID
         public Sighting GetSightingsById(int SightingID)
         {
@@ -132,5 +156,15 @@ namespace Superhero.Data.SightingRepository
             }
             return toReturn;
         }
+
+        public List<Sighting> GetSightingsByLocation(string parameter)
+        {
+            using (var db = new SuperheroDBContext())
+            {
+                return db.Sightings.Include("SightingLocation").Include("SightingHeroes").Where(s => s.SightingLocation.LocationName == parameter).ToList();
+            }
+        }
+
+        
     }
 }

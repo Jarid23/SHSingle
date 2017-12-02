@@ -18,6 +18,8 @@ namespace Superhero.Data.SightingRepository
         void AddSighting(Sighting sighting);
         void EditSighting(Sighting sighting);
         void DeleteSighting(int sightingID);
-        
+        IEnumerable<Sighting> GetSightingsByHero(string parameter);
+        List<Sighting> GetSightingsByLocation(string parameter);
+        //List<Sighting> GetSightingsByOrganization(string parameter);
     }
 }

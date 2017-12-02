@@ -134,6 +134,21 @@ namespace Superhero.Data.SightingRepository
         {
             return _sightings;
         }
+
+        public IEnumerable<Sighting> GetSightingsByHero(string parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Sighting> GetSightingsByLocation(string parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Sighting> GetSightingsByOrganization(string parameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

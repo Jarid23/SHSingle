@@ -30,7 +30,7 @@
                 </div>
                 <div>
                     <label>Hero Organizations</label>
-                    @Html.ListBoxFor(h => h.SelectedOrganizationsID, Model.Org, new { @class = "form-control" })
+                    @Html.ListBoxFor(h => h.SelectedOrganizationsID, Model.Org , new { @class = "form-control" })
                 </div>
                 @*<div>
                     Heroes Seen @Html.ListBoxFor(m => m.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })

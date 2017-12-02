@@ -70,7 +70,7 @@ namespace Superhero.Data.HeroRepository
 
                     foreach (var org in HeroID.Organizations)
                     {
-                        db.Organizations.Attach(org);
+                        db.Organizations.Add(org);
                         toEdit.Organizations.Add(org);
                     }
                     db.SaveChanges();
@@ -108,7 +108,7 @@ namespace Superhero.Data.HeroRepository
         {
             using (var context = new SuperheroDBContext())
             {
-                return context.Heroes.Where(h => h.HeroID == HeroID).FirstOrDefault();
+                return context.Heroes.Include("Organizations").Where(h => h.HeroID == HeroID).FirstOrDefault();
             }
         }
     }

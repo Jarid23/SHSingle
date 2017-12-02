@@ -17,10 +17,10 @@
         <div class="form-group">
             <select class="form-control" v-model="searchCategory" id="searchCategory">
                 <option value="">Search By&nbsp;&nbsp;</option>
-                <option value="Hero">Hero</option>
-                <option value="Organization">Organization</option>
-                <option value="Sighting">Sighting</option>
-                <option value="Location">Location</option>
+                <option value="Hero">HeroName</option>
+                <option value="Organization">OrganizationName</option>
+                <option value="Sighting">Date</option>
+                <option value="Location">LocationName</option>
             </select>
         </div>
         <div class="form-group">
@@ -42,7 +42,8 @@
                     <thead>
                         <tr>
                             <th>Sighting Heroes</th>
-                            <th>Sighting Description</th>                            
+                            <th>Sighting Description</th>
+                            <th>Location Name</th>                            
                             <th>Location Description</th>
                             <th>Location Address</th>
                             <th>Latitude</th>
@@ -57,6 +58,7 @@
                                 @*var heroes = _heroes.Where(h => h.Organizations.Any(o => o.OrganizationID == OrganizationID));*@
                                 <td>@sighting.HeroesAsHtml()</td>
                                 <td>@sighting.SightingDescription</td>
+                                <td>@sighting.SightingLocation.LocationName</td>
                                 <td>@sighting.SightingLocation.LocationDescription</td>
                                 <td>@sighting.SightingLocation.LocationAddress</td>
                                 <td>@sighting.SightingLocation.LatitudeCoordinate</td>

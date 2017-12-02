@@ -8,8 +8,7 @@ using Superhero.Model.Models;
 namespace Superhero.Data.OrganizationRepository
 {   
     public class EFOrgRepo : IOrgRepo
-    {
-        //SuperheroDBContext context = new SuperheroDBContext();
+    {       
         public void AddOrganization(Organization organization)
         {
             using (var db = new SuperheroDBContext())
@@ -36,15 +35,31 @@ namespace Superhero.Data.OrganizationRepository
         {
             using (var db = new SuperheroDBContext())
             {
-                Organization toEdit = db.Organizations.SingleOrDefault(o => o.OrganizationID == OrganizationID.OrganizationID);
+                Organization toEdit = db.Organizations.Include("OrganizationHeroes").SingleOrDefault(o => o.OrganizationID == OrganizationID.OrganizationID);
                 if (toEdit != null)
                 {
                     toEdit.OganizationAddress = OrganizationID.OganizationAddress;
-                    toEdit.OrganizationHeroes = OrganizationID.OrganizationHeroes;
                     toEdit.OrganizationLocation = OrganizationID.OrganizationLocation;
                     toEdit.OrganizationName = OrganizationID.OrganizationName;
                     toEdit.Phone = OrganizationID.Phone;
 
+                    var heroesToDelete = new List<Hero>();
+
+                    foreach (var hero in toEdit.OrganizationHeroes)
+                    {
+                        heroesToDelete.Add(hero);
+                    }
+
+                    foreach (var hero in heroesToDelete)
+                    {
+                        toEdit.OrganizationHeroes.Remove(hero);
+                    }
+
+                    foreach (Hero hero in OrganizationID.OrganizationHeroes)
+                    {
+                        db.Heroes.Attach(hero);
+                        toEdit.OrganizationHeroes.Add(hero);
+                    }
                     db.SaveChanges();
                 }
             }
@@ -64,7 +79,7 @@ namespace Superhero.Data.OrganizationRepository
         {
             using (var db = new SuperheroDBContext())
             {
-                return db.Organizations.Where(o => o.OrganizationID == o.OrganizationID).FirstOrDefault();
+                return db.Organizations.Include("OrganizationHeroes").Where(o => o.OrganizationID == OrganizationID).FirstOrDefault();
             }
         }
     }

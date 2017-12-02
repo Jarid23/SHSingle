@@ -167,7 +167,6 @@ namespace Superhero.Controllers
             {
                 model.SelectedHeroesID.Add(Hero.HeroID);
             }
-            orgrepo.EditOrg(org);
             return View(model);
         }
 
@@ -200,13 +199,11 @@ namespace Superhero.Controllers
                 HeroName = hero.HeroName,
                 Description = hero.Description,
                 Superpower = hero.Superpower,
-
             };
             foreach (var Org in hero.Organizations)
             {
                 model.SelectedOrganizationsID.Add(Org.OrganizationID);
-            }
-            herorepo.EditHero(hero);
+            }           
             return View(model);
         }
 
