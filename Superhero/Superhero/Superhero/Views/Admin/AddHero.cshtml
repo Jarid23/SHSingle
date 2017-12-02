@@ -12,6 +12,7 @@
         <div class="row">
             <div class="col-xs-3">
                 Hero Name @Html.TextBoxFor(h => h.HeroName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(h => h.HeroName)
             </div>            
             <div>
                 This Heroes' Organizations @Html.DropDownListFor(h => h.SelectedOrganizationsID, Model.Org, new { @class = "form-control" })

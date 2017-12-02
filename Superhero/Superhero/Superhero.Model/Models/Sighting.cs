@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ namespace Superhero.Model.Models
     {
         
         public int SightingID { get; set; }
+        [Required(ErrorMessage = "Sighting Heroes Required")]
         public ICollection<Hero> SightingHeroes { get; set; }
+        [Required(ErrorMessage = "Sighting Location Required")]
         public Location SightingLocation { get; set; }
         public DateTime Date { get; set; }
         public bool Ispublished { get; set; }

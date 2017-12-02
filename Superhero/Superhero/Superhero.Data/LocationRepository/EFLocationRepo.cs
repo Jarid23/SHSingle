@@ -22,6 +22,13 @@ namespace Superhero.Data.LocationRepository
         {
             using (var db = new SuperheroDBContext())
             {
+                var orgsToRemove = db.Organizations.Where(o => o.OrganizationLocation.LocationID == LocationID);
+                foreach (var org in orgsToRemove)
+                {
+                    db.Organizations.Remove(org);
+                }
+                db.SaveChanges();
+                 
                 Location toRemove = db.Locations.SingleOrDefault(l => l.LocationID == LocationID);
                 if (toRemove != null)
                 {

@@ -44,7 +44,6 @@ function search() {
     })
 }
 
-
 function getNumber(number, sets) {
     $.ajax({
         url: 'http://localhost:53579/sightings/' + number + '/' + sets,

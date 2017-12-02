@@ -69,11 +69,6 @@ namespace Superhero.Data.SightingRepository
         };
 
 
-
-
-        //Sighting requires a list of heroes which requires instantiating a new hero, possibly add all properties ?
-
-
         public IEnumerable<Sighting> GetNumberOfSightings(int number, int set)
         {
             return _sightings.Skip(number * set).Take(number).ToList();
@@ -107,7 +102,7 @@ namespace Superhero.Data.SightingRepository
             _sightings.Add(sighting);
         }
 
-        //This edit should have issues - can only change one hero at a time but there may be 2+ Heroes
+        
         public void EditSighting(Sighting sighting)
         {
             var s = new Sighting();
@@ -137,12 +132,12 @@ namespace Superhero.Data.SightingRepository
 
         public IEnumerable<Sighting> GetSightingsByHero(string parameter)
         {
-            throw new NotImplementedException();
+            return _sightings.Where(s => s.SightingHeroes.Any(t => t.HeroName == parameter)).ToList();
         }
 
         public List<Sighting> GetSightingsByLocation(string parameter)
         {
-            throw new NotImplementedException();
+            return _sightings.Where(s => s.SightingLocation.LocationName == parameter).ToList();
         }
 
         public List<Sighting> GetSightingsByOrganization(string parameter)

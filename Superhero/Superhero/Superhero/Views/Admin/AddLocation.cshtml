@@ -12,6 +12,7 @@
         <div class="row">
             <div class="col-xs-3">
                 Location Name @Html.TextBoxFor(l => l.LocationName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(l => l.LocationName)
             </div>
             <div class="col-xs-3">
                 Location Description @Html.TextBoxFor(l => l.LocationDescription, new { @class = "form-control" })

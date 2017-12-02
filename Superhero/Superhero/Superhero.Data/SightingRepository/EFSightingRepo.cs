@@ -17,8 +17,9 @@ namespace Superhero.Data.SightingRepository
             {
                 sighting.SightingLocation = db.Locations.FirstOrDefault(l => l.LocationID == sighting.SightingLocation.LocationID);
                 foreach (Hero hero in sighting.SightingHeroes)
-                {
+                {                    
                     db.Heroes.Attach(hero);
+                    //toEdit.SightingHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
                 }
                 db.Sightings.Add(sighting);
                 db.SaveChanges();
@@ -55,7 +56,7 @@ namespace Superhero.Data.SightingRepository
                 {
                     toEdit.SightingDescription = sighting.SightingDescription;
                     toEdit.Date = sighting.Date;
-                    toEdit.SightingLocation = sighting.SightingLocation;
+                    toEdit.SightingLocation = db.Locations.Single(l => l.LocationID == sighting.SightingLocation.LocationID);
 
                     var heroesToDelete = new List<Hero>();
 
@@ -71,8 +72,8 @@ namespace Superhero.Data.SightingRepository
 
                     foreach (Hero hero in sighting.SightingHeroes)
                     {
-                        db.Heroes.Attach(hero);
-                        toEdit.SightingHeroes.Add(hero);
+                        //db.Heroes.Attach(hero);
+                        toEdit.SightingHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
                     }
                     db.SaveChanges();
                 }

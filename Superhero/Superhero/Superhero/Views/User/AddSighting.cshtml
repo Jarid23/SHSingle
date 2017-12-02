@@ -16,9 +16,11 @@
             </div>
             <div>
                 Sighting Heroes @Html.ListBoxFor(m => m.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SightingHeroes)
             </div>           
             <div class="col-xs-3">
                 Sighting Location @Html.DropDownListFor(s => s.SightingObject.SightingLocation.LocationID, new SelectList(Model.SightingLocation, "LocationID", "LocationName"), "-Choose One-", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SightingLocation)
             </div>
             <div class="col-xs-3">
                 Sighting Description @Html.TextBoxFor(s => s.SightingObject.SightingDescription, new { @class = "form-control" })

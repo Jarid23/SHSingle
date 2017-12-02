@@ -150,6 +150,18 @@
     <Compile Include="Migrations\201711292204595_Seed Data.Designer.cs">
       <DependentUpon>201711292204595_Seed Data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712021954233_validation.cs" />
+    <Compile Include="Migrations\201712021954233_validation.Designer.cs">
+      <DependentUpon>201712021954233_validation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712022011522_removing validation.cs" />
+    <Compile Include="Migrations\201712022011522_removing validation.Designer.cs">
+      <DependentUpon>201712022011522_removing validation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712022023327_1.cs" />
+    <Compile Include="Migrations\201712022023327_1.Designer.cs">
+      <DependentUpon>201712022023327_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrganizationRepository\EFOrgRepo.cs" />
     <Compile Include="OrganizationRepository\IOrgRepo.cs" />
@@ -194,6 +206,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711292204595_Seed Data.resx">
       <DependentUpon>201711292204595_Seed Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021954233_validation.resx">
+      <DependentUpon>201712021954233_validation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712022011522_removing validation.resx">
+      <DependentUpon>201712022011522_removing validation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712022023327_1.resx">
+      <DependentUpon>201712022023327_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,14 +12,15 @@ using System.Web.Mvc;
 
 namespace Superhero.Controllers
 {
+
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SightingController : ApiController
     {
         //SuperheroDBContext context = new SuperheroDBContext();
         ISightingRepo repo = SightingRepoFactory.Create();
 
-        
         [System.Web.Http.Route("sightings/{property}/{parameter}")]
+        [System.Web.Http.AcceptVerbs("GET")]
         public IHttpActionResult GetByType(string property, string parameter)
         {
             ISightingRepo repo = SightingRepoFactory.Create();
@@ -40,11 +41,12 @@ namespace Superhero.Controllers
                     }
                     toReturn = repo.GetSighintsByDate(parameter).ToList();
                     break;
-                //case "Organization":
-                //    toReturn = repo.GetSightingsByOrganization(parameter);
-                //    break;
+                    //case "Organization":
+                    //    toReturn = repo.GetSightingsByOrganization(parameter);
+                    //    break;
             }
-             return Ok(toReturn);
+            //This gets the right information but crashes in self referencing loop. Probably needs a foreach loop or an .Exclude
+            return Ok(toReturn);
         }
     }
 }

@@ -70,8 +70,8 @@ namespace Superhero.Data.HeroRepository
 
                     foreach (var org in HeroID.Organizations)
                     {
-                        db.Organizations.Add(org);
-                        toEdit.Organizations.Add(org);
+                        //db.Organizations.Add(org);
+                        toEdit.Organizations.Add(db.Organizations.Single(o => o.OrganizationID == org.OrganizationID));
                     }
                     db.SaveChanges();
                 }

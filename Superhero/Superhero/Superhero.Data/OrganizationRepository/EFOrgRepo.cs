@@ -39,26 +39,28 @@ namespace Superhero.Data.OrganizationRepository
                 if (toEdit != null)
                 {
                     toEdit.OganizationAddress = OrganizationID.OganizationAddress;
-                    toEdit.OrganizationLocation = OrganizationID.OrganizationLocation;
+                    toEdit.OrganizationLocation = db.Locations.Single(l => l.LocationID == OrganizationID.OrganizationLocation.LocationID);
                     toEdit.OrganizationName = OrganizationID.OrganizationName;
                     toEdit.Phone = OrganizationID.Phone;
 
-                    var heroesToDelete = new List<Hero>();
+                    //var heroesToDelete = new List<Hero>();
 
-                    foreach (var hero in toEdit.OrganizationHeroes)
-                    {
-                        heroesToDelete.Add(hero);
-                    }
+                    //foreach (var hero in toEdit.OrganizationHeroes)
+                    //{
+                    //    heroesToDelete.Add(hero);
+                    //}
+                    toEdit.OrganizationHeroes.Clear();
+                    db.SaveChanges();
 
-                    foreach (var hero in heroesToDelete)
-                    {
-                        toEdit.OrganizationHeroes.Remove(hero);
-                    }
+                    //foreach (var hero in heroesToDelete)
+                    //{
+                    //    toEdit.OrganizationHeroes.Remove(hero);
+                    //}
 
                     foreach (Hero hero in OrganizationID.OrganizationHeroes)
                     {
-                        db.Heroes.Attach(hero);
-                        toEdit.OrganizationHeroes.Add(hero);
+                        //db.Heroes.Attach(hero);
+                        toEdit.OrganizationHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
                     }
                     db.SaveChanges();
                 }
