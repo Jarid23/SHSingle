@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-xs-3">
                 Organization Name @Html.TextBoxFor(o => o.OrganizationName, new { @class = "form-control" })
-                @*@Html.ValidationMessageFor(o => o.OrganizationName)*@
+                @Html.ValidationMessageFor(o => o.OrganizationName)
             </div>
             <div class="col-xs-3">
                 Organization Location @Html.DropDownListFor(o => o.OrganizationLocation.LocationID, Model.LocationList, new { @class = "form-control" })

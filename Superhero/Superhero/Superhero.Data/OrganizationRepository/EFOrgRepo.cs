@@ -7,17 +7,33 @@ using Superhero.Model.Models;
 using System.Data.Entity.Migrations;
 
 namespace Superhero.Data.OrganizationRepository
-{   
+{
     public class EFOrgRepo : IOrgRepo
-    {       
+    {
         public void AddOrganization(Organization organization)
         {
             using (var db = new SuperheroDBContext())
             {
-                //db.Organizations.Add(organization);
-                db.Set<Organization>().AddOrUpdate(organization);
-                db.SaveChanges();
-            }        
+                Organization toAdd = organization;
+                if (toAdd != null)
+                {
+                    toAdd.OganizationAddress = organization.OganizationAddress;
+                    toAdd.OrganizationLocation = db.Locations.Single(l => l.LocationID == organization.OrganizationLocation.LocationID);
+                    toAdd.OrganizationName = organization.OrganizationName;
+                    toAdd.Phone = organization.Phone;
+
+                    toAdd.OrganizationHeroes.Clear();
+                    db.SaveChanges();
+
+                    foreach (Hero hero in organization.OrganizationHeroes)
+                    {
+                        //db.Heroes.Attach(hero);
+                        toAdd.OrganizationHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
+                    }
+                    db.Organizations.Add(toAdd);
+                    db.SaveChanges();
+                }
+            }
         }
 
         public void DeleteOrganization(int OrganizationID)
@@ -45,19 +61,8 @@ namespace Superhero.Data.OrganizationRepository
                     toEdit.OrganizationName = OrganizationID.OrganizationName;
                     toEdit.Phone = OrganizationID.Phone;
 
-                    //var heroesToDelete = new List<Hero>();
-
-                    //foreach (var hero in toEdit.OrganizationHeroes)
-                    //{
-                    //    heroesToDelete.Add(hero);
-                    //}
                     toEdit.OrganizationHeroes.Clear();
                     db.SaveChanges();
-
-                    //foreach (var hero in heroesToDelete)
-                    //{
-                    //    toEdit.OrganizationHeroes.Remove(hero);
-                    //}
 
                     foreach (Hero hero in OrganizationID.OrganizationHeroes)
                     {
