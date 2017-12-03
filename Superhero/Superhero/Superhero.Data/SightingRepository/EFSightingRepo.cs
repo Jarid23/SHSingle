@@ -39,13 +39,7 @@ namespace Superhero.Data.SightingRepository
                 db.SaveChanges();
             }
         }
-
-        //for (int i = toEdit.SightingHeroes.Count - 1; i >= 0; i--)
-        //{
-        //    toEdit.SightingHeroes.Remove(i);
-        //}
-        //toEdit.SightingHeroes = sighting.SightingHeroes;
-        //db.Heroes.Attach(hero);
+        
         public void EditSighting(Sighting sighting)
         {
             sighting.Ispublished = true;
@@ -71,8 +65,7 @@ namespace Superhero.Data.SightingRepository
                     }
 
                     foreach (Hero hero in sighting.SightingHeroes)
-                    {
-                        //db.Heroes.Attach(hero);
+                    {                       
                         toEdit.SightingHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
                     }
                     db.SaveChanges();
@@ -123,14 +116,6 @@ namespace Superhero.Data.SightingRepository
                 return db.Sightings.Include("SightingLocation").Include("SightingHeroes").Where(s => s.SightingHeroes.Any(h => h.HeroName == parameter)).ToList();
             }
         }
-
-        //public List<Sighting> GetSightingsByLocation(Location sightinglocation)
-        //{
-        //    using (var db = new SuperheroDBContext())
-        //    {
-        //        return db.Sightings.Include("SightingLocation").Include("SightingHeroes").Where(s => s.SightingLocation == sightinglocation).ToList();
-        //    }
-        //}
 
         //public List<Sighting> GetSightingsByOrganization(Organization sightingorganization)
         //{

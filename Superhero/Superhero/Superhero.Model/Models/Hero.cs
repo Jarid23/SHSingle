@@ -10,7 +10,7 @@ namespace Superhero.Model.Models
     public class Hero
     {
         public int HeroID { get; set; }
-        [Required(ErrorMessage = "Hero Name Required")]
+        //[Required(ErrorMessage = "Hero Name Required")]
         public string HeroName { get; set; }
         public string Description { get; set; }
         public string Superpower { get; set; }

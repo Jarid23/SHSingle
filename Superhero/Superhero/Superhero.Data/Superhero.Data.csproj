@@ -162,6 +162,22 @@
     <Compile Include="Migrations\201712022023327_1.Designer.cs">
       <DependentUpon>201712022023327_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712030535517_validation stuff.cs" />
+    <Compile Include="Migrations\201712030535517_validation stuff.Designer.cs">
+      <DependentUpon>201712030535517_validation stuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712030541103_more vaidation.cs" />
+    <Compile Include="Migrations\201712030541103_more vaidation.Designer.cs">
+      <DependentUpon>201712030541103_more vaidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712030544574_reversal.cs" />
+    <Compile Include="Migrations\201712030544574_reversal.Designer.cs">
+      <DependentUpon>201712030544574_reversal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712031531206_undo validation.cs" />
+    <Compile Include="Migrations\201712031531206_undo validation.Designer.cs">
+      <DependentUpon>201712031531206_undo validation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrganizationRepository\EFOrgRepo.cs" />
     <Compile Include="OrganizationRepository\IOrgRepo.cs" />
@@ -215,6 +231,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712022023327_1.resx">
       <DependentUpon>201712022023327_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712030535517_validation stuff.resx">
+      <DependentUpon>201712030535517_validation stuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712030541103_more vaidation.resx">
+      <DependentUpon>201712030541103_more vaidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712030544574_reversal.resx">
+      <DependentUpon>201712030544574_reversal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712031531206_undo validation.resx">
+      <DependentUpon>201712031531206_undo validation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

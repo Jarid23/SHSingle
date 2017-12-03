@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Superhero.Model.Models;
+using System.Data.Entity.Migrations;
 
 namespace Superhero.Data.OrganizationRepository
 {   
@@ -13,7 +14,8 @@ namespace Superhero.Data.OrganizationRepository
         {
             using (var db = new SuperheroDBContext())
             {
-                db.Organizations.Add(organization);
+                //db.Organizations.Add(organization);
+                db.Set<Organization>().AddOrUpdate(organization);
                 db.SaveChanges();
             }        
         }

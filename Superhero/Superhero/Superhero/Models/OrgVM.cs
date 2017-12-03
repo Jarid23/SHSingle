@@ -3,6 +3,7 @@ using Superhero.Data.LocationRepository;
 using Superhero.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +14,7 @@ namespace Superhero.Models
     {
         IHeroRepo herorepo = HeroRepoFactory.Create();
         ILocationRepo locationrepo = LocationRepoFactory.Create();
+        //[Required(ErrorMessage = "Organziation Name Required")]
         public string OrganizationName { get; set; }
         public int OrganizationID { get; set; }
         public string OganizationAddress { get; set; }

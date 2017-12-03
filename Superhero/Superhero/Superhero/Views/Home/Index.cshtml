@@ -55,7 +55,7 @@
                         @foreach (var sighting in Model)
                         {
                             <tr>
-                                @*var heroes = _heroes.Where(h => h.Organizations.Any(o => o.OrganizationID == OrganizationID));*@
+                                
                                 <td>@sighting.HeroesAsHtml()</td>
                                 <td>@sighting.SightingDescription</td>
                                 <td>@sighting.SightingLocation.LocationName</td>

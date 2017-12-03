@@ -72,54 +72,74 @@ namespace Superhero.Data.Migrations
             {
                 userMgr.AddToRole(finduser.Id, "admin");
             }
-            var firstlocation = new Location
-            {
-                LocationName = "Minneapolis",
-                LocationAddress = "The Twin Cities",
-                LocationDescription = "A lovely city",
-                LatitudeCoordinate = 100,
-                LongitudeCoordinate = 100,
-            };
-            context.Locations.Add(firstlocation);
 
-            var firstorg = new Organization
+            if (!context.Locations.Any(l => l.LocationName == "Minneapolis"))
             {
-                OrganizationName = "Minneapolis Hero Squad",
-                OganizationAddress = "S 5th street Minneapolis",
-                OrganizationLocation = firstlocation,
-                Phone = "123-456-7899",
-            };
-            context.Organizations.Add(firstorg);
-
-            var firsthero = new Hero
-            {
-                HeroName = "The Flash",
-                Organizations = new Collection<Organization>()
+                var firstlocation = new Location
                 {
-                    firstorg
-                },
-                Description = "Wears a red/yellow suit",
-                Superpower = "Runs really fast",
-            };
-            context.Heroes.Add(firsthero);
-
-            var firstsighting = new Sighting
+                    LocationName = "Minneapolis",
+                    LocationAddress = "The Twin Cities",
+                    LocationDescription = "A lovely city",
+                    LatitudeCoordinate = 100,
+                    LongitudeCoordinate = 100,
+                };
+                context.Locations.Add(firstlocation);
+                context.SaveChanges();
+            }
+            var location = context.Locations.First(l => l.LocationName == "Minneapolis");
+            if (!context.Organizations.Any(o => o.OrganizationName == "Minneapolis Hero Squad"))
             {
-                SightingLocation = firstlocation,
-                SightingHeroes = new Collection<Hero>()
+                var firstorg = new Organization
                 {
-                    firsthero
+                    OrganizationName = "Minneapolis Hero Squad",
+                    OganizationAddress = "S 5th street Minneapolis",
+                    OrganizationLocation = location,
+                    Phone = "123-456-7899",
+                };
+                context.Organizations.Add(firstorg);
+                context.SaveChanges();
+            }
+
+            var org = context.Organizations.First(l => l.OrganizationName == "Minneapolis Hero Squad");
+            if (!context.Heroes.Any(h => h.HeroName == "The Flash"))
+            {
+                var firsthero = new Hero
+                {
+                    HeroName = "The Flash",
+                    Organizations = new Collection<Organization>()
+                {
+                    org
                 },
-                Date = DateTime.Today,
-                SightingDescription = "We saw the Flash in Minneapolis",
-                IsDeleted = false,
-                Ispublished = true,
-            };
-            context.Sightings.Add(firstsighting);
+                    Description = "Wears a red/yellow suit",
+                    Superpower = "Runs really fast",
+                };
+                context.Heroes.Add(firsthero);
+                context.SaveChanges();
+            }
+
+            var hero = context.Heroes.First(l => l.HeroName == "The Flash");
+            if (!context.Sightings.Any(s => s.SightingDescription == "We saw the Flash in Minneapolis"))
+            {
+                var firstsighting = new Sighting
+                {
+                    SightingLocation = location,
+                    SightingHeroes = new Collection<Hero>()
+                {
+                    hero
+                },
+                    Date = DateTime.Today,
+                    SightingDescription = "We saw the Flash in Minneapolis",
+                    IsDeleted = false,
+                    Ispublished = true,
+                };
+                context.Sightings.Add(firstsighting);
+            }
+            context.SaveChanges();
         }
+
     }
 }
-                
+
 
 
 
