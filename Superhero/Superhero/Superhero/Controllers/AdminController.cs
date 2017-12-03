@@ -52,6 +52,7 @@ namespace Superhero.Controllers
 
                 var org = new Organization
                 {
+                    SelectedHeroesID = o.SelectedHeroesID,
                     OrganizationID = o.OrganizationID,
                     OrganizationName = o.OrganizationName,
                     OganizationAddress = o.OganizationAddress,

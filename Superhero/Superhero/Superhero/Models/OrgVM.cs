@@ -14,7 +14,7 @@ namespace Superhero.Models
     {
         IHeroRepo herorepo = HeroRepoFactory.Create();
         ILocationRepo locationrepo = LocationRepoFactory.Create();
-        //[Required(ErrorMessage = "Organziation Name Required")]
+        [Required(ErrorMessage = "Organziation Name Required")]
         public string OrganizationName { get; set; }
         public int OrganizationID { get; set; }
         public string OganizationAddress { get; set; }

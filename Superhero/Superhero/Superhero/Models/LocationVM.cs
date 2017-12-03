@@ -9,7 +9,7 @@ namespace Superhero.Models
     public class LocationVM
     {
         public int LocationID { get; set; }
-        //[Required(ErrorMessage = "Location Name Required")]
+        [Required(ErrorMessage = "Location Name Required")]
         public string LocationName { get; set; }
         public string LocationDescription { get; set; }
         public string LocationAddress { get; set; }

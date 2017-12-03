@@ -14,27 +14,17 @@ namespace Superhero.Data.OrganizationRepository
         {
             using (var db = new SuperheroDBContext())
             {
-                Organization toAdd = organization;
-                if (toAdd != null)
+                organization.OrganizationLocation = db.Locations.FirstOrDefault(l => l.LocationID == organization.OrganizationLocation.LocationID);
+                foreach (Hero hero in organization.OrganizationHeroes)
                 {
-                    toAdd.OganizationAddress = organization.OganizationAddress;
-                    toAdd.OrganizationLocation = db.Locations.Single(l => l.LocationID == organization.OrganizationLocation.LocationID);
-                    toAdd.OrganizationName = organization.OrganizationName;
-                    toAdd.Phone = organization.Phone;
-
-                    toAdd.OrganizationHeroes.Clear();
-                    db.SaveChanges();
-
-                    foreach (Hero hero in organization.OrganizationHeroes)
-                    {
-                        //db.Heroes.Attach(hero);
-                        toAdd.OrganizationHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
-                    }
-                    db.Organizations.Add(toAdd);
-                    db.SaveChanges();
+                    db.Heroes.Attach(hero);                    
                 }
+                db.Organizations.Add(organization);
+                db.SaveChanges();
             }
         }
+        
+    
 
         public void DeleteOrganization(int OrganizationID)
         {

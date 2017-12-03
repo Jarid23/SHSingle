@@ -15,6 +15,7 @@ namespace Superhero.Model.Models
         public string OganizationAddress { get; set; }
         public string Phone { get; set; }
         public virtual ICollection<Hero> OrganizationHeroes { get; set; }
+        public List<int> SelectedHeroesID { get; set; }
         public Location OrganizationLocation { get; set; }
 
         public Organization()

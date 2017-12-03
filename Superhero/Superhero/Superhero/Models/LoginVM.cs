@@ -16,7 +16,5 @@ namespace Superhero.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
-        //public string ReturnUrl { get; set; }
     }
 }
