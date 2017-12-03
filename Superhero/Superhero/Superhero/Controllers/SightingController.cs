@@ -34,7 +34,7 @@ namespace Superhero.Controllers
                 case "Location":
                     toReturn = repo.GetSightingsByLocation(parameter).ToList();
                     break;
-                case "date":
+                case "Sighting":
                     if (parameter[0] == '#')
                     {
                         parameter = parameter.Remove(0, 1);
@@ -45,7 +45,7 @@ namespace Superhero.Controllers
                     //    toReturn = repo.GetSightingsByOrganization(parameter);
                     //    break;
             }
-            //This gets the right information but crashes in self referencing loop. Probably needs a foreach loop or an .Exclude
+            
             return Ok(toReturn);
         }
     }

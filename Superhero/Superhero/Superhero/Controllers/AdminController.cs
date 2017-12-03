@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace Superhero.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {      
         public ActionResult Index()
