@@ -14,10 +14,11 @@ namespace Superhero.Data.OrganizationRepository
         {
             using (var db = new SuperheroDBContext())
             {
+                organization.OrganizationHeroes.Clear();
                 organization.OrganizationLocation = db.Locations.FirstOrDefault(l => l.LocationID == organization.OrganizationLocation.LocationID);
-                foreach (Hero hero in organization.OrganizationHeroes)
+                foreach (var heroID in organization.SelectedHeroesID)
                 {
-                    db.Heroes.Attach(hero);                    
+                    organization.OrganizationHeroes.Add(db.Heroes.Single(h => h.HeroID == heroID));
                 }
                 db.Organizations.Add(organization);
                 db.SaveChanges();
