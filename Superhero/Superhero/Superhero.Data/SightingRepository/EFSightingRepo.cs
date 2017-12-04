@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Superhero.Model.Models;
 using System.Data.Entity;
 
+
 namespace Superhero.Data.SightingRepository
 {
     public class EFSightingRepo : ISightingRepo
@@ -16,11 +17,13 @@ namespace Superhero.Data.SightingRepository
             using (var db = new SuperheroDBContext())
             {
                 sighting.SightingLocation = db.Locations.FirstOrDefault(l => l.LocationID == sighting.SightingLocation.LocationID);
-                foreach (Hero hero in sighting.SightingHeroes)
-                {                    
-                    db.Heroes.Attach(hero);
-                    //toEdit.SightingHeroes.Add(db.Heroes.Single(h => h.HeroID == hero.HeroID));
+                sighting.SightingHeroes = new List<Hero>();
+
+                foreach (var HeroID in sighting.SelectedHeroesID)
+                {
+                    sighting.SightingHeroes.Add(db.Heroes.First(h => h.HeroID == HeroID));
                 }
+                
                 db.Sightings.Add(sighting);
                 db.SaveChanges();
             }

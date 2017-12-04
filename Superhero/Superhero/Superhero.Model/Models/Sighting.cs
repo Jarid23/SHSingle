@@ -18,6 +18,7 @@ namespace Superhero.Model.Models
         public DateTime Date { get; set; }
         public bool Ispublished { get; set; }
         public bool IsDeleted { get; set; }
+        public List<int> SelectedHeroesID { get; set; }
         public string SightingDescription { get; set; }
         
 

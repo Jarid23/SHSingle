@@ -6,6 +6,7 @@ using Superhero.Data.LocationRepository;
 using Superhero.Data.SightingRepository;
 using Superhero.Model.Models;
 using Superhero.Models;
+using Superhero.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,8 @@ namespace Superhero.Controllers
         [HttpGet]
         public ActionResult AddSighting()
         {
+            var model = new SightingVM();
+            //model.SightingObject.SelectedHeroesID = new List<int>();
             return View(new SightingVM());
         }
 
@@ -62,12 +65,7 @@ namespace Superhero.Controllers
             ISightingRepo repo = SightingRepoFactory.Create();
             if (ModelState.IsValid)
             {
-                s.SightingHeroes = new List<Hero>();
-
-                foreach (var HeroID in s.SelectedHeroesID)
-                {
-                    s.SightingObject.SightingHeroes.Add(herorepo.GetHereosByID(HeroID));
-                }
+                
                 repo.AddSighting(s.SightingObject);
             }
             else
@@ -92,10 +90,12 @@ namespace Superhero.Controllers
                 Date = s.Date,
                 SightingHeroes = herorepo.GetAllHeroes(),
                 SightingID = s.SightingID
+                
             };
+            model.SightingObject.SelectedHeroesID = new List<int>();
             foreach (var hero in s.SightingHeroes)
             {
-                model.SelectedHeroesID.Add(hero.HeroID);
+                model.SightingObject.SelectedHeroesID.Add(hero.HeroID);
             }
 
             return View(model);
@@ -116,7 +116,7 @@ namespace Superhero.Controllers
                     s.SightingObject.SightingHeroes.Remove(hero);
                 }
 
-                foreach (var HeroID in s.SelectedHeroesID)
+                foreach (var HeroID in s.SightingObject.SelectedHeroesID)
                 {
                     s.SightingObject.SightingHeroes.Add(herorepo.GetHereosByID(HeroID));
                 }

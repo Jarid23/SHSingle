@@ -98,7 +98,7 @@ namespace Superhero.Data.SightingRepository
         }
 
         public void AddSighting(Sighting sighting)
-        {
+        {          
             _sightings.Add(sighting);
         }
 

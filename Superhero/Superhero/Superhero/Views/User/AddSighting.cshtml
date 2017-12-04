@@ -1,4 +1,4 @@
-﻿@model Superhero.Models.SightingVM
+﻿@model Superhero.Web.SightingVM
 
 @{
     ViewBag.Title = "AddSighting";
@@ -15,7 +15,7 @@
                 Sighting Date @Html.TextBoxFor(s => s.SightingObject.Date, new { @class = "form-control" })
             </div>
             <div>
-                Sighting Heroes @Html.ListBoxFor(m => m.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })
+                Sighting Heroes @Html.ListBoxFor(m => m.SightingObject.SelectedHeroesID, new SelectList(Model.SightingHeroes, "HeroID", "HeroName"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.SightingHeroes)
             </div>           
             <div class="col-xs-3">
