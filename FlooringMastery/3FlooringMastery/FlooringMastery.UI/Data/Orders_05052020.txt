@@ -1,2 +1,0 @@
-OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost
-2,Larry,MI,5.75,Wood,105,5.15,4.75,540.75,498.75,5977.1250,7016.6250
