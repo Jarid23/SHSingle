@@ -29,13 +29,16 @@
     </form>
 </div>
 
-
 <div class="col-sm-1 divMain">
 </div>
-<div class="col-sm-10 divMain" id="SightingsArea">
+<div class="col-sm-10 divMain" id="SightingsArea">   
     <div class="col-xs-12 col-sm-9">
-        <div class="row">
-            <div class="col-xs-12">
+        <div class="row">          
+            <div id="absolute">
+                <img src="https://images.moviepilot.com/image/upload/c_fill,h_470,q_auto:good,w_620/cdhgjbdxcefp2gvygkr2.jpg" style="position:absolute; right:-300px; top:100px; float:right;width:220px;height:220px;">
+                <img src="https://vignette.wikia.nocookie.net/superman/images/2/27/Superman-dcuo.jpg/revision/latest?cb=20110901025125" style="position:absolute; right:-300px; top:320px; float:right;width:220px;height:220px;">
+            </div>
+            <div class="col-xs-12">               
                 <h4>Sighting List</h4>
                 <p>@Html.ActionLink("Add a Sighting", "AddSighting", "User", null, new { @class = "btn btn-primary" })</p>
                 <table class="table table-bordered table-striped">
@@ -51,11 +54,10 @@
                             <th>Date</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>                        
                         @foreach (var sighting in Model)
                         {
-                            <tr>
-                                
+                            <tr>                                
                                 <td>@sighting.HeroesAsHtml()</td>
                                 <td>@sighting.SightingDescription</td>
                                 <td>@sighting.SightingLocation.LocationName</td>
@@ -69,9 +71,9 @@
                                     @Html.ActionLink("Delete", "DeleteSighting", "Admin", new { SightingID = sighting.SightingID }, null)
                                 </td>
                             </tr>                            
-                        }
-                    </tbody>
-                </table>
+                        }                                             
+                    </tbody>                   
+                </table>               
             </div>
         </div>
     </div>
