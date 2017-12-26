@@ -1,0 +1,43 @@
+﻿@model List<FitnessApp.Models.Models.Workout>
+
+@{
+    ViewBag.Title = "Workout List";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Workouts</h3>
+        @Html.ActionLink("Add Workout", "AddWorkout", "Trainer", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        
+        <table class="table table-striped" style="width: auto;">
+            <thead>
+                <tr>
+                    <th>Workout Name</th>
+                    <th>Creator of Workout</th>
+                    <th>Workout Description</th>
+                    <th>Clients on Workout</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var workout in Model)
+                {
+                    <tr>
+                        <td>@workout.WorkoutName</td>
+                        <td>@workout.TrainerCreator.TrainerName</td>
+                        <td>@workout.WorkoutDescription</td>
+                        <td>@workout.WorkoutsAsHtml()</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditWorkout", "Admin", new { id = workout.WorkoutID }, null) |
+                            @Html.ActionLink("Delete", "DeleteWorkout", "Admin", new { WorkoutID = workout.WorkoutID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

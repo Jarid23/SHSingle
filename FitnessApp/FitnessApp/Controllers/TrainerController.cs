@@ -1,4 +1,7 @@
 ﻿using FitnessApp.Models.ViewModels;
+using FitnessApp.UI.ClientRepo;
+using FitnessApp.UI.TrainerRepo;
+using FitnessApp.UI.WorkoutRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +23,20 @@ namespace FitnessApp.Controllers
         public ActionResult AddClient()
         {
             return View(new ClientVM());
+        }
+
+        public ActionResult WorkoutList()
+        {
+            IWorkoutRepo repo = WorkoutRepoFactory.Create();
+            var model = repo.GetAllWorkouts();
+            return View(model);
+        }
+
+        public ActionResult ClientList()
+        {
+            IClientRepo repo = ClientRepoFactory.Create();
+            var model = repo.GetAllClients();
+            return View(model);
         }
     }
 }

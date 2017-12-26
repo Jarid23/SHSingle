@@ -47,19 +47,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @*@foreach (var trainer in Model)
+                        @foreach (var trainer in Model)
                         {
-                            <tr>
+                            <tr>                                
                                 <td>@trainer.TrainerName</td>
                                 <td>@trainer.StartDate</td>
                                 <td>@trainer.HourlyRate</td>
-                                <td>@trainer.Clients</td>                               
+                                <td>@trainer.TrainersAsHtml()</td>                              
                                 <td>
                                     @Html.ActionLink("Edit", "EditTrainer", "User", new { TrainerID = trainer.TrainerID }, null) |
                                     @Html.ActionLink("Delete", "DeleteTrainer", "Admin", new { TrainerID = trainer.TrainerID }, null)
                                 </td>
                             </tr>
-                        }*@
+                        }
                     </tbody>
                 </table>
             </div>

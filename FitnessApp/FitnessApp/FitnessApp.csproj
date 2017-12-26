@@ -212,6 +212,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Trainer\ClientList.cshtml" />
+    <Content Include="Views\Trainer\WorkoutList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -222,8 +225,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Client\" />
-    <Folder Include="Views\Trainer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FitnessApp.Models\FitnessApp.Models.csproj">

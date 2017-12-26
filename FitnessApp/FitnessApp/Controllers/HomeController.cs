@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using FitnessApp.UI.TrainerRepo;
 
 namespace FitnessApp.Controllers
 {
@@ -17,7 +17,9 @@ namespace FitnessApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            ITrainerRepo repo = TrainerRepoFactory.Create();
+            var model = repo.GetAllTrainers();
+            return View(model);
         }
 
         [AllowAnonymous]

@@ -1,0 +1,43 @@
+﻿@model List<FitnessApp.Models.Models.Client>
+
+@{
+    ViewBag.Title = "Client List";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Clients</h3>
+        @Html.ActionLink("Add Client", "AddClient", "Trainer", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+
+        <table class="table table-striped" style="width: auto;">
+            <thead>
+                <tr>
+                    <th>Client Name</th>
+                    <th>Starting Weight</th>
+                    <th>Current Weight</th>
+                    <th>Fitness Goals</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model)
+                {
+                    <tr>
+                        <td>@client.ClientName</td>
+                        <td>@client.StartingWeight</td>
+                        <td>@client.CurrentWeight</td>
+                        <td>@client.FitnessGoals</td>                        
+                        <td>
+                            @Html.ActionLink("Edit", "EditClient", "Admin", new { id = client.ClientID }, null) |
+                            @Html.ActionLink("Delete", "DeleteClient", "Admin", new { ClientID = client.ClientID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -14,5 +14,27 @@ namespace FitnessApp.Models.Models
         public Trainer TrainerCreator { get; set; }
         public ICollection<Client> ClientsOnWorkout { get; set; }
 
+        public Workout()
+        {
+            ClientsOnWorkout = new HashSet<Client>();
+        }
+
+        public string WorkoutsAsHtml()
+        {
+            string result = "";
+            if (ClientsOnWorkout != null && ClientsOnWorkout.Count > 0)
+            {
+                foreach (var client in ClientsOnWorkout)
+                {
+                    result += client.ClientName + ',';
+                }
+                if (!string.IsNullOrEmpty(result))
+                {
+                    result = result.Substring(0, result.Length - 1);
+                }
+            }
+            return result;
+        }
+
     }
 }
