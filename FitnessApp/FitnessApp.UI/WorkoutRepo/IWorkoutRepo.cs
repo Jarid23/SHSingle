@@ -12,6 +12,7 @@ namespace FitnessApp.UI.WorkoutRepo
         void AddWorkout(Workout workout);
         void EditWorkout(Workout workout);
         void DeleteWorkout(int WorkoutID);
+        Workout GetWorkoutById(int WorkoutID);
         IEnumerable<Workout> GetAllWorkouts();
     }
 }

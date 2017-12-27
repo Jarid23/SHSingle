@@ -12,6 +12,7 @@ namespace FitnessApp.UI.ClientRepo
         void AddClient(Client client);
         void EditClient(Client client);
         void DeleteClient(int ClientID);
+        Client GetClientById(int id);
         IEnumerable<Client> GetAllClients();
         IEnumerable<Client> GetClientsByTrainer(int TrainerID);
         

@@ -20,6 +20,7 @@
                     <th>Starting Weight</th>
                     <th>Current Weight</th>
                     <th>Fitness Goals</th>
+                    @*<th>Trainer Name</th>*@
                 </tr>
             </thead>
             <tbody>
@@ -29,10 +30,11 @@
                         <td>@client.ClientName</td>
                         <td>@client.StartingWeight</td>
                         <td>@client.CurrentWeight</td>
-                        <td>@client.FitnessGoals</td>                        
+                        <td>@client.FitnessGoals</td>
+                        @*<td>@client.ClientTrainer.TrainerName</td>*@                        
                         <td>
-                            @Html.ActionLink("Edit", "EditClient", "Admin", new { id = client.ClientID }, null) |
-                            @Html.ActionLink("Delete", "DeleteClient", "Admin", new { ClientID = client.ClientID }, null)
+                            @Html.ActionLink("Edit", "EditClient", "Trainer", new { id = client.ClientID }, null) |
+                            @Html.ActionLink("Delete", "DeleteClient", "Trainer", new { ClientID = client.ClientID }, null)
                         </td>
                     </tr>
                 }

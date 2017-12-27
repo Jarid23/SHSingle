@@ -55,5 +55,17 @@ namespace FitnessApp.UI.TrainerRepo
         {
             return _trainers;
         }
+
+        public Trainer GetTrainerById(int TrainerID)
+        {
+            foreach (var trainer in _trainers)
+            {
+                if (trainer.TrainerID == TrainerID)
+                {
+                    return trainer;
+                }
+            }
+            return new Trainer();
+        }
     }
 }

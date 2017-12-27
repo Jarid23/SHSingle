@@ -1,0 +1,36 @@
+﻿@model FitnessApp.Models.ViewModels.ClientVM
+
+@{
+    ViewBag.Title = "AddClient";
+}
+
+<h2>AddClient</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                Client Name @Html.TextBoxFor(c => c.ClientName, new { @class = "form-control" })                
+            </div>
+            <div>
+                Starting Weight @Html.TextBoxFor(c => c.StartingWeight, new { @class = "form-control" })
+            </div>
+            <div>
+                Current Weight @Html.TextBoxFor(c => c.CurrentWeight, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Fitness Goals @Html.TextAreaFor(c => c.FitnessGoals, new { @class = "form-control" })
+            </div>
+            <div>
+                Trainer Name @Html.DropDownListFor(c => c.SelectedTrainerID, Model.TrainerList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <button type="submit" class="btn btn-default">Save</button>
+    </div>
+}
+<div class="col-xs-12" id="clientarea">
+
+</div>

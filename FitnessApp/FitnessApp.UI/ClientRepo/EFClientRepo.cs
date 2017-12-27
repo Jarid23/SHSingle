@@ -44,7 +44,7 @@ namespace FitnessApp.UI.ClientRepo
                     toEdit.CurrentWeight = client.CurrentWeight;
                     toEdit.StartingWeight = client.StartingWeight;
                     toEdit.FitnessGoals = client.FitnessGoals;
-                    toEdit.Trainer = client.Trainer;
+                    toEdit.ClientTrainer = client.ClientTrainer;
                 }
                 db.SaveChanges();
             }
@@ -58,6 +58,11 @@ namespace FitnessApp.UI.ClientRepo
                              select c;
                 return clients.ToList();
             }
+        }
+
+        public Client GetClientById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Client> GetClientsByTrainer(int TrainerID)

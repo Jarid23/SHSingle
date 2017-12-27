@@ -30,6 +30,7 @@ namespace Superhero.Models
             OrganizationHeroes = new HashSet<Hero>();
             HeroList = new List<SelectListItem>();
             var AllHeroes = herorepo.GetAllHeroes();
+
             LocationList = new List<SelectListItem>();
             var AllLocations = locationrepo.GetAllLocations();
             SelectedHeroesID = new List<int>();

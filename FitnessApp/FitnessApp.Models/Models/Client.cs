@@ -14,9 +14,10 @@ namespace FitnessApp.Models.Models
         public DateTime ClientJoinDate { get; set; }
         public int StartingWeight { get; set; }
         public int CurrentWeight { get; set; }
-        public Trainer Trainer { get; set; }
+        public Trainer ClientTrainer { get; set; }
         public string FitnessGoals { get; set; }
-        
+        public List<int> SelectedTrainerID { get; set; }
+        public virtual ICollection<Trainer> Trainers { get; set; }
 
     }
 }

@@ -1,0 +1,40 @@
+﻿@model FitnessApp.Models.ViewModels.WorkoutVM
+
+@{
+    ViewBag.Title = "EditWorkout";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Edit Workout</h3>
+        @Html.ActionLink("Return to List", "WorkoutList", "Trainer")
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(w => w.WorkoutID)
+            <div class="form-group">
+                <div>
+                    <label>Workout Name</label>
+                    @Html.TextBoxFor(w => w.WorkoutName, new { @class = "form-control", placeholder = "WorkoutName" })
+                </div>
+                <div>
+                    <label>Workout Description</label>
+                    @Html.TextBoxFor(w => w.WorkoutDescription, new { @class = "form-control", placeholder = "WorkoutDescription" })
+                </div>
+                <div>
+                    <label>Clients on Workout</label>
+                    @Html.DropDownListFor(w => w.SelectedClientID, Model.ClientList, new { @class = "form-control", placeholder = "WorkoutName" })
+                </div>
+                <div>
+                    <label>Trainer Creator</label>
+                    @Html.DropDownListFor(w => w.SelectedTrainerID, Model.TrainerList, new { @class = "form-control", placeholder = "WorkoutName" })
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+
+            </div>
+        }
+    </div>
+</div>

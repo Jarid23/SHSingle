@@ -27,12 +27,12 @@
                 {
                     <tr>
                         <td>@workout.WorkoutName</td>
-                        <td>@workout.TrainerCreator.TrainerName</td>
+                        <td>@workout.TrainersAsHtml()</td>
                         <td>@workout.WorkoutDescription</td>
                         <td>@workout.WorkoutsAsHtml()</td>
                         <td>
-                            @Html.ActionLink("Edit", "EditWorkout", "Admin", new { id = workout.WorkoutID }, null) |
-                            @Html.ActionLink("Delete", "DeleteWorkout", "Admin", new { WorkoutID = workout.WorkoutID }, null)
+                            @Html.ActionLink("Edit", "EditWorkout", "Trainer", new { id = workout.WorkoutID }, null) |
+                            @Html.ActionLink("Delete", "DeleteWorkout", "Trainer", new { WorkoutID = workout.WorkoutID }, null)
                         </td>
                     </tr>
                 }

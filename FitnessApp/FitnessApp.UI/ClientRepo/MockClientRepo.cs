@@ -45,7 +45,7 @@ namespace FitnessApp.UI.ClientRepo
                     clientToEdit.CurrentWeight = client.CurrentWeight;
                     clientToEdit.StartingWeight = client.StartingWeight;
                     clientToEdit.FitnessGoals = client.FitnessGoals;
-                    clientToEdit.Trainer = client.Trainer;
+                    clientToEdit.ClientTrainer = client.ClientTrainer;
 
                 }
             }
@@ -57,9 +57,19 @@ namespace FitnessApp.UI.ClientRepo
             return _clients;
         }
 
+        public Client GetClientById(int id)
+        {
+            var client = _clients.SingleOrDefault(c => c.ClientID == id);
+            if (client != null)
+            {
+                return client;
+            }
+            return null;
+        }
+
         public IEnumerable<Client> GetClientsByTrainer(int TrainerID)
         {
-            var clients = _clients.Where(c => c.Trainer.TrainerID == TrainerID);
+            var clients = _clients.Where(c => c.ClientTrainer.TrainerID == TrainerID);
             if (clients != null)
             {
                 return clients;

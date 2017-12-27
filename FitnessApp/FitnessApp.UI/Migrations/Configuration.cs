@@ -4,7 +4,6 @@ namespace FitnessApp.UI.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.Models;
-    using Models.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;

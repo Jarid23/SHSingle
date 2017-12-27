@@ -12,6 +12,7 @@ namespace FitnessApp.UI.TrainerRepo
         void AddTrainer(Trainer trainer);
         void EditTrainer(Trainer trainer);
         void DeleteTrainer(int TrainerID);
+        Trainer GetTrainerById(int TrainerID);
         IEnumerable<Trainer> GetAllTrainers();
 
     }

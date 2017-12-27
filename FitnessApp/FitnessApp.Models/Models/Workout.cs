@@ -11,12 +11,13 @@ namespace FitnessApp.Models.Models
         public int WorkoutID { get; set; }
         public string WorkoutName { get; set; }
         public string WorkoutDescription { get; set; }
-        public Trainer TrainerCreator { get; set; }
+        public ICollection<Trainer> TrainerCreator { get; set; }
         public ICollection<Client> ClientsOnWorkout { get; set; }
 
         public Workout()
         {
             ClientsOnWorkout = new HashSet<Client>();
+            TrainerCreator = new HashSet<Trainer>();
         }
 
         public string WorkoutsAsHtml()
@@ -27,6 +28,23 @@ namespace FitnessApp.Models.Models
                 foreach (var client in ClientsOnWorkout)
                 {
                     result += client.ClientName + ',';
+                }
+                if (!string.IsNullOrEmpty(result))
+                {
+                    result = result.Substring(0, result.Length - 1);
+                }
+            }
+            return result;
+        }
+
+        public string TrainersAsHtml()
+        {
+            string result = "";
+            if (TrainerCreator != null && TrainerCreator.Count > 0)
+            {
+                foreach (var trainer in TrainerCreator)
+                {
+                    result += trainer.TrainerName + ',';
                 }
                 if (!string.IsNullOrEmpty(result))
                 {

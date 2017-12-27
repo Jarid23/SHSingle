@@ -57,5 +57,13 @@ namespace FitnessApp.UI.WorkoutRepo
                
             }
         }
+
+        public Workout GetWorkoutById(int WorkoutID)
+        {
+            using (var context = new FitnessDBContext())
+            {
+                return context.Workouts.Where(w => w.WorkoutID == WorkoutID).FirstOrDefault();
+            }
+        }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model FitnessApp.Models.ViewModels.ClientVM
+
+@{
+    ViewBag.Title = "EditClient";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Edit Client</h3>
+        @Html.ActionLink("Return to List", "ClientList", "Trainer")
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(c => c.ClientId)
+            <div class="form-group">
+                <div>
+                    <label>Client Name</label>
+                    @Html.TextBoxFor(c => c.ClientName, new { @class = "form-control", placeholder = "ClientName" })
+                </div>
+                <div>
+                    <label>Current Weight</label>
+                    @Html.TextBoxFor(c => c.CurrentWeight, new { @class = "form-control", placeholder = "CurrentWeight" })
+                </div>
+                <div>
+                    <label>Starting Weight</label>
+                    @Html.TextBoxFor(c => c.StartingWeight, new { @class = "form-control", placeholder = "StartingWeight" })
+                </div>
+                <div>
+                    <label>Fitness Goals</label>
+                    @Html.TextBoxFor(c => c.FitnessGoals, new { @class = "form-control", placeholder = "FitnessGoals" })
+                </div>
+                <div>
+                    Trainer Name @Html.DropDownListFor(c => c.SelectedTrainerID, Model.TrainerList, new { @class = "form-control" })
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+
+            </div>
+        }
+    </div>
+</div>
+

@@ -58,5 +58,13 @@ namespace FitnessApp.UI.TrainerRepo
 
             }
         }
+
+        public Trainer GetTrainerById(int TrainerID)
+        {
+            using (var context = new FitnessDBContext())
+            {
+                return context.Trainers.Where(t => t.TrainerID == TrainerID).FirstOrDefault();
+            }
+        }
     }
 }

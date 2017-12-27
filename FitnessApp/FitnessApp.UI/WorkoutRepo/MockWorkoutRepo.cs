@@ -23,9 +23,11 @@ namespace FitnessApp.UI.WorkoutRepo
                         ClientName = "Jarid"
                     }
                 },
-                TrainerCreator = new Trainer
+                TrainerCreator = new List<Trainer>
                 {
+                    new Trainer {
                     TrainerName = "Arnold Schwarzenegger"
+                        }
                 } } };
 
         public void AddWorkout(Workout workout)
@@ -57,6 +59,18 @@ namespace FitnessApp.UI.WorkoutRepo
         public IEnumerable<Workout> GetAllWorkouts()
         {
             return _workouts;
+        }
+
+        public Workout GetWorkoutById(int WorkoutID)
+        {
+            foreach (var workout in _workouts)
+            {
+                if (workout.WorkoutID == WorkoutID)
+                {
+                    return workout;
+                }
+            }
+            return new Workout();
         }
     }
 }
