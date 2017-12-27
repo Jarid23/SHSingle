@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <h4>Sighting List</h4>
-                <p>@Html.ActionLink("Add a Trainer", "AddTrainer", "User", null, new { @class = "btn btn-primary" })</p>
+                <p>@Html.ActionLink("Add a Trainer", "AddTrainer", "Trainer", null, new { @class = "btn btn-primary" })</p>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -55,8 +55,8 @@
                                 <td>@trainer.HourlyRate</td>
                                 <td>@trainer.TrainersAsHtml()</td>                              
                                 <td>
-                                    @Html.ActionLink("Edit", "EditTrainer", "User", new { TrainerID = trainer.TrainerID }, null) |
-                                    @Html.ActionLink("Delete", "DeleteTrainer", "Admin", new { TrainerID = trainer.TrainerID }, null)
+                                    @Html.ActionLink("Edit", "EditTrainer", "Trainer", new { id = trainer.TrainerID }, null) |
+                                    @Html.ActionLink("Delete", "DeleteTrainer", "Trainer", new { TrainerID = trainer.TrainerID }, null)
                                 </td>
                             </tr>
                         }

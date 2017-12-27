@@ -1,0 +1,30 @@
+﻿@model FitnessApp.Models.ViewModels.TrainerVM
+
+@{
+    ViewBag.Title = "AddTrainer";
+}
+
+<h2>AddTrainer</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-3">
+                Trainer Name @Html.TextBoxFor(t => t.TrainerName, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Hourly Rate @Html.TextBoxFor(t => t.HourlyRate, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                Clients with Trainer @Html.DropDownListFor(t => t.SelectedClientID, Model.ClientList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <button type="submit" class="btn btn-default">Save</button>
+    </div>
+}
+<div class="col-xs-12" id="trainerarea">
+
+</div>

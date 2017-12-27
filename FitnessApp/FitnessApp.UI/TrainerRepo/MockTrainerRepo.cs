@@ -17,7 +17,7 @@ namespace FitnessApp.UI.TrainerRepo
                 TrainerName = "Julie",
                 HourlyRate = 30,
                 StartDate = DateTime.Today,
-                Clients = new List<Client>
+                Clientelle = new List<Client>
                 {
                     new Client
                     {
@@ -45,7 +45,7 @@ namespace FitnessApp.UI.TrainerRepo
                     toEdit.TrainerName = trainer.TrainerName;
                     toEdit.StartDate = trainer.StartDate;
                     toEdit.HourlyRate = trainer.HourlyRate;
-                    toEdit.Clients = trainer.Clients;                    
+                    toEdit.Clientelle = trainer.Clientelle;                    
                 }
             }
             t = trainer;

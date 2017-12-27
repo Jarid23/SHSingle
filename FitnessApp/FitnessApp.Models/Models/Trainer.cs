@@ -12,19 +12,19 @@ namespace FitnessApp.Models.Models
         public string TrainerName { get; set; }
         public DateTime StartDate { get; set; }
         public int HourlyRate { get; set; }
-        public ICollection<Client> Clients { get; set; }
+        public ICollection<Client> Clientelle { get; set; }
 
         public Trainer()
         {
-            Clients = new HashSet<Client>();
+            Clientelle = new HashSet<Client>();
         }
 
         public string TrainersAsHtml()
         {
             string result = "";
-            if (Clients != null && Clients.Count > 0)
+            if (Clientelle != null && Clientelle.Count > 0)
             {
-                foreach (var client in Clients)
+                foreach (var client in Clientelle)
                 {
                     result += client.ClientName + ',';
                 }

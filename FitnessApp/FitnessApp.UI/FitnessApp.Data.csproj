@@ -135,21 +135,9 @@
     <Compile Include="ClientRepo\IClientRepo.cs" />
     <Compile Include="ClientRepo\MockClientRepo.cs" />
     <Compile Include="FitnessDBContext.cs" />
-    <Compile Include="Migrations\201712202335526_init.cs" />
-    <Compile Include="Migrations\201712202335526_init.Designer.cs">
-      <DependentUpon>201712202335526_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712261601140_Trainer.cs" />
-    <Compile Include="Migrations\201712261601140_Trainer.Designer.cs">
-      <DependentUpon>201712261601140_Trainer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712261606147_1.cs" />
-    <Compile Include="Migrations\201712261606147_1.Designer.cs">
-      <DependentUpon>201712261606147_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712262209446_2.cs" />
-    <Compile Include="Migrations\201712262209446_2.Designer.cs">
-      <DependentUpon>201712262209446_2.cs</DependentUpon>
+    <Compile Include="Migrations\201712271637256_init2.cs" />
+    <Compile Include="Migrations\201712271637256_init2.Designer.cs">
+      <DependentUpon>201712271637256_init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,17 +186,8 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712202335526_init.resx">
-      <DependentUpon>201712202335526_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712261601140_Trainer.resx">
-      <DependentUpon>201712261601140_Trainer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712261606147_1.resx">
-      <DependentUpon>201712261606147_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712262209446_2.resx">
-      <DependentUpon>201712262209446_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712271637256_init2.resx">
+      <DependentUpon>201712271637256_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

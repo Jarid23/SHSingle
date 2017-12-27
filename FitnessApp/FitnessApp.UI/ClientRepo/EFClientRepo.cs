@@ -72,7 +72,7 @@ namespace FitnessApp.UI.ClientRepo
                 var trainer = db.Trainers.Where(t => t.TrainerID == TrainerID).FirstOrDefault();
                 if (trainer != null)
                 {
-                    return trainer.Clients;
+                    return trainer.Clientelle;
                 }
                 return null;
             }

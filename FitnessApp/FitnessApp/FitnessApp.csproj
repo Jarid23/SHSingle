@@ -224,6 +224,8 @@
     <Content Include="Views\Trainer\AddClient.cshtml" />
     <Content Include="Views\Trainer\AddWorkout.cshtml" />
     <Content Include="Views\Trainer\EditWorkout.cshtml" />
+    <Content Include="Views\Trainer\AddTrainer.cshtml" />
+    <Content Include="Views\Trainer\EditTrainer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -233,8 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Client\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FitnessApp.Models\FitnessApp.Models.csproj">

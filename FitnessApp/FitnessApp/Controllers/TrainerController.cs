@@ -61,6 +61,49 @@ namespace FitnessApp.Controllers
 
         [HttpGet]
         [ValidateInput(false)]
+        public ActionResult EditTrainer(int id)
+        {
+            ITrainerRepo trepo = TrainerRepoFactory.Create();
+            IClientRepo repo = ClientRepoFactory.Create();
+            var trainer = trepo.GetTrainerById(id);
+            var model = new TrainerVM
+            {
+                TrainerID = trainer.TrainerID,
+                TrainerName = trainer.TrainerName,
+                HourlyRate = trainer.HourlyRate,
+                
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditTrainer(TrainerVM t)
+        {
+            IClientRepo repo = ClientRepoFactory.Create();
+            ITrainerRepo trepo = TrainerRepoFactory.Create();
+            if (ModelState.IsValid)
+            {
+                var trainer = new Trainer
+                {
+                    Clientelle = new List<Client>(),
+                    TrainerID = t.TrainerID,
+                    TrainerName = t.TrainerName,
+                    HourlyRate = t.HourlyRate,
+                    StartDate = t.StartDate,                   
+                };
+                foreach (var clientID in t.SelectedClientID)
+                {
+                    trainer.Clientelle.Add(repo.GetClientById(clientID));
+                }
+                trepo.EditTrainer(trainer);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpGet]
+        [ValidateInput(false)]
         public ActionResult EditClient(int id)
         {
             IClientRepo repo = ClientRepoFactory.Create();
@@ -118,6 +161,50 @@ namespace FitnessApp.Controllers
 
             return RedirectToAction("WorkoutList");
         }
+
+        public ActionResult DeleteTrainer(int TrainerID)
+        {
+            ITrainerRepo repo = TrainerRepoFactory.Create();
+            repo.DeleteTrainer(TrainerID);
+
+            return RedirectToAction("Index", "Home");
+        }
+           
+        [HttpGet]
+        [ValidateInput(false)]
+        public ActionResult AddTrainer()
+        {
+            return View(new TrainerVM());
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddTrainer(TrainerVM t)
+        {
+            ITrainerRepo trepo = TrainerRepoFactory.Create();
+            IClientRepo repo = ClientRepoFactory.Create();
+            if (ModelState.IsValid)
+            {
+                var trainer = new Trainer
+                {
+                    StartDate = DateTime.Today,
+                    TrainerID = t.TrainerID,
+                    TrainerName = t.TrainerName,
+                    HourlyRate = t.HourlyRate
+                };
+                foreach (var clientID in t.SelectedClientID)
+                {
+                    trainer.Clientelle.Add(repo.GetClientById(clientID));
+                }
+                trepo.AddTrainer(trainer);
+            }
+            else
+            {
+                return View(t);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+    
 
         [HttpGet]
         [ValidateInput(false)]
