@@ -135,9 +135,9 @@
     <Compile Include="ClientRepo\IClientRepo.cs" />
     <Compile Include="ClientRepo\MockClientRepo.cs" />
     <Compile Include="FitnessDBContext.cs" />
-    <Compile Include="Migrations\201712271637256_init2.cs" />
-    <Compile Include="Migrations\201712271637256_init2.Designer.cs">
-      <DependentUpon>201712271637256_init2.cs</DependentUpon>
+    <Compile Include="Migrations\201712272349127_initial.cs" />
+    <Compile Include="Migrations\201712272349127_initial.Designer.cs">
+      <DependentUpon>201712272349127_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,8 +186,8 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712271637256_init2.resx">
-      <DependentUpon>201712271637256_init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712272349127_initial.resx">
+      <DependentUpon>201712272349127_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
